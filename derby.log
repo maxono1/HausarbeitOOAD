@@ -1,0 +1,15 @@
+----------------------------------------------------------------
+Thu Jul 28 14:29:12 CEST 2022D001 : [0] The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046), [1] a816c00e-0182-44c8-46a3-000005388c88, [2] C:\Users\maxim\Documents\Hs_zeug\sem4\objektorientierte_Analyse_und_design\testMaven\HausarbeitOOAD\derbyDB, [3] jdk.internal.loader.ClassLoaders$AppClassLoader@3feba861, [4] file:/C:/libraries/db-derby-10.16.1.1-bin/lib/derby.jar
+java.vendor=Azul Systems, Inc.
+java.runtime.version=17.0.1+12-LTS
+user.dir=C:\Users\maxim\Documents\Hs_zeug\sem4\objektorientierte_Analyse_und_design\testMaven\HausarbeitOOAD
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+C005 : [0] 
+----------------------------------------------------------------
+J003 : [0] Thu Jul 28 14:29:13 CEST 2022
+----------------------------------------------------------------
+Thu Jul 28 14:29:13 CEST 2022D002 : [0] a816c00e-0182-44c8-46a3-000005388c88, [1] C:\Users\maxim\Documents\Hs_zeug\sem4\objektorientierte_Analyse_und_design\testMaven\HausarbeitOOAD\derbyDB, [2] jdk.internal.loader.ClassLoaders$AppClassLoader@3feba861
+----------------------------------------------------------------

@@ -104,4 +104,9 @@ public class MainController implements Stageable, Initializable, AcceptsDatabase
     public void setDatabaseConnection(DatabaseConnection conn) {
         this.conn = conn;
     }
+
+    public void handleonActionGuthabenScene(ActionEvent event) {
+        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getScene());
+        event.consume();
+    }
 }

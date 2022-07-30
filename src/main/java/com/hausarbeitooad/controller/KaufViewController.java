@@ -1,4 +1,4 @@
-package com.example.hausarbeitooad;
+package com.hausarbeitooad.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

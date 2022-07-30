@@ -1,4 +1,4 @@
-package com.example.hausarbeitooad;
+package com.hausarbeitooad.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

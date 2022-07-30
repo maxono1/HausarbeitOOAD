@@ -1,4 +1,4 @@
-package com.example.hausarbeitooad.db;
+package com.hausarbeitooad.db;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,7 +7,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class ImageDatabaseConnection {
+
+public class DatabaseConnection {
     /* the default framework is embedded */
     private String framework;
     private String protocol;
@@ -20,7 +21,7 @@ public class ImageDatabaseConnection {
     private String tableName;
 
     public static void main(String[] args){
-       ImageDatabaseConnection lol =  new ImageDatabaseConnection();
+       DatabaseConnection lol =  new DatabaseConnection();
        try{
            lol.insertImage(new FileInputStream("res/andro.jpg"),"galaxie");
        } catch (FileNotFoundException fnfe)
@@ -32,7 +33,7 @@ public class ImageDatabaseConnection {
 
     }
 
-    public ImageDatabaseConnection(){
+    public DatabaseConnection(){
         framework = "embedded";
         protocol = "jdbc:derby:";
         tableName = "gameImages";

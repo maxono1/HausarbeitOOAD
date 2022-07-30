@@ -1,4 +1,4 @@
-package model;
+package com.hausarbeitooad.model;
 
 import javafx.stage.Stage;
 

@@ -66,7 +66,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.hausarbeitooad/com.example.hausarbeitooad.HelloApplication
+                            <mainClass>com.example.hausarbeitooad/com.hausarbeitooad.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

@@ -1,5 +1,7 @@
 package com.hausarbeitooad.db;
 
+import com.hausarbeitooad.entity.Nutzer;
+import com.hausarbeitooad.entity.NutzerBesitzt;
 import com.hausarbeitooad.entity.Rezension;
 import com.hausarbeitooad.entity.Spiel;
 
@@ -282,6 +284,14 @@ public class DatabaseConnection {
         statements.add(insertDemo);
     }
 
+    private void insertNutzer(Nutzer nutzer) throws SQLException{
+        PreparedStatement insert =
+                conn.prepareStatement("insert into Nutzer values(?,?)");
+        statements.add(insert);
+        insert.setString(1,nutzer.getbName());
+        insert.setString(2,nutzer.getPassword());
+    }
+
     private void insertSpiel(Spiel spiel) throws SQLException {
         PreparedStatement insert =
                 conn.prepareStatement("insert into Spiel values(?,?,?,?,?,?,?,?)");
@@ -308,5 +318,12 @@ public class DatabaseConnection {
         insert.setString(4, rezension.getText());
 
         insert.executeUpdate();
+    }
+
+    private void insertNutzerBesitzt(NutzerBesitzt nutzerBesitzt) throws SQLException{
+        PreparedStatement insert =
+                conn.prepareStatement("insert into Nutzer_Besitzt values(?,?)");
+        insert.setInt(1,nutzerBesitzt.getSpielID());
+        insert.setString(2,nutzerBesitzt.getbName());
     }
 }

@@ -1,5 +1,7 @@
 package com.hausarbeitooad.db;
 
+import com.hausarbeitooad.entity.Spiel;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -23,7 +25,7 @@ public class DatabaseConnection {
     public static void main(String[] args){
        DatabaseConnection lol =  new DatabaseConnection();
        try{
-           lol.insertImage(new FileInputStream("res/andro.jpg"),"galaxie");
+           lol.insertImage(new FileInputStream("src/main/resources/images/CSGO.png"),"galaxie");
        } catch (FileNotFoundException fnfe)
        {
            System.err.println("file not found");
@@ -272,4 +274,26 @@ public class DatabaseConnection {
     }
 
 
+    private void insertDemoUsers() throws SQLException{
+        Statement insertDemo = conn.createStatement();
+        insertDemo.execute("insert into Nutzer values('tim',1234);\n" +
+                "insert into Nutzer values('abdu',1234);");
+        statements.add(insertDemo);
+    }
+
+    private void insertSpiel(Spiel spiel) throws SQLException {
+        PreparedStatement insert =
+                conn.prepareStatement("insert into Spiel values(?,?,?,?,?,?,?,?)");
+        statements.add(insert);
+        insert.setInt(1,spiel.getSpielID());
+        insert.setString(2, spiel.getName());
+        insert.setString(3,spiel.getBeschreibung());
+        insert.setDouble(4,spiel.getPreis()); //hier könnte es probleme geben
+        insert.setString(5,spiel.getGenre());
+        insert.setInt(6,spiel.getBewertungProzent());
+        insert.setBlob(7,spiel.getLogo());
+        insert.setBlob(8,spiel.getTitelbild());
+
+        insert.executeUpdate();
+    }
 }

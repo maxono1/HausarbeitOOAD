@@ -33,8 +33,9 @@ public class MainController implements Stageable, Initializable, AcceptsDatabase
      * Close application
      */
     @FXML
-    private void handleOnActionClose(ActionEvent event) {
-        stage.close();
+    private void handleOnActionLogout(ActionEvent event) {
+        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.LOGIN).getScene());
+        event.consume();
     }
 
     /**

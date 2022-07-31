@@ -47,7 +47,7 @@
 
     <ButtonBar prefHeight="30.0" prefWidth="400.0" BorderPane.alignment="CENTER">
         <buttons>
-            <Button mnemonicParsing="false" onAction="#handleOnActionClose" text="Close"/>
+            <Button mnemonicParsing="false" onAction="#handleOnActionLogout" text="Logout"/>
         </buttons>
         <BorderPane.margin>
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>

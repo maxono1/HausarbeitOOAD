@@ -24,8 +24,8 @@ public class SceneFxmlApp extends Application {
 	private static final String SCENE_ONE_FXML = "scene-one.fxml";
 	private static final String SCENE_TWO_FXML = "scene-two.fxml";
 	private static final String SCENE_THREE_FXML = "scene-three.fxml";
-
 	private static final String GUTHABEN_FXML = "guthaben-verwalten.fxml";
+	private static final String LOGIN_FXML = "login.fxml";
 
 	/** Holds the information for various scenes to switch between */
 	private static Map<SceneName, FxmlInfo> scenes = new HashMap<>();
@@ -36,7 +36,7 @@ public class SceneFxmlApp extends Application {
 
 	@Override
 	public void start(Stage stage) {
-		
+		scenes.put(SceneName.LOGIN, new FxmlInfo(SceneFxmlApp.class.getResource(LOGIN_FXML), SceneName.LOGIN, stage));
 		scenes.put(SceneName.MAIN, new FxmlInfo(SceneFxmlApp.class.getResource(MAIN_FXML), SceneName.MAIN, stage));
 		scenes.put(SceneName.SCENE1, new FxmlInfo(SceneFxmlApp.class.getResource(SCENE_ONE_FXML), SceneName.SCENE1, stage));
 		scenes.put(SceneName.SCENE2, new FxmlInfo(SceneFxmlApp.class.getResource(SCENE_TWO_FXML), SceneName.SCENE2, stage));
@@ -44,8 +44,8 @@ public class SceneFxmlApp extends Application {
 		scenes.put(SceneName.GUTHABENVERWALTEN, new FxmlInfo(SceneFxmlApp.class.getResource(GUTHABEN_FXML), SceneName.GUTHABENVERWALTEN, stage));
 
 		// getScene() will load the FXML file the first time
-		stage.setScene(scenes.get(SceneName.MAIN).getScene()); 
-		stage.setTitle("Gaming Sammlung");
+		stage.setScene(scenes.get(SceneName.LOGIN).getScene());
+		stage.setTitle("Rudi's Dampfkessel");
 		stage.show();
 	}
 

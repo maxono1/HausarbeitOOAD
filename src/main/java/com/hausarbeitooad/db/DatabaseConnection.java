@@ -1,5 +1,6 @@
 package com.hausarbeitooad.db;
 
+import com.hausarbeitooad.entity.Rezension;
 import com.hausarbeitooad.entity.Spiel;
 
 import java.io.FileInputStream;
@@ -293,6 +294,18 @@ public class DatabaseConnection {
         insert.setInt(6,spiel.getBewertungProzent());
         insert.setBlob(7,spiel.getLogo());
         insert.setBlob(8,spiel.getTitelbild());
+
+        insert.executeUpdate();
+    }
+
+    private void insertRezension(Rezension rezension) throws SQLException {
+        PreparedStatement insert =
+                conn.prepareStatement("insert into Rezension values(?,?,?,?)");
+        statements.add(insert);
+        insert.setInt(1,rezension.getSpielID());
+        insert.setString(2, rezension.getbName());
+        insert.setInt(3, rezension.getUserBewertungProzent());
+        insert.setString(4, rezension.getText());
 
         insert.executeUpdate();
     }

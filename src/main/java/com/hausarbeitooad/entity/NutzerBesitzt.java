@@ -1,12 +1,14 @@
 package com.hausarbeitooad.entity;
 
+import java.util.InputMismatchException;
+
 public class NutzerBesitzt {
     private int spielID;
-    private String bName;
+    private String bName = "test";
 
     public NutzerBesitzt(int spielID, String bName) {
         this.spielID = spielID;
-        this.bName = bName;
+        setbName(bName);
     }
 
     public int getSpielID() {
@@ -18,10 +20,14 @@ public class NutzerBesitzt {
     }
 
     public String getbName() {
+
         return bName;
     }
 
     public void setbName(String bName) {
+        if(bName.length() > 20){
+            throw new InputMismatchException("name länger als 20 zeichen");
+        }
         this.bName = bName;
     }
 }

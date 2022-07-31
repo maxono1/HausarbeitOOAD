@@ -6,44 +6,45 @@ import com.hausarbeitooad.model.Stageable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ReviewViewController implements Stageable, Initializable {
+public class CollectionViewController implements Stageable, Initializable {
 
     private Stage stage;
     @FXML
-    private ImageView DragImageReviewID;
-
-    @FXML
-    private ImageView arrowLeftID;
+    private ImageView arrowBackCollectedGameID;
 
     @FXML
     private Label gameNameID;
 
     @FXML
-    private TextField nameReviewID;
+    private Button rezensionSchreibenID;
 
     @FXML
-    private TextField opinionReviewID;
+    void handleOnActionRezensionSchreiben(ActionEvent event) {
+        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.REVIEW_VIEW).getScene());
+        event.consume();
+    }
+    @FXML
+    void onActionCollectionBackBtn(ActionEvent event) {
+        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.MAIN).getScene());
+        event.consume();
+    }
+
 
     @Override
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    }
-    @FXML
-    void onActionReviewBackBtn(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.COLLECTION_VIEW).getScene());
-        event.consume();
     }
 }

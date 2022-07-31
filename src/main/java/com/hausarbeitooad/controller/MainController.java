@@ -60,8 +60,8 @@ public class MainController implements Stageable, Initializable, AcceptsDatabase
      * Display the third scene
      */
     @FXML
-    private void handleOnActionSceneThree(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.SCENE3).getScene());
+    private void handleOnActionSceneCollection(ActionEvent event) {
+        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.COLLECTION_VIEW).getScene());
         event.consume();
     }
 
@@ -110,4 +110,5 @@ public class MainController implements Stageable, Initializable, AcceptsDatabase
         stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getScene());
         event.consume();
     }
+
 }

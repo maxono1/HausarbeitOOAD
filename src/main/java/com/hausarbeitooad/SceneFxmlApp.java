@@ -25,7 +25,7 @@ public class SceneFxmlApp extends Application {
 
 	private static final String COLLECTION_VIEW_FXML = "collection-view.fxml";
 	private static final String GUTHABEN_VERWALTEN_VIEW_FXML = "guthaben-verwalten-view.fxml";
-	private static final String LOGIN_VIEW_FXML = "login_view.fxml";
+	private static final String LOGIN_VIEW_FXML = "login-view.fxml";
 
 	private static final String GUTHABEN_AUFLADEN_VIEW_FXML = "guthaben-aufladen-view.fxml";
 

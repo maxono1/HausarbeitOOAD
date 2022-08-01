@@ -32,10 +32,18 @@ public class GuthabenVerwaltenController implements Stageable, Initializable, Ac
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+    @FXML
+    void onActionGuthabenAufladenBtn(ActionEvent event) {
+        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GUTHABENAUFLADEN).getScene());
+        event.consume();
+    }
 
     @FXML
-    private void handleOnActionBackButton(ActionEvent event) {
+    void onActionGuthabenVerwaltenBackBtn(ActionEvent event) {
         stage.setScene(SceneFxmlApp.getScenes().get(SceneName.MAIN).getScene());
         event.consume();
     }
+
+
+
 }

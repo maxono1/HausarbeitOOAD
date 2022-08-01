@@ -1,5 +1,6 @@
 package com.hausarbeitooad.entity;
 
+import java.io.FileInputStream;
 import java.sql.Blob;
 import java.util.InputMismatchException;
 
@@ -10,10 +11,10 @@ public class Spiel {
     private double preis;
     private String genre;
     private int bewertungProzent;
-    private Blob logo;
-    private Blob titelbild; //eig mediumblob
+    private FileInputStream logo;
+    private FileInputStream titelbild; //eig mediumblob
 
-    public Spiel(int spielID, String name, String beschreibung, double preis, String genre, int bewertungProzent, Blob logo, Blob titelbild) {
+    public Spiel(int spielID, String name, String beschreibung, double preis, String genre, int bewertungProzent, FileInputStream logo, FileInputStream titelbild) {
         this.spielID = spielID;
         this.name = name;
         this.beschreibung = beschreibung;
@@ -83,19 +84,19 @@ public class Spiel {
         }
     }
 
-    public Blob getLogo() {
+    public FileInputStream getLogo() {
         return logo;
     }
 
-    public void setLogo(Blob logo) {
+    public void setLogo(FileInputStream logo) {
         this.logo = logo;
     }
 
-    public Blob getTitelbild() {
+    public FileInputStream getTitelbild() {
         return titelbild;
     }
 
-    public void setTitelbild(Blob titelbild) {
+    public void setTitelbild(FileInputStream titelbild) {
         this.titelbild = titelbild;
     }
 }

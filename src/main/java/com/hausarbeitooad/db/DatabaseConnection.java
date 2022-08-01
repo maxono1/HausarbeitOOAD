@@ -27,10 +27,24 @@ public class DatabaseConnection {
 
     public static void main(String[] args) {
         DatabaseConnection lol = new DatabaseConnection();
+
         try {
-            lol.insertImage(new FileInputStream("src/main/resources/images/CSGO.png"), "galaxie");
+            Spiel fallGuys = new Spiel(1, "Fall Guys", "Don't Fall in the Slime", 1.0, "Horrorspiel", 50, new FileInputStream("src/main/resources/images/CSGO.png"), new FileInputStream("src/main/resources/images/CSGO.png"));
+            Nutzer nutzer = new Nutzer("maxi", "12345", 100.0);
+            NutzerBesitzt nutzerBesitzt = new NutzerBesitzt(1, "maxi");
+            Rezension rezension = new Rezension(1, "maxi", 75, "jo, war super Spiel, habe ich mit Freuden spielen dürfen.");
+            //lol.insertImage(new FileInputStream("src/main/resources/images/CSGO.png"), "galaxie");
+            lol.insertNutzer(nutzer);
+            lol.insertSpiel(fallGuys);
+            lol.insertNutzerBesitzt(nutzerBesitzt);
+            lol.insertRezension(rezension);
+
         } catch (FileNotFoundException fnfe) {
             System.err.println("file not found");
+        } catch (SQLException e) {
+            System.err.println("some SQL Statements are broken.");
+            printSQLException(e);
+            //throw new RuntimeException(e);
         }
         lol.selectAll();
         lol.closeDB();

@@ -25,20 +25,19 @@ public class DatabaseConnection {
 
     private String tableName;
 
-    public static void main(String[] args){
-       DatabaseConnection lol =  new DatabaseConnection();
-       try{
-           lol.insertImage(new FileInputStream("src/main/resources/images/CSGO.png"),"galaxie");
-       } catch (FileNotFoundException fnfe)
-       {
-           System.err.println("file not found");
-       }
-       lol.selectAll();
-       lol.closeDB();
+    public static void main(String[] args) {
+        DatabaseConnection lol = new DatabaseConnection();
+        try {
+            lol.insertImage(new FileInputStream("src/main/resources/images/CSGO.png"), "galaxie");
+        } catch (FileNotFoundException fnfe) {
+            System.err.println("file not found");
+        }
+        lol.selectAll();
+        lol.closeDB();
 
     }
 
-    public DatabaseConnection(){
+    public DatabaseConnection() {
         framework = "embedded";
         protocol = "jdbc:derby:";
         tableName = "gameImages";
@@ -46,32 +45,32 @@ public class DatabaseConnection {
 
         System.out.println("Datenbank starting in " + framework + " mode");
 
-        try{
+        try {
             Properties props = new Properties(); // connection properties
             // providing a user name and password is optional in the embedded
             // and derbyclient frameworks
             props.put("user", "user1");
             props.put("password", "user1");
             /* By default, the schema APP will be used when no username is
-                * provided.
-                * Otherwise, the schema name is the same as the user name (in this
-                * case "user1" or USER1.)
-                *
-                * Note that user authentication is off by default, meaning that any
-                * user can connect to your database using any password. To enable
-                * authentication, see the Derby Developer's Guide.
-                */
+             * provided.
+             * Otherwise, the schema name is the same as the user name (in this
+             * case "user1" or USER1.)
+             *
+             * Note that user authentication is off by default, meaning that any
+             * user can connect to your database using any password. To enable
+             * authentication, see the Derby Developer's Guide.
+             */
             String dbName = "derbyDB"; // the name of the database
             /*
-                * This connection specifies create=true in the connection URL to
-                * cause the database to be created when connecting for the first
-                * time. To remove the database, remove the directory derbyDB (the
-                * same as the database name) and its contents.
-                *
-                * The directory derbyDB will be created under the directory that
-                * the system property derby.system.home points to, or the current
-                * directory (user.dir) if derby.system.home is not set.
-                */
+             * This connection specifies create=true in the connection URL to
+             * cause the database to be created when connecting for the first
+             * time. To remove the database, remove the directory derbyDB (the
+             * same as the database name) and its contents.
+             *
+             * The directory derbyDB will be created under the directory that
+             * the system property derby.system.home points to, or the current
+             * directory (user.dir) if derby.system.home is not set.
+             */
             conn = DriverManager.getConnection(protocol + dbName
                     + ";create=true", props);
             System.out.println("Connected to and created database " + dbName);
@@ -82,7 +81,7 @@ public class DatabaseConnection {
             Statement statement = conn.createStatement();
             statements.add(statement);
             statement.execute("create table imagetest(num int, name varchar(255), image blob, primary key (name))");
-        } catch (SQLException sqlException){
+        } catch (SQLException sqlException) {
 
             printSQLException(sqlException);
         }
@@ -90,37 +89,37 @@ public class DatabaseConnection {
 
     //hier den index returnen, nur ein weg finden zu testen ob es den index gibt
     //man kann in sql ein index erstellen
-    public boolean insertImage(FileInputStream fis, String uniqueName){
-        try{
+    public boolean insertImage(FileInputStream fis, String uniqueName) {
+        try {
             psInsert = conn.prepareStatement("insert into imagetest values (?,?,?)");
             statements.add(psInsert);
 
-            psInsert.setInt(1,1);
-            psInsert.setString(2,uniqueName);
+            psInsert.setInt(1, 1);
+            psInsert.setString(2, uniqueName);
 
-            psInsert.setBlob(3,fis);
+            psInsert.setBlob(3, fis);
             psInsert.executeUpdate();
 
             return true;
 
-        } catch (SQLException sqlException){
+        } catch (SQLException sqlException) {
             printSQLException(sqlException);
             return false;
         }
 
     }
 
-    public void selectAll(){
-        try{
+    public void selectAll() {
+        try {
             Statement select = conn.createStatement();
             statements.add(select);
-            ResultSet everything =  select.executeQuery("SELECT * from imagetest");
+            ResultSet everything = select.executeQuery("SELECT * from imagetest");
             ResultSetMetaData rsmd = everything.getMetaData();
             System.out.println("querying select * from imagetest");
             int columnNumber = rsmd.getColumnCount();
-            while(everything.next()){
-                for (int i = 1; i <= columnNumber; i++){
-                    if(i > 1) {
+            while (everything.next()) {
+                for (int i = 1; i <= columnNumber; i++) {
+                    if (i > 1) {
                         System.out.print(",  ");
                     }
                     String columnValue = everything.getString(i);
@@ -129,17 +128,17 @@ public class DatabaseConnection {
                 System.out.println("");
             }
             everything.close();
-        } catch (SQLException s){
+        } catch (SQLException s) {
             printSQLException(s);
         }
 
     }
 
-    public InputStream retrieveImage(String uniqueName){
+    public InputStream retrieveImage(String uniqueName) {
         try {
             Statement stmt = conn.createStatement();
-            ResultSet resultSet = stmt.executeQuery("SELECT * from imagetest where name='" +  uniqueName + "'");
-            if(resultSet.next()){
+            ResultSet resultSet = stmt.executeQuery("SELECT * from imagetest where name='" + uniqueName + "'");
+            if (resultSet.next()) {
                 Blob imageBlob = resultSet.getBlob("image");
                 System.out.println(imageBlob.length());
                 resultSet.close();
@@ -147,37 +146,35 @@ public class DatabaseConnection {
             }
             resultSet.close();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             printSQLException(e);
         }
 
         return null;
     }
 
-    public void commit(){
-        try{
+    public void commit() {
+        try {
             conn.commit();
-        }catch (SQLException sqlException){
+        } catch (SQLException sqlException) {
             printSQLException(sqlException);
         }
     }
 
-    public void dropTables(){
-        try{
+    public void dropTables() {
+        try {
             Statement s = conn.createStatement();
             statements.add(s);
             s.execute("drop table imagetest");
 
-        }catch (SQLException s){
+        } catch (SQLException s) {
             printSQLException(s);
         }
     }
 
-    public void closeDB(){
-        if (framework.equals("embedded"))
-        {
-            try
-            {
+    public void closeDB() {
+        if (framework.equals("embedded")) {
+            try {
                 // the shutdown=true attribute shuts down Derby
                 DriverManager.getConnection("jdbc:derby:;shutdown=true");
 
@@ -185,11 +182,9 @@ public class DatabaseConnection {
                 // engine running (for example for connecting to other
                 // databases), specify a database in the connection URL:
                 //DriverManager.getConnection("jdbc:derby:" + dbName + ";shutdown=true");
-            }
-            catch (SQLException se)
-            {
-                if (( (se.getErrorCode() == 50000)
-                        && ("XJ015".equals(se.getSQLState()) ))) {
+            } catch (SQLException se) {
+                if (((se.getErrorCode() == 50000)
+                        && ("XJ015".equals(se.getSQLState())))) {
                     // we got the expected exception
                     System.out.println("Derby shut down normally");
                     // Note that for single database shutdown, the expected
@@ -218,7 +213,7 @@ public class DatabaseConnection {
         int i = 0;
         while (!statements.isEmpty()) {
             // PreparedStatement extend Statement
-            Statement st = (Statement)statements.remove(i);
+            Statement st = (Statement) statements.remove(i);
             try {
                 if (st != null) {
                     st.close();
@@ -241,9 +236,6 @@ public class DatabaseConnection {
     }
 
 
-
-
-
     /**
      * Reports a data verification failure to System.err with the given message.
      *
@@ -260,12 +252,10 @@ public class DatabaseConnection {
      *
      * @param e the SQLException from which to print details.
      */
-    public static void printSQLException(SQLException e)
-    {
+    public static void printSQLException(SQLException e) {
         // Unwraps the entire exception chain to unveil the real cause of the
         // Exception.
-        while (e != null)
-        {
+        while (e != null) {
             System.err.println("\n----- SQLException -----");
             System.err.println("  SQL State:  " + e.getSQLState());
             System.err.println("  Error Code: " + e.getErrorCode());
@@ -277,33 +267,33 @@ public class DatabaseConnection {
     }
 
 
-    private void insertDemoUsers() throws SQLException{
+    private void insertDemoUsers() throws SQLException {
         Statement insertDemo = conn.createStatement();
         insertDemo.execute("insert into Nutzer values('tim',1234);\n" +
                 "insert into Nutzer values('abdu',1234);");
         statements.add(insertDemo);
     }
 
-    private void insertNutzer(Nutzer nutzer) throws SQLException{
+    private void insertNutzer(Nutzer nutzer) throws SQLException {
         PreparedStatement insert =
                 conn.prepareStatement("insert into Nutzer values(?,?)");
         statements.add(insert);
-        insert.setString(1,nutzer.getbName());
-        insert.setString(2,nutzer.getPassword());
+        insert.setString(1, nutzer.getbName());
+        insert.setString(2, nutzer.getPassword());
     }
 
     private void insertSpiel(Spiel spiel) throws SQLException {
         PreparedStatement insert =
                 conn.prepareStatement("insert into Spiel values(?,?,?,?,?,?,?,?)");
         statements.add(insert);
-        insert.setInt(1,spiel.getSpielID());
+        insert.setInt(1, spiel.getSpielID());
         insert.setString(2, spiel.getName());
-        insert.setString(3,spiel.getBeschreibung());
-        insert.setDouble(4,spiel.getPreis()); //hier könnte es probleme geben
-        insert.setString(5,spiel.getGenre());
-        insert.setInt(6,spiel.getBewertungProzent());
-        insert.setBlob(7,spiel.getLogo());
-        insert.setBlob(8,spiel.getTitelbild());
+        insert.setString(3, spiel.getBeschreibung());
+        insert.setDouble(4, spiel.getPreis()); //hier könnte es probleme geben
+        insert.setString(5, spiel.getGenre());
+        insert.setInt(6, spiel.getBewertungProzent());
+        insert.setBlob(7, spiel.getLogo());
+        insert.setBlob(8, spiel.getTitelbild());
 
         insert.executeUpdate();
     }
@@ -312,7 +302,7 @@ public class DatabaseConnection {
         PreparedStatement insert =
                 conn.prepareStatement("insert into Rezension values(?,?,?,?)");
         statements.add(insert);
-        insert.setInt(1,rezension.getSpielID());
+        insert.setInt(1, rezension.getSpielID());
         insert.setString(2, rezension.getbName());
         insert.setInt(3, rezension.getUserBewertungProzent());
         insert.setString(4, rezension.getText());
@@ -320,10 +310,34 @@ public class DatabaseConnection {
         insert.executeUpdate();
     }
 
-    private void insertNutzerBesitzt(NutzerBesitzt nutzerBesitzt) throws SQLException{
+    private void insertNutzerBesitzt(NutzerBesitzt nutzerBesitzt) throws SQLException {
         PreparedStatement insert =
                 conn.prepareStatement("insert into Nutzer_Besitzt values(?,?)");
-        insert.setInt(1,nutzerBesitzt.getSpielID());
-        insert.setString(2,nutzerBesitzt.getbName());
+        insert.setInt(1, nutzerBesitzt.getSpielID());
+        insert.setString(2, nutzerBesitzt.getbName());
+    }
+
+    public void dropRezension() throws SQLException {
+        Statement s = conn.createStatement();
+        statements.add(s);
+        s.execute("drop table Rezension");
+    }
+
+    public void dropNutzerBesitzt() throws SQLException {
+        Statement s = conn.createStatement();
+        statements.add(s);
+        s.execute("drop table Nutzer_Besitzt");
+    }
+
+    public void dropNutzer() throws SQLException {
+        Statement s = conn.createStatement();
+        statements.add(s);
+        s.execute("drop table Nutzer");
+    }
+
+    public void dropSpiel() throws SQLException {
+        Statement s = conn.createStatement();
+        statements.add(s);
+        s.execute("drop table Spiel");
     }
 }

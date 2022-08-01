@@ -27,6 +27,7 @@ public class GuthabenAufladenController implements Stageable, Initializable, Acc
 
     @FXML
     private Button guthabenAufladenBtnID;
+    private DatabaseConnection conn;
 
     @FXML
     void onActionGuthabenAufladenBackBtn(ActionEvent event) {
@@ -42,7 +43,7 @@ public class GuthabenAufladenController implements Stageable, Initializable, Acc
 
     @Override
     public void setDatabaseConnection(DatabaseConnection conn) {
-
+        this.conn = conn;
     }
 
     @Override

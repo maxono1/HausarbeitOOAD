@@ -1,6 +1,8 @@
 package com.hausarbeitooad.controller;
 
 import com.hausarbeitooad.SceneFxmlApp;
+import com.hausarbeitooad.db.DatabaseConnection;
+import com.hausarbeitooad.model.AcceptsDatabase;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
 import javafx.event.ActionEvent;
@@ -14,9 +16,10 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CollectionViewController implements Stageable, Initializable {
+public class CollectionViewController implements Stageable, Initializable, AcceptsDatabase {
 
     private Stage stage;
+    private DatabaseConnection conn;
     @FXML
     private ImageView arrowBackCollectedGameID;
 
@@ -46,5 +49,10 @@ public class CollectionViewController implements Stageable, Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    }
+
+    @Override
+    public void setDatabaseConnection(DatabaseConnection conn) {
+        this.conn = conn;
     }
 }

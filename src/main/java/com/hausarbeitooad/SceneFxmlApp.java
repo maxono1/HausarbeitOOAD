@@ -25,7 +25,7 @@ public class SceneFxmlApp extends Application {
 
 	private static final String COLLECTION_VIEW_FXML = "collection-view.fxml";
 	private static final String GUTHABEN_VERWALTEN_VIEW_FXML = "guthaben-verwalten-view.fxml";
-	private static final String LOGIN_FXML = "login.fxml";
+	private static final String LOGIN_VIEW_FXML = "login_view.fxml";
 
 	private static final String GUTHABEN_AUFLADEN_VIEW_FXML = "guthaben-aufladen-view.fxml";
 
@@ -40,7 +40,7 @@ public class SceneFxmlApp extends Application {
 
 	@Override
 	public void start(Stage stage) {
-		scenes.put(SceneName.LOGIN, new FxmlInfo(SceneFxmlApp.class.getResource(LOGIN_FXML), SceneName.LOGIN, stage));
+		scenes.put(SceneName.LOGIN, new FxmlInfo(SceneFxmlApp.class.getResource(LOGIN_VIEW_FXML), SceneName.LOGIN, stage));
 		scenes.put(SceneName.MAIN, new FxmlInfo(SceneFxmlApp.class.getResource(MAIN_FXML), SceneName.MAIN, stage));
 		//scenes.put(SceneName.SCENE1, new FxmlInfo(SceneFxmlApp.class.getResource(SCENE_ONE_FXML), SceneName.SCENE1, stage));
 		//scenes.put(SceneName.SCENE2, new FxmlInfo(SceneFxmlApp.class.getResource(SCENE_TWO_FXML), SceneName.SCENE2, stage));

@@ -5,10 +5,12 @@ import java.util.InputMismatchException;
 public class Nutzer {
     private String bName = "test";
     private String password = "5555";
+    private double guthaben = 0;
 
-    public Nutzer(String bName, String password) {
+    public Nutzer(String bName, String password, double guthaben) {
         setbName(bName);
         setPassword(password);
+        setGuthaben(guthaben);
     }
 
     public String getbName() {
@@ -31,5 +33,16 @@ public class Nutzer {
             throw new InputMismatchException("pw länger als 20 zeichen");
         }
         this.password = password;
+    }
+
+    public double getGuthaben() {
+        return guthaben;
+    }
+
+    public void setGuthaben(double guthaben) {
+        if (this.guthaben < 0){
+            throw new InputMismatchException("Guthaben kann nicht unter 0 sein");
+        }
+        this.guthaben = guthaben;
     }
 }

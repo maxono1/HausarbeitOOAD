@@ -5,9 +5,9 @@ import com.hausarbeitooad.entity.NutzerBesitzt;
 import com.hausarbeitooad.entity.Rezension;
 import com.hausarbeitooad.entity.Spiel;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -26,13 +26,23 @@ public class DatabaseConnection {
     private String tableName;
 
     public static void main(String[] args) {
+        /*
+        try{
+            Path filePath = Path.of("src/main/resources/sqlFiles/SpielDatenbank.sql");
+            String createTablesSql = Files.readString(filePath);
+            System.out.println(createTablesSql);
+
+        } catch (IOException ioException){
+            ioException.printStackTrace();
+        }*/
+
         DatabaseConnection lol = new DatabaseConnection();
 
         try {
             Spiel fallGuys = new Spiel(1, "Fall Guys", "Don't Fall in the Slime", 1.0, "Horrorspiel", 50, new FileInputStream("src/main/resources/images/CSGO.png"), new FileInputStream("src/main/resources/images/CSGO.png"));
             Nutzer nutzer = new Nutzer("maxi", "12345", 100.0);
             NutzerBesitzt nutzerBesitzt = new NutzerBesitzt(1, "maxi");
-            Rezension rezension = new Rezension(1, "maxi", 75, "jo, war super Spiel, habe ich mit Freuden spielen dürfen.");
+            Rezension rezension = new Rezension(1, nutzer.getbName(), 75, "jo, war super Spiel, habe ich mit Freuden spielen dürfen.");
             //lol.insertImage(new FileInputStream("src/main/resources/images/CSGO.png"), "galaxie");
             lol.insertNutzer(nutzer);
             lol.insertSpiel(fallGuys);
@@ -46,7 +56,10 @@ public class DatabaseConnection {
             printSQLException(e);
             //throw new RuntimeException(e);
         }
-        lol.selectAll();
+        lol.selectQuery("Select * from Nutzer");
+        lol.selectQuery("Select * from Nutzer_Besitzt");
+        lol.selectQuery("Select * from Rezension");
+        lol.selectQuery("Select * from Spiel");
         lol.closeDB();
 
     }
@@ -94,11 +107,56 @@ public class DatabaseConnection {
 
             Statement statement = conn.createStatement();
             statements.add(statement);
-            statement.execute("create table imagetest(num int, name varchar(255), image blob, primary key (name))");
+            //Quelle sql skript laden: https://howtodoinjava.com/java/io/java-read-file-to-string-examples/#1-using-filesreadstring-java-11
+            //Path filePath = Path.of("src/main/resources/sqlFiles/SpielDatenbank.sql");
+            //String createTablesSql = Files.readString(filePath);
+
+            String create1 = "create table Spiel(\n" +
+                    "    SpielID int primary key,\n" +
+                    "    Name varchar(255),\n" +
+                    "    Beschreibung varchar(2048),\n" +
+                    "    Preis decimal(5,2),\n" +
+                    "    Genre varchar(128),\n" +
+                    "    BewertungProzent int,\n" +
+                    "    Logo blob,\n" +
+                    "    Titelbild blob,\n" +
+                    "    check (preis>=0 AND preis <1000),\n" +
+                    "    check (BewertungProzent>=0 AND BewertungProzent<=100)\n" +
+                    ")";
+            String create2 = "create table Nutzer(\n" +
+                    "    BName varchar(20) primary key,\n" +
+                    "    password varchar(20),\n" +
+                    "    guthaben decimal(10,2),\n" +
+                    "    check (guthaben>=0)\n" +
+                    ")";
+            String create3 = "create table Rezension(\n" +
+                    "    SpielID int,\n" +
+                    "    BName varchar(20),\n" +
+                    "    UserBewertungProzent int,\n" +
+                    "    Text varchar(3999),\n" +
+                    "    foreign key (BName) references Nutzer(BName),\n" +
+                    "    foreign key (SpielID) references Spiel(SpielID),\n" +
+                    "    primary key(SpielID,BName),\n" +
+                    "    check (UserBewertungProzent>=0 AND UserBewertungProzent<=100)\n" +
+                    ")";
+            String create4 = "create table Nutzer_Besitzt(\n" +
+                    "    SpielID int,\n" +
+                    "    BName varchar(20),\n" +
+                    "    foreign key (BName) references Nutzer(BName),\n" +
+                    "    foreign key (SpielID) references Spiel(SpielID),\n" +
+                    "    primary key(SpielID,BName)\n" +
+                    ")";
+            statement.execute(create1);
+            statement.execute(create2);
+            statement.execute(create3);
+            statement.execute(create4);
+
         } catch (SQLException sqlException) {
 
             printSQLException(sqlException);
-        }
+        } /*catch (IOException ioException){
+            ioException.printStackTrace();
+        }*/
     }
 
     //hier den index returnen, nur ein weg finden zu testen ob es den index gibt
@@ -123,13 +181,16 @@ public class DatabaseConnection {
 
     }
 
-    public void selectAll() {
+    /**
+     * quelle fehlt, noch suchen
+     * */
+    public void selectQuery(String query) {
         try {
             Statement select = conn.createStatement();
             statements.add(select);
-            ResultSet everything = select.executeQuery("SELECT * from imagetest");
+            ResultSet everything = select.executeQuery(query);
             ResultSetMetaData rsmd = everything.getMetaData();
-            System.out.println("querying select * from imagetest");
+            System.out.println(query);
             int columnNumber = rsmd.getColumnCount();
             while (everything.next()) {
                 for (int i = 1; i <= columnNumber; i++) {
@@ -172,17 +233,6 @@ public class DatabaseConnection {
             conn.commit();
         } catch (SQLException sqlException) {
             printSQLException(sqlException);
-        }
-    }
-
-    public void dropTables() {
-        try {
-            Statement s = conn.createStatement();
-            statements.add(s);
-            s.execute("drop table imagetest");
-
-        } catch (SQLException s) {
-            printSQLException(s);
         }
     }
 
@@ -290,10 +340,13 @@ public class DatabaseConnection {
 
     private void insertNutzer(Nutzer nutzer) throws SQLException {
         PreparedStatement insert =
-                conn.prepareStatement("insert into Nutzer values(?,?)");
+                conn.prepareStatement("insert into Nutzer values(?,?,?)");
         statements.add(insert);
         insert.setString(1, nutzer.getbName());
         insert.setString(2, nutzer.getPassword());
+        insert.setDouble(3, nutzer.getGuthaben());
+
+        insert.executeUpdate();
     }
 
     private void insertSpiel(Spiel spiel) throws SQLException {
@@ -329,6 +382,7 @@ public class DatabaseConnection {
                 conn.prepareStatement("insert into Nutzer_Besitzt values(?,?)");
         insert.setInt(1, nutzerBesitzt.getSpielID());
         insert.setString(2, nutzerBesitzt.getbName());
+        insert.executeUpdate();
     }
 
     public void dropRezension() throws SQLException {

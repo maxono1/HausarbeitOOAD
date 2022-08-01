@@ -42,18 +42,8 @@ public class MainController implements Stageable, Initializable, AcceptsDatabase
      * Display the first scene
      */
     @FXML
-    private void handleOnActionSceneOne(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.SCENE1).getScene());
-        event.consume();
-    }
+    private void handleOnActionShop(ActionEvent event) {
 
-    /**
-     * Display the second scene
-     */
-    @FXML
-    private void handleOnActionSceneTwo(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.SCENE2).getScene());
-        event.consume();
     }
 
     /**

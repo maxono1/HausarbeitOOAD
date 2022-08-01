@@ -66,7 +66,7 @@
     </VBox>
     <VBox alignment="CENTER" BorderPane.alignment="CENTER">
         <children>
-            <Button mnemonicParsing="false" onAction="#handleOnActionSceneOne" prefWidth="170.0" text="Shop">
+            <Button mnemonicParsing="false" onAction="#handleOnActionShop" prefWidth="170.0" text="Shop">
                 <VBox.margin>
                     <Insets top="30.0"/>
                 </VBox.margin>

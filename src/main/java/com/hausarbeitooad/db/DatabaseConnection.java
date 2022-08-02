@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 
@@ -108,55 +109,24 @@ public class DatabaseConnection {
             Statement statement = conn.createStatement();
             statements.add(statement);
             //Quelle sql skript laden: https://howtodoinjava.com/java/io/java-read-file-to-string-examples/#1-using-filesreadstring-java-11
+            //read file line by line: https://stackoverflow.com/questions/5868369/how-can-i-read-a-large-text-file-line-by-line-using-java
             //Path filePath = Path.of("src/main/resources/sqlFiles/SpielDatenbank.sql");
-            //String createTablesSql = Files.readString(filePath);
+            FileInputStream fileInputStream = new FileInputStream("src/main/resources/sqlFiles/SpielDatenbank.sql");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+            String sqlLine;
 
-            String create1 = "create table Spiel(\n" +
-                    "    SpielID int primary key,\n" +
-                    "    Name varchar(255),\n" +
-                    "    Beschreibung varchar(2048),\n" +
-                    "    Preis decimal(5,2),\n" +
-                    "    Genre varchar(128),\n" +
-                    "    BewertungProzent int,\n" +
-                    "    Logo blob,\n" +
-                    "    Titelbild blob,\n" +
-                    "    check (preis>=0 AND preis <1000),\n" +
-                    "    check (BewertungProzent>=0 AND BewertungProzent<=100)\n" +
-                    ")";
-            String create2 = "create table Nutzer(\n" +
-                    "    BName varchar(20) primary key,\n" +
-                    "    password varchar(20),\n" +
-                    "    guthaben decimal(10,2),\n" +
-                    "    check (guthaben>=0)\n" +
-                    ")";
-            String create3 = "create table Rezension(\n" +
-                    "    SpielID int,\n" +
-                    "    BName varchar(20),\n" +
-                    "    UserBewertungProzent int,\n" +
-                    "    Text varchar(3999),\n" +
-                    "    foreign key (BName) references Nutzer(BName),\n" +
-                    "    foreign key (SpielID) references Spiel(SpielID),\n" +
-                    "    primary key(SpielID,BName),\n" +
-                    "    check (UserBewertungProzent>=0 AND UserBewertungProzent<=100)\n" +
-                    ")";
-            String create4 = "create table Nutzer_Besitzt(\n" +
-                    "    SpielID int,\n" +
-                    "    BName varchar(20),\n" +
-                    "    foreign key (BName) references Nutzer(BName),\n" +
-                    "    foreign key (SpielID) references Spiel(SpielID),\n" +
-                    "    primary key(SpielID,BName)\n" +
-                    ")";
-            statement.execute(create1);
-            statement.execute(create2);
-            statement.execute(create3);
-            statement.execute(create4);
+            while((sqlLine = bufferedReader.readLine()) != null){
+                statement.execute(sqlLine);
+            }
+            fileInputStream.close();
+
 
         } catch (SQLException sqlException) {
 
             printSQLException(sqlException);
-        } /*catch (IOException ioException){
+        } catch (IOException ioException){
             ioException.printStackTrace();
-        }*/
+        }
     }
 
     //hier den index returnen, nur ein weg finden zu testen ob es den index gibt
@@ -212,6 +182,7 @@ public class DatabaseConnection {
     public InputStream retrieveImage(String uniqueName) {
         try {
             Statement stmt = conn.createStatement();
+            statements.add(stmt);
             ResultSet resultSet = stmt.executeQuery("SELECT * from imagetest where name='" + uniqueName + "'");
             if (resultSet.next()) {
                 Blob imageBlob = resultSet.getBlob("image");
@@ -225,6 +196,33 @@ public class DatabaseConnection {
             printSQLException(e);
         }
 
+        return null;
+    }
+
+    //https://docs.oracle.com/javase/tutorial/jdbc/basics/retrieving.html
+    public List<Spiel> retrieveSpiele() throws SQLException{
+        Statement stmt = conn.createStatement();
+        ResultSet resultSet = stmt.executeQuery("select * from Spiel");
+        ArrayList<Spiel> spieleAusDb = new ArrayList<>();
+        while (resultSet.next()){
+            int spielID = resultSet.getInt("SpielID");
+            String name = resultSet.getString("Name");
+            String beschreibung = resultSet.getString("beschreibung");
+            double preis = resultSet.getDouble("Preis");
+            String genre = resultSet.getString("Genre");
+            int bewertungProzent = resultSet.getInt("BewertungProzent");
+            InputStream logo =  resultSet.getBlob("logo").getBinaryStream();
+            InputStream titelbild = resultSet.getBlob("titelbild").getBinaryStream();
+
+            Spiel spielAusDb = new Spiel(spielID,name,beschreibung,preis,genre,bewertungProzent,logo,titelbild);
+
+        }
+
+
+
+
+
+        resultSet.close();
         return null;
     }
 
@@ -338,7 +336,7 @@ public class DatabaseConnection {
         statements.add(insertDemo);
     }
 
-    private void insertNutzer(Nutzer nutzer) throws SQLException {
+    public void insertNutzer(Nutzer nutzer) throws SQLException {
         PreparedStatement insert =
                 conn.prepareStatement("insert into Nutzer values(?,?,?)");
         statements.add(insert);
@@ -349,7 +347,7 @@ public class DatabaseConnection {
         insert.executeUpdate();
     }
 
-    private void insertSpiel(Spiel spiel) throws SQLException {
+    public void insertSpiel(Spiel spiel) throws SQLException {
         PreparedStatement insert =
                 conn.prepareStatement("insert into Spiel values(?,?,?,?,?,?,?,?)");
         statements.add(insert);
@@ -365,7 +363,7 @@ public class DatabaseConnection {
         insert.executeUpdate();
     }
 
-    private void insertRezension(Rezension rezension) throws SQLException {
+    public void insertRezension(Rezension rezension) throws SQLException {
         PreparedStatement insert =
                 conn.prepareStatement("insert into Rezension values(?,?,?,?)");
         statements.add(insert);
@@ -377,7 +375,7 @@ public class DatabaseConnection {
         insert.executeUpdate();
     }
 
-    private void insertNutzerBesitzt(NutzerBesitzt nutzerBesitzt) throws SQLException {
+    public void insertNutzerBesitzt(NutzerBesitzt nutzerBesitzt) throws SQLException {
         PreparedStatement insert =
                 conn.prepareStatement("insert into Nutzer_Besitzt values(?,?)");
         insert.setInt(1, nutzerBesitzt.getSpielID());
@@ -409,3 +407,45 @@ public class DatabaseConnection {
         s.execute("drop table Spiel");
     }
 }
+
+/*
+            String create1 = "create table Spiel(\n" +
+                    "    SpielID int primary key,\n" +
+                    "    Name varchar(255),\n" +
+                    "    Beschreibung varchar(2048),\n" +
+                    "    Preis decimal(5,2),\n" +
+                    "    Genre varchar(128),\n" +
+                    "    BewertungProzent int,\n" +
+                    "    Logo blob,\n" +
+                    "    Titelbild blob,\n" +
+                    "    check (preis>=0 AND preis <1000),\n" +
+                    "    check (BewertungProzent>=0 AND BewertungProzent<=100)\n" +
+                    ")";
+            String create2 = "create table Nutzer(\n" +
+                    "    BName varchar(20) primary key,\n" +
+                    "    password varchar(20),\n" +
+                    "    guthaben decimal(10,2),\n" +
+                    "    check (guthaben>=0)\n" +
+                    ")";
+            String create3 = "create table Rezension(\n" +
+                    "    SpielID int,\n" +
+                    "    BName varchar(20),\n" +
+                    "    UserBewertungProzent int,\n" +
+                    "    Text varchar(3999),\n" +
+                    "    foreign key (BName) references Nutzer(BName),\n" +
+                    "    foreign key (SpielID) references Spiel(SpielID),\n" +
+                    "    primary key(SpielID,BName),\n" +
+                    "    check (UserBewertungProzent>=0 AND UserBewertungProzent<=100)\n" +
+                    ")";
+            String create4 = "create table Nutzer_Besitzt(\n" +
+                    "    SpielID int,\n" +
+                    "    BName varchar(20),\n" +
+                    "    foreign key (BName) references Nutzer(BName),\n" +
+                    "    foreign key (SpielID) references Spiel(SpielID),\n" +
+                    "    primary key(SpielID,BName)\n" +
+                    ")";
+            statement.execute(create1);
+            statement.execute(create2);
+            statement.execute(create3);
+            statement.execute(create4);
+*/

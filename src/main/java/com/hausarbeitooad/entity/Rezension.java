@@ -21,6 +21,9 @@ public class Rezension {
     }
 
     public void setbName(String bName) {
+        if(bName.length() > 20){
+            throw new InputMismatchException("name länger als 20 zeichen");
+        }
         this.bName = bName;
     }
 
@@ -42,13 +45,17 @@ public class Rezension {
     }
 
     public void setText(String text) {
-        this.text = text;
+        if(text.length() <= 3999){
+            this.text = text;
+        } else {
+            this.text = text.substring(0,3998);
+        }
     }
 
     public Rezension(int spielID, String bName, int userBewertungProzent, String text) {
         this.spielID = spielID;
-        this.bName = bName;
+        this.setbName(bName);
         this.setUserBewertungProzent(userBewertungProzent);
-        this.text = text;
+        this.setText(text);
     }
 }

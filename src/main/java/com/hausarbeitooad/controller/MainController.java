@@ -43,7 +43,8 @@ public class MainController implements Stageable, Initializable, AcceptsDatabase
      */
     @FXML
     private void handleOnActionShop(ActionEvent event) {
-
+        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.SHOP_MENU).getScene());
+        event.consume();
     }
 
     /**

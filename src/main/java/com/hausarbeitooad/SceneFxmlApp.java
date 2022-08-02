@@ -32,6 +32,8 @@ public class SceneFxmlApp extends Application {
 
 	private static final String REVIEW_VIEW_FXML = "review-view.fxml";
 
+	private static final String SHOP_MENU_VIEW_FXML = "shop-menu-view.fxml";
+
 	/** Holds the information for various scenes to switch between */
 	private static Map<SceneName, FxmlInfo> scenes = new HashMap<>();
 
@@ -55,6 +57,8 @@ public class SceneFxmlApp extends Application {
 		scenes.put(SceneName.GUTHABENAUFLADEN, new FxmlInfo(SceneFxmlApp.class.getResource(GUTHABEN_AUFLADEN_VIEW_FXML), SceneName.GUTHABENAUFLADEN, stage, conn));
 		scenes.put(SceneName.COLLECTION_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(COLLECTION_VIEW_FXML), SceneName.COLLECTION_VIEW, stage, conn));
 		scenes.put(SceneName.REVIEW_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(REVIEW_VIEW_FXML), SceneName.REVIEW_VIEW, stage, conn));
+		scenes.put(SceneName.SHOP_MENU, new FxmlInfo(SceneFxmlApp.class.getResource(SHOP_MENU_VIEW_FXML), SceneName.SHOP_MENU, stage, conn));
+
 
 		// getScene() will load the FXML file the first time
 		stage.setScene(scenes.get(SceneName.LOGIN).getScene());

@@ -25,6 +25,6 @@
                 <Image url="@../../images/left-arrow.png"/>
             </image>
         </ImageView>
-        <ListView fx:id="listViewID" fixedCellSize="50.0" layoutY="100.0" prefHeight="68.0" prefWidth="703.0"/>
+        <ListView fx:id="listViewID" fixedCellSize="50.0" layoutY="100.0" prefHeight="500.0" prefWidth="703.0"/>
     </children>
 </AnchorPane>

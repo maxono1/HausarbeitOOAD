@@ -1,6 +1,7 @@
 package com.hausarbeitooad.entity;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.util.InputMismatchException;
 
@@ -11,15 +12,15 @@ public class Spiel {
     private double preis;
     private String genre;
     private int bewertungProzent;
-    private FileInputStream logo;
-    private FileInputStream titelbild; //eig mediumblob
+    private InputStream logo;
+    private InputStream titelbild; //eig mediumblob
 
-    public Spiel(int spielID, String name, String beschreibung, double preis, String genre, int bewertungProzent, FileInputStream logo, FileInputStream titelbild) {
+    public Spiel(int spielID, String name, String beschreibung, double preis, String genre, int bewertungProzent, InputStream logo, InputStream titelbild) {
         this.spielID = spielID;
         this.name = name;
-        this.beschreibung = beschreibung;
+        setBeschreibung(beschreibung);
         setPreis(preis);
-        this.genre = genre;
+        setGenre(genre);
         setBewertungProzent(bewertungProzent);
         this.logo = logo;
         this.titelbild = titelbild;
@@ -37,16 +38,26 @@ public class Spiel {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String name) throws InputMismatchException{
+        if(name.length() <=255){
+            this.name = name;
+        } else {
+            this.name = name.substring(0,254);
+            throw new InputMismatchException("name länger als 255 chars");
+        }
     }
 
     public String getBeschreibung() {
         return beschreibung;
     }
 
-    public void setBeschreibung(String beschreibung) {
-        this.beschreibung = beschreibung;
+    public void setBeschreibung(String beschreibung) throws InputMismatchException{
+        if(beschreibung.length() <=2048) {
+            this.beschreibung = beschreibung;
+        } else {
+            this.beschreibung = beschreibung.substring(0,2047);
+            throw new InputMismatchException("beschreibung länger als 2048 chars");
+        }
     }
 
     public double getPreis() {
@@ -67,8 +78,14 @@ public class Spiel {
         return genre;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setGenre(String genre) throws InputMismatchException{
+        if(genre.length() <=255){
+            this.genre = genre;
+        } else {
+            this.genre = genre.substring(0,254);
+            throw new InputMismatchException("genre länger als 255 chars");
+        }
+
     }
 
     public int getBewertungProzent() {
@@ -79,24 +96,24 @@ public class Spiel {
         if(bewertungProzent >=0 && bewertungProzent <=100){
             this.bewertungProzent = bewertungProzent;
         } else {
-            bewertungProzent = 0;
+            this.bewertungProzent = 0;
             throw new InputMismatchException("bewertung nicht zwischen 0 und 100 prozent");
         }
     }
 
-    public FileInputStream getLogo() {
+    public InputStream getLogo() {
         return logo;
     }
 
-    public void setLogo(FileInputStream logo) {
+    public void setLogo(InputStream logo) {
         this.logo = logo;
     }
 
-    public FileInputStream getTitelbild() {
+    public InputStream getTitelbild() {
         return titelbild;
     }
 
-    public void setTitelbild(FileInputStream titelbild) {
+    public void setTitelbild(InputStream titelbild) {
         this.titelbild = titelbild;
     }
 }

@@ -1,6 +1,7 @@
 package com.hausarbeitooad.entity;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.util.InputMismatchException;
@@ -12,18 +13,18 @@ public class Spiel {
     private double preis;
     private String genre;
     private int bewertungProzent;
-    private InputStream logo;
-    private InputStream titelbild; //eig mediumblob
+    private byte[] logo;
+    private byte[] titelbild; //eig mediumblob
 
-    public Spiel(int spielID, String name, String beschreibung, double preis, String genre, int bewertungProzent, InputStream logo, InputStream titelbild) {
+    public Spiel(int spielID, String name, String beschreibung, double preis, String genre, int bewertungProzent, InputStream logo, InputStream titelbild) throws IOException{
         this.spielID = spielID;
         this.name = name;
         setBeschreibung(beschreibung);
         setPreis(preis);
         setGenre(genre);
         setBewertungProzent(bewertungProzent);
-        this.logo = logo;
-        this.titelbild = titelbild;
+        setLogo(logo);
+        setTitelbild(titelbild);
     }
 
     public int getSpielID() {
@@ -101,19 +102,19 @@ public class Spiel {
         }
     }
 
-    public InputStream getLogo() {
+    public byte[] getLogo() {
         return logo;
     }
 
-    public void setLogo(InputStream logo) {
-        this.logo = logo;
+    public void setLogo(InputStream logoStream) throws IOException {
+        this.logo = logoStream.readAllBytes();
     }
 
-    public InputStream getTitelbild() {
+    public byte[] getTitelbild() {
         return titelbild;
     }
 
-    public void setTitelbild(InputStream titelbild) {
-        this.titelbild = titelbild;
+    public void setTitelbild(InputStream titelbild) throws IOException{
+        this.titelbild = titelbild.readAllBytes();
     }
 }

@@ -46,6 +46,9 @@ public class LoginController implements Stageable, Initializable, AcceptsDatabas
     private void handleOnSubmitButtonClicked(ActionEvent event) {
         System.out.println("clicked on login");
         stage.setScene(SceneFxmlApp.getScenes().get(SceneName.MAIN).getScene());
+        //hier raussoaken und abfragen ob das stimmt
+        //maybe irgendwie die current session zwischenspeichern? oder nächsten inkrement
+        //
         event.consume();
     }
 }

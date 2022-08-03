@@ -42,11 +42,11 @@ public class SceneFxmlApp extends Application {
 	}
 
 	//das muss noch gemacht werden.
-	DatabaseConnection conn = new DatabaseConnection();
+	private DatabaseConnection conn;
 
 	@Override
 	public void start(Stage stage) {
-
+		conn = new DatabaseConnection();
 
 		scenes.put(SceneName.LOGIN, new FxmlInfo(SceneFxmlApp.class.getResource(LOGIN_VIEW_FXML), SceneName.LOGIN, stage, conn));
 		scenes.put(SceneName.MAIN, new FxmlInfo(SceneFxmlApp.class.getResource(MAIN_FXML), SceneName.MAIN, stage, conn));
@@ -63,6 +63,9 @@ public class SceneFxmlApp extends Application {
 		// getScene() will load the FXML file the first time
 		stage.setScene(scenes.get(SceneName.LOGIN).getScene());
 		stage.setTitle("Rudi's Dampfkessel");
+		stage.setOnHidden( windowEvent -> {
+			conn.closeDB();
+		});
 		stage.show();
 	}
 

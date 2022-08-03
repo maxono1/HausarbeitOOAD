@@ -19,8 +19,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -48,6 +50,8 @@ public class ShopMenuViewController implements Stageable, Initializable, Accepts
             fallGuys = new Spiel(1, "Fall Guys", "Don't Fall in the Slime", 1.0, "Horrorspiel", 50, new FileInputStream("src/main/resources/images/CSGO.png"), new FileInputStream("src/main/resources/images/CSGO.png"));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
+        } catch (IOException io){
+            io.printStackTrace();
         }
         for (int i = 0; i < 50; i++){
             listViewID.getItems().add(createHBoxFromSpiel(fallGuys));
@@ -67,7 +71,7 @@ public class ShopMenuViewController implements Stageable, Initializable, Accepts
 
     public HBox createHBoxFromSpiel(Spiel spiel){
 
-        ImageView logoImageView = new ImageView(new Image(spiel.getLogo()));
+        ImageView logoImageView = new ImageView(new Image(new ByteArrayInputStream(spiel.getLogo())));
         logoImageView.setFitHeight(68);
         logoImageView.setFitWidth(68);
         logoImageView.setPickOnBounds(true);

@@ -40,13 +40,21 @@ public class DatabaseConnection {
         DatabaseConnection lol = new DatabaseConnection();
 
         try {
-            Spiel fallGuys = new Spiel(1, "Fall Guys", "Don't Fall in the Slime", 1.0, "Horrorspiel", 50, new FileInputStream("src/main/resources/images/CSGO.png"), new FileInputStream("src/main/resources/images/CSGO.png"));
-            Nutzer nutzer = new Nutzer("maxi", "12345", 100.0);
+            ArrayList<Spiel> bspSpiele = new ArrayList<>();
+            bspSpiele.add(new Spiel(1, "banana Guys", "Don't Fall in the Slime", 20.0, "Horrorspiel", 50, new FileInputStream("src/main/resources/images/bananen_game.jpg"), new FileInputStream("src/main/resources/images/bananen_game.jpg")));
+            bspSpiele.add(new Spiel(2, "Car Drivers", "Ride or Die, super speed",40.0,"Racing", 90, new FileInputStream("src/main/resources/images/car.png"), new FileInputStream("src/main/resources/images/car.png")));
+            bspSpiele.add(new Spiel(3, "XTreme Bike Ride", "Race down a mountain to be the winner baby", 90.55, "Racing, Thriller", 20, new FileInputStream("src/main/resources/images/bike.png"), new FileInputStream("src/main/resources/images/bike.png")));
+            bspSpiele.add(new Spiel(4, "Astronaut Game explore", "explore the galaxy to become rich and influential!", 1.5, "space", 99, new FileInputStream("src/main/resources/images/galaxy.jpg"), new FileInputStream("src/main/resources/images/galaxy.jpg")));
+            for (int i = 5; i < 15; i++){
+                bspSpiele.add(new Spiel(i,"Spiel"+i,"Beschreibung" + i, 50, "genre", 20, new FileInputStream("src/main/resources/images/placeholder_grafik.png") ,new FileInputStream("src/main/resources/images/placeholder_grafik.png")));
+            }
+            Nutzer maxi = new Nutzer("maxi", "1234", 100.0);
+            Nutzer tim = new Nutzer("tim", "1234", 0);
             NutzerBesitzt nutzerBesitzt = new NutzerBesitzt(1, "maxi");
-            Rezension rezension = new Rezension(1, nutzer.getbName(), 75, "jo, war super Spiel, habe ich mit Freuden spielen dürfen.");
+            Rezension rezension = new Rezension(1, maxi.getbName(), 75, "jo, war super Spiel, habe ich mit Freuden spielen dürfen.");
             //lol.insertImage(new FileInputStream("src/main/resources/images/CSGO.png"), "galaxie");
-            lol.insertNutzer(nutzer);
-            lol.insertSpiel(fallGuys);
+            lol.insertNutzer(maxi);
+            lol.insertSpiel(bspSpiele.get(0));
             lol.insertNutzerBesitzt(nutzerBesitzt);
             lol.insertRezension(rezension);
 
@@ -56,11 +64,14 @@ public class DatabaseConnection {
             System.err.println("some SQL Statements are broken.");
             printSQLException(e);
             //throw new RuntimeException(e);
+        } catch (IOException io){
+            io.printStackTrace();
         }
         lol.selectQuery("Select * from Nutzer");
         lol.selectQuery("Select * from Nutzer_Besitzt");
         lol.selectQuery("Select * from Rezension");
         lol.selectQuery("Select * from Spiel");
+        lol.commit();
         lol.closeDB();
 
     }
@@ -213,8 +224,12 @@ public class DatabaseConnection {
             int bewertungProzent = resultSet.getInt("BewertungProzent");
             InputStream logo =  resultSet.getBlob("logo").getBinaryStream();
             InputStream titelbild = resultSet.getBlob("titelbild").getBinaryStream();
+            try{
+                Spiel spielAusDb = new Spiel(spielID,name,beschreibung,preis,genre,bewertungProzent,logo,titelbild);
 
-            Spiel spielAusDb = new Spiel(spielID,name,beschreibung,preis,genre,bewertungProzent,logo,titelbild);
+            }catch (IOException io){
+                io.printStackTrace();
+            }
 
         }
 
@@ -357,8 +372,8 @@ public class DatabaseConnection {
         insert.setDouble(4, spiel.getPreis()); //hier könnte es probleme geben
         insert.setString(5, spiel.getGenre());
         insert.setInt(6, spiel.getBewertungProzent());
-        insert.setBlob(7, spiel.getLogo());
-        insert.setBlob(8, spiel.getTitelbild());
+        insert.setBlob(7, new ByteArrayInputStream(spiel.getLogo()));
+        insert.setBlob(8, new ByteArrayInputStream(spiel.getTitelbild()));
 
         insert.executeUpdate();
     }

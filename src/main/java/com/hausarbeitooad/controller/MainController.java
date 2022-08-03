@@ -22,9 +22,9 @@ import java.util.ResourceBundle;
  *
  * @author
  */
-public class MainController implements Stageable, Initializable, AcceptsDatabase {
+public class MainController implements Stageable, Initializable {
     private Stage stage;
-    private DatabaseConnection conn;
+
 
     @FXML
     private MenuBar menuBar;
@@ -90,11 +90,6 @@ public class MainController implements Stageable, Initializable, AcceptsDatabase
     private void handleAboutAction(final ActionEvent event) {
         provideAboutFunctionality();
         event.consume();
-    }
-
-    @Override
-    public void setDatabaseConnection(DatabaseConnection conn) {
-        this.conn = conn;
     }
 
     public void handleonActionGuthabenScene(ActionEvent event) {

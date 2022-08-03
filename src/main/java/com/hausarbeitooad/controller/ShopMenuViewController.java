@@ -1,8 +1,10 @@
 package com.hausarbeitooad.controller;
 
+import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.entity.Spiel;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.model.AcceptsDatabase;
+import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ShopMenuViewController implements Stageable, Initializable, AcceptsDatabase {
+public class ShopMenuViewController implements Stageable, Initializable {
     @FXML
     private ImageView arrowLeftID;
 
@@ -66,7 +68,13 @@ public class ShopMenuViewController implements Stageable, Initializable, Accepts
         try {
             List<Spiel> spiele = conn.retrieveSpiele();
             for (Spiel s: spiele){
-                listViewID.getItems().add(createHBoxFromSpiel(s));
+                HBox spielHbox = createHBoxFromSpiel(s);
+                spielHbox.setOnMouseClicked( event -> {
+                    //spielHbox.getChildren().get(2)
+                    stage.setScene(SceneFxmlApp.getScenes().get(SceneName.SHOP_MENU).getScene());
+                    event.consume();
+                });
+                listViewID.getItems().add(spielHbox);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -75,10 +83,6 @@ public class ShopMenuViewController implements Stageable, Initializable, Accepts
 
     }
 
-    @Override
-    public void setDatabaseConnection(DatabaseConnection conn) {
-        this.conn = conn;
-    }
 
     @Override
     public void setStage(Stage stage) {
@@ -86,6 +90,8 @@ public class ShopMenuViewController implements Stageable, Initializable, Accepts
     }
 
     public HBox createHBoxFromSpiel(Spiel spiel){
+
+
 
         ImageView logoImageView = new ImageView(new Image(new ByteArrayInputStream(spiel.getLogo())));
         logoImageView.setFitHeight(68);
@@ -98,6 +104,15 @@ public class ShopMenuViewController implements Stageable, Initializable, Accepts
         logoVbox.setPrefHeight(70);
         logoVbox.setPrefWidth(100);
 
+        Label idLabel = new Label(Integer.toString(spiel.getSpielID()));
+        idLabel.setFont(Font.font(18.0));
+        idLabel.setAlignment(Pos.CENTER);
+
+        VBox idVbox = new VBox(idLabel);
+        idVbox.setAlignment(Pos.CENTER);
+        idVbox.setPrefHeight(70);
+        idVbox.setPrefWidth(100);
+
         Label nameLabel = new Label(spiel.getName());
         nameLabel.setFont(Font.font(18.0));
         nameLabel.setAlignment(Pos.CENTER);
@@ -105,7 +120,7 @@ public class ShopMenuViewController implements Stageable, Initializable, Accepts
         VBox nameVbox = new VBox(nameLabel);
         nameVbox.setAlignment(Pos.CENTER);
         nameVbox.setPrefHeight(70);
-        nameVbox.setPrefWidth(320);
+        nameVbox.setPrefWidth(220);
 
         Label preisLabel = new Label(Double.toString(spiel.getPreis()));
         preisLabel.setFont(Font.font(18.0));
@@ -117,6 +132,6 @@ public class ShopMenuViewController implements Stageable, Initializable, Accepts
         preisVbox.setPrefWidth(280);
 
 
-        return new HBox(logoVbox,nameVbox,preisVbox);
+        return new HBox(logoVbox,idVbox,nameVbox,preisVbox);
     }
 }

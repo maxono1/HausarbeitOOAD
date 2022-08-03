@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ShopItemController implements Stageable, Initializable, AcceptsDatabase {
+public class ShopItemController implements Stageable, Initializable {
 
 
     @FXML
@@ -31,10 +31,6 @@ public class ShopItemController implements Stageable, Initializable, AcceptsData
         mainWindow.setTitle(title);
     }
 
-    @Override
-    public void setDatabaseConnection(DatabaseConnection conn) {
-        this.conn = conn;
-    }
 
     @Override
     public void setStage(Stage stage) {

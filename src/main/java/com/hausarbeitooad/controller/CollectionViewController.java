@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CollectionViewController implements Stageable, Initializable, AcceptsDatabase {
+public class CollectionViewController implements Stageable, Initializable {
 
     private Stage stage;
     private DatabaseConnection conn;
@@ -51,8 +51,4 @@ public class CollectionViewController implements Stageable, Initializable, Accep
 
     }
 
-    @Override
-    public void setDatabaseConnection(DatabaseConnection conn) {
-        this.conn = conn;
-    }
 }

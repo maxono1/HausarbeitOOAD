@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController implements Stageable, Initializable, AcceptsDatabase {
+public class LoginController implements Stageable, Initializable {
 
     private Stage stage;
     private DatabaseConnection conn;
@@ -32,10 +32,6 @@ public class LoginController implements Stageable, Initializable, AcceptsDatabas
         this.stage = stage;
     }
 
-    @Override
-    public void setDatabaseConnection(DatabaseConnection conn) {
-        this.conn = conn;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

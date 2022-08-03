@@ -111,11 +111,12 @@ public class FxmlInfo {
 		if (controller != null) {
 			controller.setStage(this.getStage());
 		}
+		/*
 		//hier database verteilen
 		AcceptsDatabase controlr = loader.getController();
 		if (controlr != null){
 			controlr.setDatabaseConnection(this.getConn());
-		}
+		}*/
 
 		return scene;
 	}

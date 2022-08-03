@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ReviewViewController implements Stageable, Initializable, AcceptsDatabase {
+public class ReviewViewController implements Stageable, Initializable {
 
     private Stage stage;
     @FXML
@@ -34,7 +34,6 @@ public class ReviewViewController implements Stageable, Initializable, AcceptsDa
 
     @FXML
     private TextField opinionReviewID;
-    private DatabaseConnection conn;
 
     @Override
     public void setStage(Stage stage) {
@@ -50,8 +49,4 @@ public class ReviewViewController implements Stageable, Initializable, AcceptsDa
         event.consume();
     }
 
-    @Override
-    public void setDatabaseConnection(DatabaseConnection conn) {
-        this.conn = conn;
-    }
 }

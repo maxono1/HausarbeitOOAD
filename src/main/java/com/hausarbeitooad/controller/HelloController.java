@@ -5,7 +5,7 @@ import com.hausarbeitooad.model.AcceptsDatabase;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController implements AcceptsDatabase {
+public class HelloController  {
 
     private DatabaseConnection dbConn;
     @FXML
@@ -16,8 +16,4 @@ public class HelloController implements AcceptsDatabase {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
 
-    @Override
-    public void setDatabaseConnection(DatabaseConnection conn) {
-        this.dbConn = conn;
-    }
 }

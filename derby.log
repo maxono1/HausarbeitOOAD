@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Wed Aug 03 14:44:38 CEST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0182-63bc-8fe5-00000536de00 
+Wed Aug 03 15:12:06 CEST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0182-63d5-b71a-0000053d9320 
 on database directory C:\Users\maxim\Documents\Hs_zeug\sem4\objektorientierte_Analyse_und_design\testMaven\HausarbeitOOAD\derbyDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5a10411 
 Loaded from file:/C:/libraries/db-derby-10.16.1.1-bin/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -12,8 +12,8 @@ os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
 ----------------------------------------------------------------
-Wed Aug 03 14:48:56 CEST 2022: Shutting down Derby engine
+Wed Aug 03 15:12:18 CEST 2022: Shutting down Derby engine
 ----------------------------------------------------------------
-Wed Aug 03 14:48:56 CEST 2022:
-Shutting down instance a816c00e-0182-63bc-8fe5-00000536de00 on database directory C:\Users\maxim\Documents\Hs_zeug\sem4\objektorientierte_Analyse_und_design\testMaven\HausarbeitOOAD\derbyDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5a10411 
+Wed Aug 03 15:12:18 CEST 2022:
+Shutting down instance a816c00e-0182-63d5-b71a-0000053d9320 on database directory C:\Users\maxim\Documents\Hs_zeug\sem4\objektorientierte_Analyse_und_design\testMaven\HausarbeitOOAD\derbyDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5a10411 
 ----------------------------------------------------------------

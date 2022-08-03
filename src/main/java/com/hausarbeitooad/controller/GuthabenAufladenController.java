@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GuthabenAufladenController implements Stageable, Initializable, AcceptsDatabase {
+public class GuthabenAufladenController implements Stageable, Initializable {
 
     private Stage stage;
     @FXML
@@ -41,10 +41,6 @@ public class GuthabenAufladenController implements Stageable, Initializable, Acc
     }
 
 
-    @Override
-    public void setDatabaseConnection(DatabaseConnection conn) {
-        this.conn = conn;
-    }
 
     @Override
     public void setStage(Stage stage) {

@@ -45,12 +45,16 @@ public class SceneFxmlApp extends Application {
 
 	@Override
 	public void start(Stage stage) {
-		conn = new DatabaseConnection();
+		conn = DatabaseConnection.getInstance();
 		//conn.selectQuery("select * from spiel");
 		boolean loadTestData = false;
 		if (loadTestData){
 			BeispielDatenLoader b = new BeispielDatenLoader(conn);
 		}
+		//conn.selectQuery("Select * from Nutzer");
+		//conn.selectQuery("Select * from Nutzer_Besitzt");
+		//conn.selectQuery("Select * from Rezension");
+		//conn.selectQuery("Select * from Spiel");
 
 		scenes.put(SceneName.LOGIN, new FxmlInfo(SceneFxmlApp.class.getResource(LOGIN_VIEW_FXML), SceneName.LOGIN, stage, conn));
 		scenes.put(SceneName.MAIN, new FxmlInfo(SceneFxmlApp.class.getResource(MAIN_FXML), SceneName.MAIN, stage, conn));

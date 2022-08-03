@@ -71,12 +71,21 @@ public class DatabaseConnection {
         lol.selectQuery("Select * from Nutzer_Besitzt");
         lol.selectQuery("Select * from Rezension");
         lol.selectQuery("Select * from Spiel");
-        lol.commit();
+        //lol.commit();
         lol.closeDB();
 
     }
 
-    public DatabaseConnection() {
+    private static DatabaseConnection dbConnInstance = null;
+
+    public static DatabaseConnection getInstance(){
+        if (dbConnInstance == null){
+            dbConnInstance = new DatabaseConnection();
+        }
+        return dbConnInstance;
+    }
+
+    private DatabaseConnection() {
         framework = "embedded";
         protocol = "jdbc:derby:";
         tableName = "gameImages";
@@ -116,6 +125,14 @@ public class DatabaseConnection {
             // We want to control transactions manually. Autocommit is on by
             // default in JDBC.
             conn.setAutoCommit(false);
+            /*
+            dropRezension();
+            dropNutzerBesitzt();
+            dropSpiel();
+            dropNutzer();
+*/
+
+
 
             Statement statement = conn.createStatement();
             statements.add(statement);
@@ -225,20 +242,15 @@ public class DatabaseConnection {
             InputStream logo =  resultSet.getBlob("logo").getBinaryStream();
             InputStream titelbild = resultSet.getBlob("titelbild").getBinaryStream();
             try{
-                Spiel spielAusDb = new Spiel(spielID,name,beschreibung,preis,genre,bewertungProzent,logo,titelbild);
+                spieleAusDb.add(new Spiel(spielID,name,beschreibung,preis,genre,bewertungProzent,logo,titelbild));
 
             }catch (IOException io){
                 io.printStackTrace();
             }
 
         }
-
-
-
-
-
         resultSet.close();
-        return null;
+        return spieleAusDb;
     }
 
     public void commit() {

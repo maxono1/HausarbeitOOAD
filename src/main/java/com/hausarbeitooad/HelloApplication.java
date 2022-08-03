@@ -23,6 +23,8 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         HelloController helloController = fxmlLoader.getController();
 
+
+        /*
         DatabaseConnection lol = new DatabaseConnection();
 
         try {
@@ -50,7 +52,7 @@ public class HelloApplication extends Application {
         lol.closeDB();
 
         stage.setScene(scene);
-        stage.show();
+        stage.show();*/
     }
 
     public static void main(String[] args) {

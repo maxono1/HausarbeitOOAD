@@ -24,6 +24,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ShopMenuViewController implements Stageable, Initializable, AcceptsDatabase {
@@ -45,6 +48,7 @@ public class ShopMenuViewController implements Stageable, Initializable, Accepts
         //textField.setBackground(Background.fill(Color.AQUA));
 
         //listViewID.getItems().add("textField");
+        /*
         Spiel fallGuys = null;
         try {
             fallGuys = new Spiel(1, "Fall Guys", "Don't Fall in the Slime", 1.0, "Horrorspiel", 50, new FileInputStream("src/main/resources/images/CSGO.png"), new FileInputStream("src/main/resources/images/CSGO.png"));
@@ -56,6 +60,18 @@ public class ShopMenuViewController implements Stageable, Initializable, Accepts
         for (int i = 0; i < 50; i++){
             listViewID.getItems().add(createHBoxFromSpiel(fallGuys));
         }
+        */
+        conn = DatabaseConnection.getInstance();
+
+        try {
+            List<Spiel> spiele = conn.retrieveSpiele();
+            for (Spiel s: spiele){
+                listViewID.getItems().add(createHBoxFromSpiel(s));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 

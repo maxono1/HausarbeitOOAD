@@ -8,6 +8,7 @@ import com.hausarbeitooad.entity.Spiel;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BeispielDatenLoader {
@@ -31,8 +32,18 @@ public class BeispielDatenLoader {
             NutzerBesitzt nutzerBesitzt = new NutzerBesitzt(1, "maxi");
             Rezension rezension = new Rezension(1, maxi.getbName(), 75, "jo, war super Spiel, habe ich mit Freuden spielen dürfen.");
 
+            for (Spiel s: bspSpiele){
+                conn.insertSpiel(s);
+            }
+            conn.insertNutzer(maxi);
+            conn.insertNutzer(tim);
+            conn.insertNutzerBesitzt(nutzerBesitzt);
+            conn.insertRezension(rezension);
+            conn.commit();
         } catch (IOException ioException){
             ioException.printStackTrace();
+        } catch (SQLException sqlException){
+            DatabaseConnection.printSQLException(sqlException);
         }
 
 

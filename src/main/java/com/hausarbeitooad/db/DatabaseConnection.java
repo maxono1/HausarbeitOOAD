@@ -327,6 +327,8 @@ public class DatabaseConnection {
      * Prints details of an SQLException chain to <code>System.err</code>.
      * Details included are SQL State, Error code, Exception message.
      *
+     * Quelle: https://db.apache.org/derby/papers/DerbyTut/embedded_intro.html
+     * offizielles apache derby tutorial
      * @param e the SQLException from which to print details.
      */
     public static void printSQLException(SQLException e) {

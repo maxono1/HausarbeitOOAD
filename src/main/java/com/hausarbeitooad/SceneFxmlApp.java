@@ -12,11 +12,10 @@ import java.util.Map;
 /**
  * Sets all scene info into a Map and displays the main scene.
  * <p>
- * Note: This class should be launched with these VM flags:
- * <p>
- * {@code --module-path /path/to/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml}
- * 
- * @author Knute Snortum
+ *
+ * Source: <a href="https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11"> https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11 </a>
+ *
+ * @author Knute Snortum, modified by Abdurrahman Azattemür, Maximilian Jaesch, Tim Cirksena
  * @version 2019-08-23
  */
 public class SceneFxmlApp extends Application {
@@ -47,6 +46,11 @@ public class SceneFxmlApp extends Application {
 	@Override
 	public void start(Stage stage) {
 		conn = new DatabaseConnection();
+		//conn.selectQuery("select * from spiel");
+		boolean loadTestData = false;
+		if (loadTestData){
+			BeispielDatenLoader b = new BeispielDatenLoader(conn);
+		}
 
 		scenes.put(SceneName.LOGIN, new FxmlInfo(SceneFxmlApp.class.getResource(LOGIN_VIEW_FXML), SceneName.LOGIN, stage, conn));
 		scenes.put(SceneName.MAIN, new FxmlInfo(SceneFxmlApp.class.getResource(MAIN_FXML), SceneName.MAIN, stage, conn));

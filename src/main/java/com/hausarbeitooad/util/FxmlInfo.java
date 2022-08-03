@@ -3,6 +3,7 @@ package com.hausarbeitooad.util;
 import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.model.AcceptsDatabase;
+import com.hausarbeitooad.model.Loggerble;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
 import javafx.application.Platform;
@@ -31,7 +32,7 @@ import java.net.URL;
 public class FxmlInfo {
 	
 	//private static Logger logger = LogManager.getLogger();
-	
+	private Loggerble loggerble;
 	private URL resourceName;
 	private SceneName sceneName;
 	private Stage stage;
@@ -88,6 +89,13 @@ public class FxmlInfo {
 		return conn;
 	}
 
+	public Loggerble getLoggerble() {
+		if (loggerble == null){
+			scene = load();
+		}
+		return loggerble;
+	}
+
 	/**
 	 * lädt die FXML datei wenn diese noch ungeladen ist
 	 * */
@@ -110,6 +118,11 @@ public class FxmlInfo {
 		Stageable controller = loader.getController();
 		if (controller != null) {
 			controller.setStage(this.getStage());
+		}
+
+		Loggerble lgb = loader.getController();
+		if (lgb != null){
+			loggerble = lgb;
 		}
 		/*
 		//hier database verteilen

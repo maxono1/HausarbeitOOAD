@@ -3,11 +3,13 @@ package com.hausarbeitooad.controller;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.model.AcceptsDatabase;
+import com.hausarbeitooad.model.Loggerble;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
@@ -22,12 +24,15 @@ import java.util.ResourceBundle;
  *
  * @author
  */
-public class MainController implements Stageable, Initializable {
+public class MainController implements Stageable, Initializable, Loggerble {
     private Stage stage;
 
 
     @FXML
     private MenuBar menuBar;
+    private String activeUser;
+    @FXML
+    private Label usernameID;
 
     /**
      * Close application
@@ -68,7 +73,9 @@ public class MainController implements Stageable, Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         menuBar.setFocusTraversable(true);
+
     }
 
     @FXML
@@ -96,5 +103,10 @@ public class MainController implements Stageable, Initializable {
         stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getScene());
         event.consume();
     }
-
+    @Override
+    public void setActiveUser(String uname) {
+        this.activeUser = uname;
+        usernameID.setVisible(true);
+        usernameID.setText(activeUser);
+    }
 }

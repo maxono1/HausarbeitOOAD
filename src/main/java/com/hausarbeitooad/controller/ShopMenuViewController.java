@@ -4,6 +4,7 @@ import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.entity.Spiel;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.model.AcceptsDatabase;
+import com.hausarbeitooad.model.Loggerble;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
 import javafx.fxml.FXML;
@@ -31,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ShopMenuViewController implements Stageable, Initializable {
+public class ShopMenuViewController implements Stageable, Initializable, Loggerble {
     @FXML
     private ImageView arrowLeftID;
 
@@ -44,6 +45,7 @@ public class ShopMenuViewController implements Stageable, Initializable {
     private Label gameNameID;
     private DatabaseConnection conn;
     private Stage stage;
+    private String activeUser;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -83,7 +85,10 @@ public class ShopMenuViewController implements Stageable, Initializable {
 
     }
 
-
+    @Override
+    public void setActiveUser(String uname) {
+        this.activeUser = uname;
+    }
     @Override
     public void setStage(Stage stage) {
         this.stage = stage;

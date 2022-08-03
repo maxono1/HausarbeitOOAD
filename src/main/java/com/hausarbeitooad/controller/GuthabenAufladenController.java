@@ -3,6 +3,7 @@ package com.hausarbeitooad.controller;
 import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.model.AcceptsDatabase;
+import com.hausarbeitooad.model.Loggerble;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
 import javafx.event.ActionEvent;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GuthabenAufladenController implements Stageable, Initializable {
+public class GuthabenAufladenController implements Stageable, Initializable, Loggerble {
 
     private Stage stage;
     @FXML
@@ -28,6 +29,7 @@ public class GuthabenAufladenController implements Stageable, Initializable {
     @FXML
     private Button guthabenAufladenBtnID;
     private DatabaseConnection conn;
+    private String activeUser;
 
     @FXML
     void onActionGuthabenAufladenBackBtn(ActionEvent event) {
@@ -40,7 +42,10 @@ public class GuthabenAufladenController implements Stageable, Initializable {
 
     }
 
-
+    @Override
+    public void setActiveUser(String uname) {
+        this.activeUser = uname;
+    }
 
     @Override
     public void setStage(Stage stage) {

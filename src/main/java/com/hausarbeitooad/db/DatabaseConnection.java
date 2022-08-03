@@ -207,6 +207,25 @@ public class DatabaseConnection {
 
     }
 
+    public boolean selectUser(String username, String password) {
+        try {
+            String query = "Select * From Nutzer WHERE bName like '" + username + "'";
+            Statement select = conn.createStatement();
+            statements.add(select);
+            ResultSet everything = select.executeQuery(query);
+            System.out.println(query);
+            while(everything.next()){
+                if (everything.getString("BNAME").equals(username) && everything.getString("PASSWORD").equals(password)){
+                    return true;
+                }
+            }
+            everything.close();
+        } catch (SQLException s) {
+            printSQLException(s);
+        }
+        return false;
+    }
+
     public InputStream retrieveImage(String uniqueName) {
         try {
             Statement stmt = conn.createStatement();

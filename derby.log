@@ -1,19 +1,18 @@
 ----------------------------------------------------------------
-Wed Aug 03 18:39:37 CEST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0182-6493-b005-0000052cea40 
-on database directory C:\Users\maxim\Documents\Hs_zeug\sem4\objektorientierte_Analyse_und_design\testMaven\HausarbeitOOAD\derbyDBv2 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5a10411 
-Loaded from file:/C:/libraries/db-derby-10.16.1.1-bin/lib/derby.jar
+Wed Aug 03 18:56:34 CEST 2022:
+Booten von Derby-Version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): Instanz a816c00e-0182-64a3-35e6-000006380268
+für Datenbankverzeichnis C:\Users\timci\IdeaProjects\HausarbeitOOAD\derbyDBv2 mit Class Loader jdk.internal.loader.ClassLoaders$AppClassLoader@5a10411
+Geladen aus file:/C:/Users/timci/OneDrive/Desktop/libs/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=18.0.1.1+2-6
-user.dir=C:\Users\maxim\Documents\Hs_zeug\sem4\objektorientierte_Analyse_und_design\testMaven\HausarbeitOOAD
+java.runtime.version=18.0.2+9-61
+user.dir=C:\Users\timci\IdeaProjects\HausarbeitOOAD
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
-Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Wed Aug 03 18:40:33 CEST 2022: Shutting down Derby engine
-----------------------------------------------------------------
-Wed Aug 03 18:40:33 CEST 2022:
-Shutting down instance a816c00e-0182-6493-b005-0000052cea40 on database directory C:\Users\maxim\Documents\Hs_zeug\sem4\objektorientierte_Analyse_und_design\testMaven\HausarbeitOOAD\derbyDBv2 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5a10411 
-----------------------------------------------------------------
+------------  Anfang Fehlermeldung -------------
+
+System hat möglicherweise einen inkonsistenten Status. Fehlende Datei: C:\Users\timci\IdeaProjects\HausarbeitOOAD\derbyDBv2\log\log1.dat
+------------  Ende Fehlermeldung -------------
+
+Datenbank-Class Loader wurde gestartet - derby.database.classpath=''

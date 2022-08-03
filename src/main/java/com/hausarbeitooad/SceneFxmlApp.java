@@ -26,7 +26,7 @@ public class SceneFxmlApp extends Application {
 	private static final String GAME_DETAIL_VIEW_FXML = "game-detail-view.fxml";
 	private static final String GUTHABEN_VERWALTEN_VIEW_FXML = "guthaben-verwalten-view.fxml";
 	private static final String LOGIN_VIEW_FXML = "login-view.fxml";
-
+	private static final String OPTION_VIEW_FXML = "option-view.fxml";
 	private static final String GUTHABEN_AUFLADEN_VIEW_FXML = "guthaben-aufladen-view.fxml";
 
 	private static final String REVIEW_VIEW_FXML = "review-view.fxml";
@@ -69,8 +69,8 @@ public class SceneFxmlApp extends Application {
 		//conn.selectQuery("Select * from Nutzer");
 		//conn.selectQuery("Select * from Nutzer_Besitzt");
 		//conn.selectQuery("Select * from Rezension");
-		//conn.selectQuery("Select SpielID,Name,Beschreibung from Spiel order by SpielID asc");
-
+		//conn.selectQuery("Select * from Spiel");
+		scenes.put(SceneName.OPTION_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(OPTION_VIEW_FXML), SceneName.OPTION_VIEW, stage));
 		scenes.put(SceneName.COLLECTION_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(COLLECTION_VIEW_FXML), SceneName.COLLECTION_VIEW, stage));
 		scenes.put(SceneName.LOGIN, new FxmlInfo(SceneFxmlApp.class.getResource(LOGIN_VIEW_FXML), SceneName.LOGIN, stage));
 		scenes.put(SceneName.MAIN, new FxmlInfo(SceneFxmlApp.class.getResource(MAIN_FXML), SceneName.MAIN, stage));

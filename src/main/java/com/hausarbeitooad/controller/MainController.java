@@ -101,6 +101,11 @@ public class MainController implements Stageable, Initializable, Loggerble {
         stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getScene());
         event.consume();
     }
+    public void  handleOnActionOptionen(ActionEvent event) {
+        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.OPTION_VIEW).getScene());
+        event.consume();
+    }
+
     @Override
     public void setActiveUser(String uname) {
         this.activeUser = uname;

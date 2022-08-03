@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hausarbeitooad.controller.GameDetailViewController">
+   <children>
+      <Separator layoutY="95.0" prefHeight="18.0" prefWidth="714.0" />
+      <Label fx:id="gameNameID" alignment="CENTER" contentDisplay="TOP" layoutX="161.0" layoutY="51.0" prefHeight="18.0" prefWidth="403.0" text="Samplegame">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <VBox layoutY="104.0" prefHeight="396.0" prefWidth="714.0">
+         <children>
+            <Label text="Spielzeit:">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="50.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Erfolge:">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="50.0" />
+               </VBox.margin>
+            </Label>
+            <Button fx:id="rezensionSchreibenID" mnemonicParsing="false" onAction="#handleOnActionRezensionSchreiben" text="Rezension schreiben">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="175.0" top="50.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onActionCollectionBackBtn" prefHeight="18.0" prefWidth="6.0">
+         <graphic>
+            <ImageView fx:id="arrowLeftID1" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/left-arrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

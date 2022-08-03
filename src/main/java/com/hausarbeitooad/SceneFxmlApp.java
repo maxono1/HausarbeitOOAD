@@ -22,8 +22,8 @@ public class SceneFxmlApp extends Application {
 	
 	private static final String MAIN_FXML = "main-view.fxml";
 
-
 	private static final String COLLECTION_VIEW_FXML = "collection-view.fxml";
+	private static final String GAME_DETAIL_VIEW_FXML = "game-detail-view.fxml";
 	private static final String GUTHABEN_VERWALTEN_VIEW_FXML = "guthaben-verwalten-view.fxml";
 	private static final String LOGIN_VIEW_FXML = "login-view.fxml";
 
@@ -44,9 +44,22 @@ public class SceneFxmlApp extends Application {
 	private DatabaseConnection conn;
 
 	@Override
-	public void start(Stage stage) {
+	public void start(Stage stage){
 		conn = DatabaseConnection.getInstance();
 		//conn.selectQuery("select * from spiel");
+
+		/*
+		try {
+			conn.dropNutzerBesitzt();
+			conn.dropRezension();
+			conn.dropSpiel();
+			conn.dropNutzer();
+			conn.commit();
+		} catch (SQLException e) {
+			DatabaseConnection.printSQLException(e);
+		}
+		*/
+
 		boolean loadTestData = false;
 		if (loadTestData){
 			BeispielDatenLoader b = new BeispielDatenLoader(conn);
@@ -56,6 +69,7 @@ public class SceneFxmlApp extends Application {
 		//conn.selectQuery("Select * from Rezension");
 		//conn.selectQuery("Select * from Spiel");
 
+		scenes.put(SceneName.COLLECTION_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(COLLECTION_VIEW_FXML), SceneName.COLLECTION_VIEW, stage, conn));
 		scenes.put(SceneName.LOGIN, new FxmlInfo(SceneFxmlApp.class.getResource(LOGIN_VIEW_FXML), SceneName.LOGIN, stage, conn));
 		scenes.put(SceneName.MAIN, new FxmlInfo(SceneFxmlApp.class.getResource(MAIN_FXML), SceneName.MAIN, stage, conn));
 		//scenes.put(SceneName.SCENE1, new FxmlInfo(SceneFxmlApp.class.getResource(SCENE_ONE_FXML), SceneName.SCENE1, stage));
@@ -63,7 +77,7 @@ public class SceneFxmlApp extends Application {
 		//scenes.put(SceneName.SCENE3, new FxmlInfo(SceneFxmlApp.class.getResource(SCENE_THREE_FXML), SceneName.SCENE3, stage));
 		scenes.put(SceneName.GUTHABENVERWALTEN, new FxmlInfo(SceneFxmlApp.class.getResource(GUTHABEN_VERWALTEN_VIEW_FXML), SceneName.GUTHABENVERWALTEN, stage, conn));
 		scenes.put(SceneName.GUTHABENAUFLADEN, new FxmlInfo(SceneFxmlApp.class.getResource(GUTHABEN_AUFLADEN_VIEW_FXML), SceneName.GUTHABENAUFLADEN, stage, conn));
-		scenes.put(SceneName.COLLECTION_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(COLLECTION_VIEW_FXML), SceneName.COLLECTION_VIEW, stage, conn));
+		scenes.put(SceneName.GAME_DETAIL_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(GAME_DETAIL_VIEW_FXML), SceneName.GAME_DETAIL_VIEW, stage, conn));
 		scenes.put(SceneName.REVIEW_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(REVIEW_VIEW_FXML), SceneName.REVIEW_VIEW, stage, conn));
 		scenes.put(SceneName.SHOP_MENU, new FxmlInfo(SceneFxmlApp.class.getResource(SHOP_MENU_VIEW_FXML), SceneName.SHOP_MENU, stage, conn));
 

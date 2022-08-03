@@ -7,6 +7,7 @@ import com.hausarbeitooad.model.AcceptsDatabase;
 import com.hausarbeitooad.model.Loggerble;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -84,6 +85,11 @@ public class ShopMenuViewController implements Stageable, Initializable, Loggerb
 
 
     }
+    @FXML
+    void onActionMenuItemBackBtn(ActionEvent event) {
+        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.MAIN).getScene());
+        event.consume();
+    }
 
     @Override
     public void setActiveUser(String uname) {
@@ -95,8 +101,6 @@ public class ShopMenuViewController implements Stageable, Initializable, Loggerb
     }
 
     public HBox createHBoxFromSpiel(Spiel spiel){
-
-
 
         ImageView logoImageView = new ImageView(new Image(new ByteArrayInputStream(spiel.getLogo())));
         logoImageView.setFitHeight(68);

@@ -1,8 +1,6 @@
 package com.hausarbeitooad.controller;
 
-import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.SceneFxmlApp;
-import com.hausarbeitooad.model.AcceptsDatabase;
 import com.hausarbeitooad.model.Loggerble;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;

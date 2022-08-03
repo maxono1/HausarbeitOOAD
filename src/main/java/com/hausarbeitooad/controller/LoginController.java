@@ -2,14 +2,12 @@ package com.hausarbeitooad.controller;
 
 import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.db.DatabaseConnection;
-import com.hausarbeitooad.model.AcceptsDatabase;
 import com.hausarbeitooad.model.Loggerble;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -59,7 +57,7 @@ public class LoginController implements Stageable, Initializable, Loggerble {
             SceneFxmlApp.getScenes().get(SceneName.MAIN).getLoggerble().setActiveUser(this.usernameID.getText());
             SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getLoggerble().setActiveUser(this.usernameID.getText());
             SceneFxmlApp.getScenes().get(SceneName.GUTHABENAUFLADEN).getLoggerble().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.COLLECTION_VIEW).getLoggerble().setActiveUser(this.usernameID.getText());
+            SceneFxmlApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getLoggerble().setActiveUser(this.usernameID.getText());
             SceneFxmlApp.getScenes().get(SceneName.REVIEW_VIEW).getLoggerble().setActiveUser(this.usernameID.getText());
             SceneFxmlApp.getScenes().get(SceneName.LOGIN).getLoggerble().setActiveUser(this.usernameID.getText());
             SceneFxmlApp.getScenes().get(SceneName.SHOP_MENU).getLoggerble().setActiveUser(this.usernameID.getText());

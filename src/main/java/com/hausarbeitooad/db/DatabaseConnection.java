@@ -89,6 +89,7 @@ public class DatabaseConnection {
         framework = "embedded";
         protocol = "jdbc:derby:";
         tableName = "gameImages";
+
         statements = new ArrayList<>();
 
         System.out.println("Datenbank starting in " + framework + " mode");
@@ -108,7 +109,7 @@ public class DatabaseConnection {
              * user can connect to your database using any password. To enable
              * authentication, see the Derby Developer's Guide.
              */
-            String dbName = "derbyDB"; // the name of the database
+            String dbName = "derbyDBv2"; // the name of the database
             /*
              * This connection specifies create=true in the connection URL to
              * cause the database to be created when connecting for the first

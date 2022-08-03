@@ -1,8 +1,6 @@
 package com.hausarbeitooad.controller;
 
 import com.hausarbeitooad.SceneFxmlApp;
-import com.hausarbeitooad.db.DatabaseConnection;
-import com.hausarbeitooad.model.AcceptsDatabase;
 import com.hausarbeitooad.model.Loggerble;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
@@ -12,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -47,7 +44,7 @@ public class ReviewViewController implements Stageable, Initializable, Loggerble
     }
     @FXML
     void onActionReviewBackBtn(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.COLLECTION_VIEW).getScene());
+        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getScene());
         event.consume();
     }
     @Override

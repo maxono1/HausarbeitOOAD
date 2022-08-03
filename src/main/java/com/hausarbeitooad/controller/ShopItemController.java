@@ -1,8 +1,10 @@
 package com.hausarbeitooad.controller;
 
+import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.model.AcceptsDatabase;
 import com.hausarbeitooad.model.Loggerble;
+import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,4 +48,10 @@ public class ShopItemController implements Stageable, Initializable, Loggerble {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+    @FXML
+    void onActionKaufenBackBtn(ActionEvent event) {
+        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.SHOP_MENU).getScene());
+        event.consume();
+    }
+
 }

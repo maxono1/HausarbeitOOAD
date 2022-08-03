@@ -73,8 +73,11 @@ public class ShopMenuViewController implements Stageable, Initializable, Loggerb
             for (Spiel s: spiele){
                 HBox spielHbox = createHBoxFromSpiel(s);
                 spielHbox.setOnMouseClicked( event -> {
-                    //spielHbox.getChildren().get(2)
-                    stage.setScene(SceneFxmlApp.getScenes().get(SceneName.SHOP_MENU).getScene());
+                    Label idLabel = (Label) spielHbox.getChildren().get(1);
+                    System.out.println(idLabel.getText());
+                    int id = Integer.parseInt(idLabel.getText());
+                    SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getAcceptsID().setSpielID(id);
+                    stage.setScene(SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getScene());
                     event.consume();
                 });
                 listViewID.getItems().add(spielHbox);
@@ -82,8 +85,6 @@ public class ShopMenuViewController implements Stageable, Initializable, Loggerb
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
     @FXML
     void onActionMenuItemBackBtn(ActionEvent event) {
@@ -116,11 +117,14 @@ public class ShopMenuViewController implements Stageable, Initializable, Loggerb
         Label idLabel = new Label(Integer.toString(spiel.getSpielID()));
         idLabel.setFont(Font.font(18.0));
         idLabel.setAlignment(Pos.CENTER);
+        idLabel.setPrefHeight(70);
+        idLabel.setPrefWidth(100);
 
-        VBox idVbox = new VBox(idLabel);
+
+        /*VBox idVbox = new VBox(idLabel);
         idVbox.setAlignment(Pos.CENTER);
         idVbox.setPrefHeight(70);
-        idVbox.setPrefWidth(100);
+        idVbox.setPrefWidth(100);*/
 
         Label nameLabel = new Label(spiel.getName());
         nameLabel.setFont(Font.font(18.0));
@@ -140,7 +144,6 @@ public class ShopMenuViewController implements Stageable, Initializable, Loggerb
         preisVbox.setPrefHeight(70);
         preisVbox.setPrefWidth(280);
 
-
-        return new HBox(logoVbox,idVbox,nameVbox,preisVbox);
+        return new HBox(logoVbox,idLabel,nameVbox,preisVbox);
     }
 }

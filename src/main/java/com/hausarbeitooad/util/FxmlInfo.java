@@ -1,11 +1,9 @@
 package com.hausarbeitooad.util;
 
 import com.hausarbeitooad.SceneFxmlApp;
+import com.hausarbeitooad.controller.ShopItemController;
 import com.hausarbeitooad.db.DatabaseConnection;
-import com.hausarbeitooad.model.AcceptsDatabase;
-import com.hausarbeitooad.model.Loggerble;
-import com.hausarbeitooad.model.SceneName;
-import com.hausarbeitooad.model.Stageable;
+import com.hausarbeitooad.model.*;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -33,11 +31,12 @@ public class FxmlInfo {
 	
 	//private static Logger logger = LogManager.getLogger();
 	private Loggerble loggerble;
+
+	private AcceptsID acceptsID;
 	private URL resourceName;
 	private SceneName sceneName;
 	private Stage stage;
 	private Scene scene;
-	private DatabaseConnection conn;
 	
 	/**
 	 * Construct an FxmlInfo object
@@ -46,11 +45,10 @@ public class FxmlInfo {
 	 * @param sceneName the {@link SceneName} for this FXML
 	 * @param stage the primary stage that the scene will be set to
 	 */
-	public FxmlInfo(URL resourceName, SceneName sceneName, Stage stage, DatabaseConnection conn) {
+	public FxmlInfo(URL resourceName, SceneName sceneName, Stage stage) {
 		this.resourceName = resourceName;
 		this.sceneName = sceneName;
 		this.stage = stage;
-		this.conn = conn;
 	}
 	
 	/** @return the resource name for this FXML file */
@@ -85,15 +83,18 @@ public class FxmlInfo {
 		return stage;
 	}
 
-	public DatabaseConnection getConn() {
-		return conn;
-	}
-
 	public Loggerble getLoggerble() {
 		if (loggerble == null){
 			scene = load();
 		}
 		return loggerble;
+	}
+
+	public AcceptsID getAcceptsID(){
+		if(acceptsID == null){
+			scene = load();
+		}
+		return acceptsID;
 	}
 
 	/**
@@ -124,6 +125,13 @@ public class FxmlInfo {
 		if (lgb != null){
 			loggerble = lgb;
 		}
+
+		if(loader.getController() instanceof AcceptsID){
+			acceptsID = loader.getController();
+		}
+
+
+
 		/*
 		//hier database verteilen
 		AcceptsDatabase controlr = loader.getController();

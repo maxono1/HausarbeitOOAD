@@ -250,7 +250,7 @@ public class DatabaseConnection {
     //https://docs.oracle.com/javase/tutorial/jdbc/basics/retrieving.html
     public List<Spiel> retrieveSpiele() throws SQLException{
         Statement stmt = conn.createStatement();
-        ResultSet resultSet = stmt.executeQuery("select * from Spiel");
+        ResultSet resultSet = stmt.executeQuery("select * from Spiel order by SpielID asc");
         ArrayList<Spiel> spieleAusDb = new ArrayList<>();
         while (resultSet.next()){
             int spielID = resultSet.getInt("SpielID");

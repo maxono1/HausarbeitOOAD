@@ -33,6 +33,8 @@ public class SceneFxmlApp extends Application {
 
 	private static final String SHOP_MENU_VIEW_FXML = "shop-menu-view.fxml";
 
+	private static final String SHOP_ITEM_VIEW_FXML = "shop-item-view.fxml";
+
 	/** Holds the information for various scenes to switch between */
 	private static Map<SceneName, FxmlInfo> scenes = new HashMap<>();
 
@@ -67,19 +69,20 @@ public class SceneFxmlApp extends Application {
 		//conn.selectQuery("Select * from Nutzer");
 		//conn.selectQuery("Select * from Nutzer_Besitzt");
 		//conn.selectQuery("Select * from Rezension");
-		//conn.selectQuery("Select * from Spiel");
+		//conn.selectQuery("Select SpielID,Name,Beschreibung from Spiel order by SpielID asc");
 
-		scenes.put(SceneName.COLLECTION_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(COLLECTION_VIEW_FXML), SceneName.COLLECTION_VIEW, stage, conn));
-		scenes.put(SceneName.LOGIN, new FxmlInfo(SceneFxmlApp.class.getResource(LOGIN_VIEW_FXML), SceneName.LOGIN, stage, conn));
-		scenes.put(SceneName.MAIN, new FxmlInfo(SceneFxmlApp.class.getResource(MAIN_FXML), SceneName.MAIN, stage, conn));
+		scenes.put(SceneName.COLLECTION_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(COLLECTION_VIEW_FXML), SceneName.COLLECTION_VIEW, stage));
+		scenes.put(SceneName.LOGIN, new FxmlInfo(SceneFxmlApp.class.getResource(LOGIN_VIEW_FXML), SceneName.LOGIN, stage));
+		scenes.put(SceneName.MAIN, new FxmlInfo(SceneFxmlApp.class.getResource(MAIN_FXML), SceneName.MAIN, stage));
 		//scenes.put(SceneName.SCENE1, new FxmlInfo(SceneFxmlApp.class.getResource(SCENE_ONE_FXML), SceneName.SCENE1, stage));
 		//scenes.put(SceneName.SCENE2, new FxmlInfo(SceneFxmlApp.class.getResource(SCENE_TWO_FXML), SceneName.SCENE2, stage));
 		//scenes.put(SceneName.SCENE3, new FxmlInfo(SceneFxmlApp.class.getResource(SCENE_THREE_FXML), SceneName.SCENE3, stage));
-		scenes.put(SceneName.GUTHABENVERWALTEN, new FxmlInfo(SceneFxmlApp.class.getResource(GUTHABEN_VERWALTEN_VIEW_FXML), SceneName.GUTHABENVERWALTEN, stage, conn));
-		scenes.put(SceneName.GUTHABENAUFLADEN, new FxmlInfo(SceneFxmlApp.class.getResource(GUTHABEN_AUFLADEN_VIEW_FXML), SceneName.GUTHABENAUFLADEN, stage, conn));
-		scenes.put(SceneName.GAME_DETAIL_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(GAME_DETAIL_VIEW_FXML), SceneName.GAME_DETAIL_VIEW, stage, conn));
-		scenes.put(SceneName.REVIEW_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(REVIEW_VIEW_FXML), SceneName.REVIEW_VIEW, stage, conn));
-		scenes.put(SceneName.SHOP_MENU, new FxmlInfo(SceneFxmlApp.class.getResource(SHOP_MENU_VIEW_FXML), SceneName.SHOP_MENU, stage, conn));
+		scenes.put(SceneName.GUTHABENVERWALTEN, new FxmlInfo(SceneFxmlApp.class.getResource(GUTHABEN_VERWALTEN_VIEW_FXML), SceneName.GUTHABENVERWALTEN, stage));
+		scenes.put(SceneName.GUTHABENAUFLADEN, new FxmlInfo(SceneFxmlApp.class.getResource(GUTHABEN_AUFLADEN_VIEW_FXML), SceneName.GUTHABENAUFLADEN, stage));
+		scenes.put(SceneName.GAME_DETAIL_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(GAME_DETAIL_VIEW_FXML), SceneName.GAME_DETAIL_VIEW, stage));
+		scenes.put(SceneName.REVIEW_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(REVIEW_VIEW_FXML), SceneName.REVIEW_VIEW, stage));
+		scenes.put(SceneName.SHOP_MENU, new FxmlInfo(SceneFxmlApp.class.getResource(SHOP_MENU_VIEW_FXML), SceneName.SHOP_MENU, stage));
+		scenes.put(SceneName.SHOP_ITEM, new FxmlInfo(SceneFxmlApp.class.getResource(SHOP_ITEM_VIEW_FXML), SceneName.SHOP_ITEM, stage));
 
 
 		// getScene() will load the FXML file the first time

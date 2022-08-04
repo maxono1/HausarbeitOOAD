@@ -39,6 +39,9 @@ public class ShopItemController implements Stageable, Initializable, Loggerble, 
     @Override
     public void setActiveUser(String uname) {
         this.activeUser = uname;
+        System.out.println(uname);
+        guthabenInItemViewID.setVisible(true);
+        guthabenInItemViewID.setText( ""+conn.selectGuthaben(uname));
     }
 
     @Override

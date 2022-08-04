@@ -207,6 +207,26 @@ public class DatabaseConnection {
         }
 
     }
+    public double selectGuthaben(String username){
+        try{
+            String query = "Select guthaben From Nutzer WHERE bName like '" + username + "'";
+            Statement select = conn.createStatement();
+            statements.add(select);
+            ResultSet everything = select.executeQuery(query);
+            System.out.println(query);
+            if(everything.next()){  //wenn es keine Daten gibt failed es hier
+                return everything.getDouble("guthaben");
+            }else{
+                System.out.println("Es wurde nichts gefunden LUL");
+            }
+            everything.close();
+        } catch (SQLException s) {
+            printSQLException(s);
+        }
+        return 0.0;
+    }
+
+
 
     public boolean selectUser(String username, String password) {
         try {

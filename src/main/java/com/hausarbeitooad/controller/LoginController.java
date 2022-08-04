@@ -61,6 +61,7 @@ public class LoginController implements Stageable, Initializable, Loggerble {
             SceneFxmlApp.getScenes().get(SceneName.REVIEW_VIEW).getLoggerble().setActiveUser(this.usernameID.getText());
             SceneFxmlApp.getScenes().get(SceneName.LOGIN).getLoggerble().setActiveUser(this.usernameID.getText());
             SceneFxmlApp.getScenes().get(SceneName.SHOP_MENU).getLoggerble().setActiveUser(this.usernameID.getText());
+            SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getLoggerble().setActiveUser(this.usernameID.getText());
             stage.setScene(SceneFxmlApp.getScenes().get(SceneName.MAIN).getScene());
         } else {
             this.errorTextID.setVisible(true);

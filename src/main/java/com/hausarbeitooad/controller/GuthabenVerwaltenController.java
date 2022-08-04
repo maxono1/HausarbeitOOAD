@@ -2,20 +2,20 @@ package com.hausarbeitooad.controller;
 
 import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.db.DatabaseConnection;
-import com.hausarbeitooad.model.AcceptsDatabase;
-import com.hausarbeitooad.model.Loggerble;
-import com.hausarbeitooad.model.SceneName;
-import com.hausarbeitooad.model.Stageable;
+import com.hausarbeitooad.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GuthabenVerwaltenController implements Stageable, Initializable, Loggerble {
+public class GuthabenVerwaltenController implements Stageable, Initializable, Loggerble, Guthaberble {
 
+    @FXML
+    private Text guthabenAnzeigeID;
     private Stage stage;
     private DatabaseConnection conn;
     private String activeUser;
@@ -28,7 +28,7 @@ public class GuthabenVerwaltenController implements Stageable, Initializable, Lo
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        conn = DatabaseConnection.getInstance();
     }
     @FXML
     void onActionGuthabenAufladenBtn(ActionEvent event) {
@@ -45,6 +45,11 @@ public class GuthabenVerwaltenController implements Stageable, Initializable, Lo
     @Override
     public void setActiveUser(String uname) {
         this.activeUser = uname;
+        updateGuthaben();
     }
 
+    @Override
+    public void updateGuthaben() {
+        guthabenAnzeigeID.setText(conn.selectGuthaben(activeUser)+ "€");
+    }
 }

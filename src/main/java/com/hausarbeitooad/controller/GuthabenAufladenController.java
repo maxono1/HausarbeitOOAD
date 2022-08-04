@@ -43,37 +43,39 @@ public class GuthabenAufladenController implements Stageable, Initializable, Log
 
     @FXML
     private void onClick20Euro(ActionEvent event) {
-        conn.updateGuthaben(activeUser, 20.00);
-        SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getGuthaberble().updateGuthaben();
+        guthabenAufladen(20);
         event.consume();
     }
 
     @FXML
     private void onClick50Euro(ActionEvent event) {
-        conn.updateGuthaben(activeUser, 50.00);
-        conn.commit();
-        SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getGuthaberble().updateGuthaben();
+        guthabenAufladen(50);
         event.consume();
     }
 
     @FXML
     private void onClick100Euro(ActionEvent event) {
-        conn.updateGuthaben(activeUser, 100.00);
-        conn.commit();
-        SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getGuthaberble().updateGuthaben();
+        guthabenAufladen(100);
         event.consume();
     }
 
     @FXML
     private void onActionGuthabenAufladenBackBtn(ActionEvent event) {
         stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getScene());
-        conn.commit();
         event.consume();
     }
 
     @FXML
     private void onActionGuthabenAufladenBtn(ActionEvent event) {
+        //guthabenAufladen();
 
+    }
+
+    private void guthabenAufladen(double geld){
+        conn.updateGuthaben(activeUser, geld);
+        conn.commit();
+        SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getGuthaberble().updateGuthaben();
+        SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getGuthaberble().updateGuthaben();
     }
 
     @Override

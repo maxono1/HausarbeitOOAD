@@ -207,6 +207,11 @@ public class DatabaseConnection {
         }
 
     }
+    /**
+     * gibt guthaben in form eines doubles zurück
+     *
+     * @author Tim cirksena
+     * */
     public double selectGuthaben(String username){
         try{
             String query = "Select guthaben From Nutzer WHERE bName like '" + username + "'";

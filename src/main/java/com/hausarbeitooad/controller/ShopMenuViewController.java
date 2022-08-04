@@ -83,7 +83,7 @@ public class ShopMenuViewController implements Stageable, Initializable, Loggerb
                 listViewID.getItems().add(spielHbox);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            DatabaseConnection.printSQLException(e);
         }
     }
     @FXML

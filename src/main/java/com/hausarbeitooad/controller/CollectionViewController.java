@@ -1,6 +1,7 @@
 package com.hausarbeitooad.controller;
 
 import com.hausarbeitooad.SceneFxmlApp;
+import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.entity.Spiel;
 import com.hausarbeitooad.model.Loggerble;
 import com.hausarbeitooad.model.SceneName;
@@ -10,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -19,16 +21,22 @@ import javafx.stage.Stage;
 
 import java.io.ByteArrayInputStream;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CollectionViewController implements Stageable, Initializable, Loggerble {
 
     private Stage stage;
+    private DatabaseConnection conn;
+    private String activeUser;
     @FXML
     private ImageView arrowLeftID1;
 
     @FXML
     private Label gameNameID;
+    @FXML
+    private ListView<HBox> listNameID;
 
     @FXML
     void onActionCollectionBackBtn(ActionEvent event) {
@@ -38,7 +46,7 @@ public class CollectionViewController implements Stageable, Initializable, Logge
 
     @Override
     public void setActiveUser(String uname) {
-
+        this.activeUser = uname;
     }
 
     @Override
@@ -48,8 +56,27 @@ public class CollectionViewController implements Stageable, Initializable, Logge
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        conn = DatabaseConnection.getInstance();
 
+        try {
+            List<Spiel> spiele = conn.retrieveSpiele();
+            for (Spiel s: spiele){
+                HBox spielHbox = createHBoxFromSpiel(s);
+                spielHbox.setOnMouseClicked( event -> {
+                    Label idLabel = (Label) spielHbox.getChildren().get(1);
+                    System.out.println(idLabel.getText());
+                    int id = Integer.parseInt(idLabel.getText());
+                    SceneFxmlApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getAcceptsID().setSpielID(id);
+                    stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getScene());
+                    event.consume();
+                });
+                listNameID.getItems().add(spielHbox);
+            }
+        } catch (SQLException e) {
+            DatabaseConnection.printSQLException(e);
+        }
     }
+
 
     private HBox createHBoxFromSpiel(Spiel spiel){
         ImageView spielImageView = new ImageView(new Image(new ByteArrayInputStream(spiel.getLogo())));

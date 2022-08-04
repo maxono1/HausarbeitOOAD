@@ -93,11 +93,13 @@ public class ShopItemController implements Stageable, Initializable, Loggerble, 
     private void kaufen() {
         //guthaben abfragen
         try {
-            if (conn.selectGuthaben(activeUser) > Double.parseDouble(preisInhaltID.getText())) {
+            int iend = preisInhaltID.getText().indexOf("€");
+
+            if (conn.selectGuthaben(activeUser) > Double.parseDouble(preisInhaltID.getText().substring(0,iend))) {
                 //besitzt updaten
                 conn.insertNutzerBesitzt(new NutzerBesitzt(spielID, activeUser));
                 //guthaben abziehen
-                conn.updateGuthaben(activeUser, -Double.parseDouble(preisInhaltID.getText()));
+                conn.updateGuthaben(activeUser, -Double.parseDouble(preisInhaltID.getText().substring(0,iend)));
                 conn.commit();
                 userBesitztAbfrage();
                 updateGuthaben();

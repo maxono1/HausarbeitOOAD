@@ -5,6 +5,7 @@ import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.entity.NutzerBesitzt;
 import com.hausarbeitooad.entity.Spiel;
 import com.hausarbeitooad.model.*;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.ByteArrayInputStream;
 import java.net.URL;
@@ -74,7 +76,7 @@ public class ShopItemController implements Stageable, Initializable, Loggerble, 
         System.out.println(spielID);
         try {
             Spiel spiel = conn.retrieveSpielById(spielID);
-            preisInhaltID.setText(Double.toString(spiel.getPreis()));
+            preisInhaltID.setText(Double.toString(spiel.getPreis()) + "€");
             bewertungInhaltID.setText(Integer.toString(spiel.getBewertungProzent()) + "%");
             genreInhaltID.setText(spiel.getGenre());
             gameNameID.setText(spiel.getName());
@@ -98,8 +100,17 @@ public class ShopItemController implements Stageable, Initializable, Loggerble, 
                 conn.updateGuthaben(activeUser, -Double.parseDouble(preisInhaltID.getText()));
                 conn.commit();
                 userBesitztAbfrage();
+                updateGuthaben();
             } else {
-
+                keineKohleID.setVisible(true);
+                //Quelle https://stackoverflow.com/questions/29487645/how-to-make-a-label-visible-for-a-certain-time-and-then-should-be-invisible-with
+                PauseTransition visiblePause = new PauseTransition(
+                        Duration.seconds(3)
+                );
+                visiblePause.setOnFinished(
+                        event -> keineKohleID.setVisible(false)
+                );
+                visiblePause.play();
             }
         } catch (SQLException s) {
             DatabaseConnection.printSQLException(s);
@@ -120,7 +131,7 @@ public class ShopItemController implements Stageable, Initializable, Loggerble, 
     @Override
     public void updateGuthaben() {
         guthabenInItemViewID.setVisible(true);
-        guthabenInItemViewID.setText("" + conn.selectGuthaben(activeUser));
+        guthabenInItemViewID.setText(conn.selectGuthaben(activeUser) + "€");
     }
 
     private void userBesitztAbfrage() {

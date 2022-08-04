@@ -87,7 +87,7 @@ public class ShopMenuViewController implements Stageable, Initializable, Loggerb
         }
     }
     @FXML
-    void onActionMenuItemBackBtn(ActionEvent event) {
+    private void onActionMenuItemBackBtn(ActionEvent event) {
         stage.setScene(SceneFxmlApp.getScenes().get(SceneName.MAIN).getScene());
         event.consume();
     }
@@ -101,7 +101,7 @@ public class ShopMenuViewController implements Stageable, Initializable, Loggerb
         this.stage = stage;
     }
 
-    public HBox createHBoxFromSpiel(Spiel spiel){
+    private HBox createHBoxFromSpiel(Spiel spiel){
 
         ImageView logoImageView = new ImageView(new Image(new ByteArrayInputStream(spiel.getLogo())));
         logoImageView.setFitHeight(68);
@@ -135,7 +135,7 @@ public class ShopMenuViewController implements Stageable, Initializable, Loggerb
         nameVbox.setPrefHeight(70);
         nameVbox.setPrefWidth(220);
 
-        Label preisLabel = new Label(Double.toString(spiel.getPreis()));
+        Label preisLabel = new Label(Double.toString(spiel.getPreis()) + "€");
         preisLabel.setFont(Font.font(18.0));
         preisLabel.setAlignment(Pos.CENTER);
 

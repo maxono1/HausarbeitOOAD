@@ -62,7 +62,7 @@ public class SceneFxmlApp extends Application {
 		}
 		*/
 
-		boolean loadTestData = true;
+		boolean loadTestData = false;
 		if (loadTestData){
 			BeispielDatenLoader b = new BeispielDatenLoader(conn);
 		}

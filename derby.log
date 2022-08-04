@@ -1,13 +1,19 @@
 ----------------------------------------------------------------
-Thu Aug 04 11:44:03 CEST 2022:
-Booten von Derby-Version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): Instanz a816c00e-0182-683d-994f-00000622ee00
-für Datenbankverzeichnis C:\Users\timci\IdeaProjects\HausarbeitOOAD\derbyDBv2 mit Class Loader jdk.internal.loader.ClassLoaders$AppClassLoader@5a10411
-Geladen aus file:/C:/Users/timci/OneDrive/Desktop/libs/derby.jar
+Thu Aug 04 12:58:59 CEST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0182-6882-3089-00000525d390 
+on database directory C:\Users\maxim\Documents\Hs_zeug\sem4\objektorientierte_Analyse_und_design\testMaven\HausarbeitOOAD\derbyDBv2 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5a10411 
+Loaded from file:/C:/libraries/db-derby-10.16.1.1-bin/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=18.0.2+9-61
-user.dir=C:\Users\timci\IdeaProjects\HausarbeitOOAD
+java.runtime.version=18.0.1.1+2-6
+user.dir=C:\Users\maxim\Documents\Hs_zeug\sem4\objektorientierte_Analyse_und_design\testMaven\HausarbeitOOAD
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
-Datenbank-Class Loader wurde gestartet - derby.database.classpath=''
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Thu Aug 04 13:18:47 CEST 2022: Shutting down Derby engine
+----------------------------------------------------------------
+Thu Aug 04 13:18:48 CEST 2022:
+Shutting down instance a816c00e-0182-6882-3089-00000525d390 on database directory C:\Users\maxim\Documents\Hs_zeug\sem4\objektorientierte_Analyse_und_design\testMaven\HausarbeitOOAD\derbyDBv2 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5a10411 
+----------------------------------------------------------------

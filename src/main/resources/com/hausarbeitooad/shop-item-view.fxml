@@ -26,25 +26,25 @@
                 <Font size="36.0" />
             </font>
         </Label>
-        <Label fx:id="GenreInhaltID" layoutX="436.0" layoutY="110.0" prefHeight="39.0" prefWidth="220.0" text="TestGenre" />
+        <Label fx:id="genreInhaltID" layoutX="436.0" layoutY="110.0" prefHeight="39.0" prefWidth="220.0" text="TestGenre" />
         <Label layoutX="325.0" layoutY="158.0" text="Preis:">
             <font>
                 <Font size="36.0" />
             </font>
         </Label>
-        <Label fx:id="PreisInhaltID" layoutX="436.0" layoutY="165.0" prefHeight="39.0" prefWidth="220.0" text="TestPreis" />
+        <Label fx:id="preisInhaltID" layoutX="436.0" layoutY="165.0" prefHeight="39.0" prefWidth="220.0" text="TestPreis" />
         <Label layoutX="14.0" layoutY="278.0" prefHeight="39.0" prefWidth="124.0" text="Bewertung:">
             <font>
                 <Font size="24.0" />
             </font>
         </Label>
-        <Label fx:id="BewertungInhaltID" layoutX="147.0" layoutY="278.0" prefHeight="39.0" prefWidth="164.0" text="TestBewertung" />
+        <Label fx:id="bewertungInhaltID" layoutX="147.0" layoutY="278.0" prefHeight="39.0" prefWidth="164.0" text="TestBewertung" />
         <Label layoutX="325.0" layoutY="226.0" prefHeight="39.0" prefWidth="151.0" text="Beschreibung:">
             <font>
                 <Font size="24.0" />
             </font>
         </Label>
-        <Label fx:id="BeschreibungInhaltID" layoutX="484.0" layoutY="231.0" prefHeight="39.0" prefWidth="220.0" text="TestBeschreibung " />
+        <Label fx:id="beschreibungInhaltID" layoutX="484.0" layoutY="231.0" prefHeight="39.0" prefWidth="220.0" text="TestBeschreibung " />
         <ImageView fx:id="arrowLeftID" fitHeight="32.0" fitWidth="32.0" layoutX="23.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../images/left-arrow.png" />

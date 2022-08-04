@@ -226,6 +226,10 @@ public class DatabaseConnection {
         return 0.0;
     }
 
+    /**
+     * negative value um geld abzuziehen
+     * @author Tim Cirksena
+     * */
     public boolean updateGuthaben(String username, double geld){
         try{
             double tmp = selectGuthaben(username) + geld;
@@ -241,6 +245,8 @@ public class DatabaseConnection {
         }
         return false;
     }
+
+
 
     public boolean selectUser(String username, String password) {
         try {
@@ -326,6 +332,20 @@ public class DatabaseConnection {
         resultSet.close();
         return spiel;
     }
+
+    public boolean besitztNutzerSpiel(String nutzername, int spielID) throws SQLException{
+        Statement statement = conn.createStatement();
+        statements.add(statement);
+
+        ResultSet resultSet = statement.executeQuery("Select SpielID from Nutzer_Besitzt where bName like '" + nutzername + "'");
+        while (resultSet.next()){
+            if(resultSet.getInt("SpielID") == spielID){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void commit() {
         try {
             conn.commit();

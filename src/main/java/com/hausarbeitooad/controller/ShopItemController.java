@@ -28,7 +28,8 @@ public class ShopItemController implements Stageable, Initializable, Loggerble, 
     private Stage stage;
     private String activeUser;
     private int spielID;
-
+    @FXML
+    private Label guthabenInItemViewID;
     @FXML
     void btnOkClicked(ActionEvent event) {
         Stage mainWindow = (Stage) tfTitle.getScene().getWindow();

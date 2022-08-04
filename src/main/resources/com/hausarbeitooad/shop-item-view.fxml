@@ -60,5 +60,15 @@
             </ImageView>
          </graphic>
       </Button>
+      <Label layoutX="354.0" layoutY="421.0" text="Guthaben:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="guthabenInItemViewID" layoutX="476.0" layoutY="423.0" prefHeight="32.0" prefWidth="102.0" text="Label" visible="false">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

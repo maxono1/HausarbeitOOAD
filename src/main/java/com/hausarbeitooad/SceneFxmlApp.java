@@ -32,7 +32,7 @@ public class SceneFxmlApp extends Application {
 	private static final String REVIEW_VIEW_FXML = "review-view.fxml";
 
 	private static final String SHOP_MENU_VIEW_FXML = "shop-menu-view.fxml";
-
+	private static final String REZENSION_VIEW_FXML = "rezension-view.fxml";
 	private static final String SHOP_ITEM_VIEW_FXML = "shop-item-view.fxml";
 
 	/** Holds the information for various scenes to switch between */
@@ -68,7 +68,7 @@ public class SceneFxmlApp extends Application {
 		}
 		//conn.selectQuery("Select * from Nutzer");
 		//conn.selectQuery("Select * from Nutzer_Besitzt");
-		//conn.selectQuery("Select * from Rezension");
+		conn.selectQuery("Select * from Rezension");
 		//conn.selectQuery("Select * from Spiel");
 		scenes.put(SceneName.OPTION_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(OPTION_VIEW_FXML), SceneName.OPTION_VIEW, stage));
 		scenes.put(SceneName.COLLECTION_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(COLLECTION_VIEW_FXML), SceneName.COLLECTION_VIEW, stage));
@@ -83,7 +83,7 @@ public class SceneFxmlApp extends Application {
 		scenes.put(SceneName.REVIEW_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(REVIEW_VIEW_FXML), SceneName.REVIEW_VIEW, stage));
 		scenes.put(SceneName.SHOP_MENU, new FxmlInfo(SceneFxmlApp.class.getResource(SHOP_MENU_VIEW_FXML), SceneName.SHOP_MENU, stage));
 		scenes.put(SceneName.SHOP_ITEM, new FxmlInfo(SceneFxmlApp.class.getResource(SHOP_ITEM_VIEW_FXML), SceneName.SHOP_ITEM, stage));
-
+		scenes.put(SceneName.REZENSION_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(REZENSION_VIEW_FXML), SceneName.REZENSION_VIEW, stage));
 
 		// getScene() will load the FXML file the first time
 		stage.setScene(scenes.get(SceneName.LOGIN).getScene());

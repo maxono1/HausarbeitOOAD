@@ -299,6 +299,15 @@ public class DatabaseConnection {
         return new Spiel(spielID,name,beschreibung,preis,genre,bewertungProzent,logo,titelbild);
     }
 
+    private Rezension rezensionFromResultSet(ResultSet resultSet) throws SQLException, IOException {
+        int spielID = resultSet.getInt("SpielID");
+        String name = resultSet.getString("bName");
+        int userBewertungProzent = resultSet.getInt("userBewertungProzent");
+        String beschreibung = resultSet.getString("text");
+
+        return new Rezension(spielID,name,userBewertungProzent,beschreibung);
+    }
+
     //https://docs.oracle.com/javase/tutorial/jdbc/basics/retrieving.html
     public List<Spiel> retrieveSpiele() throws SQLException{
         Statement stmt = conn.createStatement();
@@ -315,6 +324,23 @@ public class DatabaseConnection {
         }
         resultSet.close();
         return spieleAusDb;
+    }
+
+    public List<Rezension> retrieveRezensionen(int spielID) throws SQLException{
+        Statement stmt = conn.createStatement();
+        statements.add(stmt);
+        ResultSet resultSet = stmt.executeQuery("select * from Rezension where spielID =" + spielID);
+        ArrayList<Rezension> rezensionenAusDB = new ArrayList<>();
+        while (resultSet.next()){
+            try{
+                rezensionenAusDB.add(rezensionFromResultSet(resultSet));
+
+            }catch (IOException io){
+                io.printStackTrace();
+            }
+        }
+        resultSet.close();
+        return rezensionenAusDB;
     }
 
     public Spiel retrieveSpielById(int id) throws  SQLException{

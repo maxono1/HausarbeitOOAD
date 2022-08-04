@@ -151,4 +151,10 @@ public class ShopItemController implements Stageable, Initializable, Loggerble, 
             DatabaseConnection.printSQLException(s);
         }
     }
+    @FXML
+    private void onActionRezensionBtn(ActionEvent event) {
+        SceneFxmlApp.getScenes().get(SceneName.REZENSION_VIEW).getAcceptsID().setSpielID(this.spielID);
+        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.REZENSION_VIEW).getScene());
+        event.consume();
+    }
 }

@@ -266,33 +266,52 @@ public class DatabaseConnection {
 
         return null;
     }
+    private Spiel spielFromResultSet(ResultSet resultSet) throws SQLException, IOException {
+        int spielID = resultSet.getInt("SpielID");
+        String name = resultSet.getString("Name");
+        String beschreibung = resultSet.getString("beschreibung");
+        double preis = resultSet.getDouble("Preis");
+        String genre = resultSet.getString("Genre");
+        int bewertungProzent = resultSet.getInt("BewertungProzent");
+        InputStream logo =  resultSet.getBlob("logo").getBinaryStream();
+        InputStream titelbild = resultSet.getBlob("titelbild").getBinaryStream();
+        
+        return new Spiel(spielID,name,beschreibung,preis,genre,bewertungProzent,logo,titelbild);
+    }
 
     //https://docs.oracle.com/javase/tutorial/jdbc/basics/retrieving.html
     public List<Spiel> retrieveSpiele() throws SQLException{
         Statement stmt = conn.createStatement();
+        statements.add(stmt);
         ResultSet resultSet = stmt.executeQuery("select * from Spiel order by SpielID asc");
         ArrayList<Spiel> spieleAusDb = new ArrayList<>();
         while (resultSet.next()){
-            int spielID = resultSet.getInt("SpielID");
-            String name = resultSet.getString("Name");
-            String beschreibung = resultSet.getString("beschreibung");
-            double preis = resultSet.getDouble("Preis");
-            String genre = resultSet.getString("Genre");
-            int bewertungProzent = resultSet.getInt("BewertungProzent");
-            InputStream logo =  resultSet.getBlob("logo").getBinaryStream();
-            InputStream titelbild = resultSet.getBlob("titelbild").getBinaryStream();
             try{
-                spieleAusDb.add(new Spiel(spielID,name,beschreibung,preis,genre,bewertungProzent,logo,titelbild));
+                spieleAusDb.add(spielFromResultSet(resultSet));
 
             }catch (IOException io){
                 io.printStackTrace();
             }
-
         }
         resultSet.close();
         return spieleAusDb;
     }
 
+    public Spiel retrieveSpielById(int id) throws  SQLException{
+        Statement statement = conn.createStatement();
+        statements.add(statement);
+        ResultSet resultSet = statement.executeQuery("select * from Spiel where SpielID = "+ id);
+        Spiel spiel = null;
+        if(resultSet.next()){
+            try {
+                spiel = spielFromResultSet(resultSet);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        resultSet.close();
+        return spiel;
+    }
     public void commit() {
         try {
             conn.commit();

@@ -31,7 +31,7 @@ public class ShopItemController implements Stageable, Initializable, Loggerble, 
     @FXML
     private Label guthabenInItemViewID;
     @FXML
-    void btnOkClicked(ActionEvent event) {
+    private void btnOkClicked(ActionEvent event) {
         Stage mainWindow = (Stage) tfTitle.getScene().getWindow();
         String title = tfTitle.getText();
         mainWindow.setTitle(title);
@@ -48,7 +48,7 @@ public class ShopItemController implements Stageable, Initializable, Loggerble, 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        conn = DatabaseConnection.getInstance();
     }
     @Override
     public void setSpielID(int spielID) {
@@ -59,9 +59,16 @@ public class ShopItemController implements Stageable, Initializable, Loggerble, 
 
     }
     @FXML
-    void onActionKaufenBackBtn(ActionEvent event) {
+    private void onActionKaufenBackBtn(ActionEvent event) {
         stage.setScene(SceneFxmlApp.getScenes().get(SceneName.SHOP_MENU).getScene());
         event.consume();
+    }
+
+    /**
+     * Funktion: von dem active user guthaben laden
+     * */
+    private void guthabenLaden(){
+
     }
 
 }

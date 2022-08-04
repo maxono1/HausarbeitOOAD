@@ -226,7 +226,21 @@ public class DatabaseConnection {
         return 0.0;
     }
 
+    public boolean updateGuthaben(String username, double geld){
+        try{
+            double tmp = selectGuthaben(username) + geld;
+            String query = "UPDATE Nutzer SET guthaben =" + tmp + " WHERE bName like'" + username + "'";
+            Statement select = conn.createStatement();
+            statements.add(select);
+            int everything = select.executeUpdate(query);
+            System.out.println(query);
+            System.out.println(everything); //Hier ist row count
+            }catch (SQLException s) {
+            printSQLException(s);
 
+        }
+        return false;
+    }
 
     public boolean selectUser(String username, String password) {
         try {

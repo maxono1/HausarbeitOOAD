@@ -27,18 +27,49 @@ public class GuthabenAufladenController implements Stageable, Initializable, Log
     private Label gameNameID;
 
     @FXML
+    private Button euro100BtnID;
+
+    @FXML
+    private Button euro20BtnID;
+
+    @FXML
+    private Button euro50BtnID;
+
+    @FXML
     private Button guthabenAufladenBtnID;
     private DatabaseConnection conn;
     private String activeUser;
 
+
     @FXML
-    void onActionGuthabenAufladenBackBtn(ActionEvent event) {
+    private void onClick20Euro(ActionEvent event) {
+        conn.updateGuthaben(activeUser, 20.00);
+        SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getGuthaberble().updateGuthaben();
+        event.consume();
+    }
+
+    @FXML
+    private void onClick50Euro(ActionEvent event) {
+        conn.updateGuthaben(activeUser, 50.00);
+        SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getGuthaberble().updateGuthaben();
+        event.consume();
+    }
+
+    @FXML
+    private void onClick100Euro(ActionEvent event) {
+        conn.updateGuthaben(activeUser, 100.00);
+        SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getGuthaberble().updateGuthaben();
+        event.consume();
+    }
+
+    @FXML
+    private void onActionGuthabenAufladenBackBtn(ActionEvent event) {
         stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getScene());
         event.consume();
     }
 
     @FXML
-    void onActionGuthabenAufladenBtn(ActionEvent event) {
+    private void onActionGuthabenAufladenBtn(ActionEvent event) {
 
     }
 
@@ -54,7 +85,7 @@ public class GuthabenAufladenController implements Stageable, Initializable, Log
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        conn = DatabaseConnection.getInstance();
     }
 
 }

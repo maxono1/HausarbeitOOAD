@@ -3,11 +3,7 @@ package com.hausarbeitooad.controller;
 import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.entity.Spiel;
-import com.hausarbeitooad.model.AcceptsDatabase;
-import com.hausarbeitooad.model.AcceptsID;
-import com.hausarbeitooad.model.Loggerble;
-import com.hausarbeitooad.model.SceneName;
-import com.hausarbeitooad.model.Stageable;
+import com.hausarbeitooad.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +19,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ShopItemController implements Stageable, Initializable, Loggerble, AcceptsID {
+public class ShopItemController implements Stageable, Initializable, Loggerble, AcceptsID, Guthaberble {
 
 
     @FXML
@@ -54,9 +50,7 @@ public class ShopItemController implements Stageable, Initializable, Loggerble, 
     @Override
     public void setActiveUser(String uname) {
         this.activeUser = uname;
-        System.out.println(uname);
-        guthabenInItemViewID.setVisible(true);
-        guthabenInItemViewID.setText( ""+conn.selectGuthaben(uname));
+        updateGuthaben();
     }
 
     @Override
@@ -108,8 +102,9 @@ public class ShopItemController implements Stageable, Initializable, Loggerble, 
     /**
      * Funktion: von dem active user guthaben laden
      * */
-    private void guthabenLaden(){
-
+    @Override
+    public void updateGuthaben() {
+        guthabenInItemViewID.setVisible(true);
+        guthabenInItemViewID.setText( ""+conn.selectGuthaben(activeUser));
     }
-
 }

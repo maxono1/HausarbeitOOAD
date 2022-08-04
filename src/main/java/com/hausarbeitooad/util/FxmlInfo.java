@@ -31,7 +31,7 @@ public class FxmlInfo {
 	
 	//private static Logger logger = LogManager.getLogger();
 	private Loggerble loggerble;
-
+	private Guthaberble guthaberble;
 	private AcceptsID acceptsID;
 	private URL resourceName;
 	private SceneName sceneName;
@@ -83,6 +83,13 @@ public class FxmlInfo {
 		return stage;
 	}
 
+	public Guthaberble getGuthaberble(){
+		if(guthaberble == null){
+			scene = load();
+		}
+		return guthaberble;
+	}
+
 	public Loggerble getLoggerble() {
 		if (loggerble == null){
 			scene = load();
@@ -124,6 +131,9 @@ public class FxmlInfo {
 		Loggerble lgb = loader.getController();
 		if (lgb != null){
 			loggerble = lgb;
+		}
+		if(loader.getController() instanceof Guthaberble){
+			guthaberble = loader.getController();
 		}
 
 		if(loader.getController() instanceof AcceptsID){

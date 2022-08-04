@@ -51,6 +51,7 @@ public class GuthabenAufladenController implements Stageable, Initializable, Log
     @FXML
     private void onClick50Euro(ActionEvent event) {
         conn.updateGuthaben(activeUser, 50.00);
+        conn.commit();
         SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getGuthaberble().updateGuthaben();
         event.consume();
     }
@@ -58,6 +59,7 @@ public class GuthabenAufladenController implements Stageable, Initializable, Log
     @FXML
     private void onClick100Euro(ActionEvent event) {
         conn.updateGuthaben(activeUser, 100.00);
+        conn.commit();
         SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getGuthaberble().updateGuthaben();
         event.consume();
     }
@@ -65,6 +67,7 @@ public class GuthabenAufladenController implements Stageable, Initializable, Log
     @FXML
     private void onActionGuthabenAufladenBackBtn(ActionEvent event) {
         stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getScene());
+        conn.commit();
         event.consume();
     }
 

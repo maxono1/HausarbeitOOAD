@@ -21,7 +21,8 @@ import java.util.ResourceBundle;
 
 public class ShopItemController implements Stageable, Initializable, Loggerble, AcceptsID, Guthaberble {
 
-
+    @FXML
+    private Label keineKohleID;
     @FXML
     private Label beschreibungInhaltID;
     @FXML

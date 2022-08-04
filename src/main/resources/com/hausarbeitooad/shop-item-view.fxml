@@ -70,5 +70,6 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <Label fx:id="keineKohleID" layoutX="22.0" layoutY="396.0" text="Sie besitzen leider nicht genügend Geldeinheiten zum erwerb dieses Spiels!" textFill="RED" visible="false" />
     </children>
 </AnchorPane>

@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -22,7 +23,10 @@ public class GameDetailViewController implements Stageable, Initializable, Login
     private DatabaseConnection conn;
     private String activeUser;
     @FXML
-    private ImageView arrowBackCollectedGameID;
+    private ImageView arrowLeftID1;
+
+    @FXML
+    private Text erfolgeTextID;
 
     @FXML
     private Label gameNameID;
@@ -30,6 +34,9 @@ public class GameDetailViewController implements Stageable, Initializable, Login
     @FXML
     private Button rezensionSchreibenID;
     private int spielID;
+
+    @FXML
+    private Text spielzeitTextID;
 
     @FXML
     void handleOnActionRezensionSchreiben(ActionEvent event) {

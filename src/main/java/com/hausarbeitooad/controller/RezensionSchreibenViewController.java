@@ -70,6 +70,7 @@ public class RezensionSchreibenViewController implements Stageable, Initializabl
     void onActionSubmitButton(ActionEvent event){
         try{
             conn.insertRezension(new Rezension(this.spielID, this.activeUser, Integer.parseInt(this.bewertungID.getText()), this.opinionReviewID.getText()));
+            conn.commit();
         } catch (SQLException sqlException){
             if(sqlException.getSQLState().equals("23505")){
                 //hier son popup einfügen

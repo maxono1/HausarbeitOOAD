@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -21,7 +22,8 @@ public class GuthabenAufladenController implements Stageable, Initializable, Log
     private Stage stage;
     @FXML
     private ImageView arrowLeftID;
-
+    @FXML
+    private TextField moneyID;
     @FXML
     private Label gameNameID;
 
@@ -42,19 +44,19 @@ public class GuthabenAufladenController implements Stageable, Initializable, Log
 
     @FXML
     private void onClick20Euro(ActionEvent event) {
-        guthabenAufladen(20);
+        moneyID.setText("20");
         event.consume();
     }
 
     @FXML
     private void onClick50Euro(ActionEvent event) {
-        guthabenAufladen(50);
+        moneyID.setText("50");
         event.consume();
     }
 
     @FXML
     private void onClick100Euro(ActionEvent event) {
-        guthabenAufladen(100);
+        moneyID.setText("100");
         event.consume();
     }
 
@@ -63,11 +65,21 @@ public class GuthabenAufladenController implements Stageable, Initializable, Log
         stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getScene());
         event.consume();
     }
+    private double sicherung(){
+        double tmp;
+        try{
+            tmp = Double.parseDouble(moneyID.getText());
+        }catch (NumberFormatException e){
+            e.printStackTrace();
+            return 0.0;
+        }
+       return tmp;
+    }
 
     @FXML
     private void onActionGuthabenAufladenBtn(ActionEvent event) {
-        //guthabenAufladen();
-
+        guthabenAufladen(sicherung());
+        event.consume();
     }
 
     private void guthabenAufladen(double geld){

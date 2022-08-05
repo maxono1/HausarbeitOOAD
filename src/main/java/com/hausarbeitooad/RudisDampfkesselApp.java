@@ -10,15 +10,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Sets all scene info into a Map and displays the main scene.
- * <p>
  *
- * Source: <a href="https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11"> https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11 </a>
+ *
+ * Quelle: <a href="https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11"> https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11 </a>
  *
  * @author Knute Snortum, modified by Abdurrahman Azattemür, Maximilian Jaesch, Tim Cirksena
  * @version 2019-08-23
  */
-public class SceneFxmlApp extends Application {
+public class RudisDampfkesselApp extends Application {
 
 	
 	private static final String MAIN_FXML = "main-view.fxml";
@@ -36,49 +35,39 @@ public class SceneFxmlApp extends Application {
 	/** Holds the information for various scenes to switch between */
 	private static Map<SceneName, FxmlInfo> scenes = new HashMap<>();
 
+	private DatabaseConnection conn;
+
 	public static void main(String[] args) {
 		launch(args);
 	}
 
-	//das muss noch gemacht werden.
-	private DatabaseConnection conn;
+
 
 	@Override
 	public void start(Stage stage){
 		conn = DatabaseConnection.getInstance();
-		//conn.selectQuery("select * from spiel");
-
-		/*
-		try {
-			conn.dropNutzerBesitzt();
-			conn.dropRezension();
-			conn.dropSpiel();
-			conn.dropNutzer();
-			conn.commit();
-		} catch (SQLException e) {
-			DatabaseConnection.printSQLException(e);
-		}
-		*/
-
 		boolean loadTestData = false;
 		if (loadTestData){
 			BeispielDatenLoader b = new BeispielDatenLoader(conn);
 		}
+		//zum testen der Tables
 		//conn.selectQuery("Select * from Nutzer");
 		//conn.selectQuery("Select * from Nutzer_Besitzt");
-		conn.selectQuery("Select * from Rezension");
+		//conn.selectQuery("Select * from Rezension");
 		//conn.selectQuery("Select * from Spiel");
-		scenes.put(SceneName.OPTION_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(OPTION_VIEW_FXML), SceneName.OPTION_VIEW, stage));
-		scenes.put(SceneName.COLLECTION_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(COLLECTION_VIEW_FXML), SceneName.COLLECTION_VIEW, stage));
-		scenes.put(SceneName.LOGIN, new FxmlInfo(SceneFxmlApp.class.getResource(LOGIN_VIEW_FXML), SceneName.LOGIN, stage));
-		scenes.put(SceneName.MAIN, new FxmlInfo(SceneFxmlApp.class.getResource(MAIN_FXML), SceneName.MAIN, stage));
-		scenes.put(SceneName.GUTHABENVERWALTEN, new FxmlInfo(SceneFxmlApp.class.getResource(GUTHABEN_VERWALTEN_VIEW_FXML), SceneName.GUTHABENVERWALTEN, stage));
-		scenes.put(SceneName.GUTHABENAUFLADEN, new FxmlInfo(SceneFxmlApp.class.getResource(GUTHABEN_AUFLADEN_VIEW_FXML), SceneName.GUTHABENAUFLADEN, stage));
-		scenes.put(SceneName.GAME_DETAIL_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(GAME_DETAIL_VIEW_FXML), SceneName.GAME_DETAIL_VIEW, stage));
-		scenes.put(SceneName.REVIEW_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(REZENSION_SCHREIBEN_VIEW_FXML), SceneName.REVIEW_VIEW, stage));
-		scenes.put(SceneName.SHOP_MENU, new FxmlInfo(SceneFxmlApp.class.getResource(SHOP_MENU_VIEW_FXML), SceneName.SHOP_MENU, stage));
-		scenes.put(SceneName.SHOP_ITEM, new FxmlInfo(SceneFxmlApp.class.getResource(SHOP_ITEM_VIEW_FXML), SceneName.SHOP_ITEM, stage));
-		scenes.put(SceneName.REZENSION_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(REZENSION_VIEW_FXML), SceneName.REZENSION_VIEW, stage));
+
+		//alle FXMLinfo initialisieren, damit wir zwischen den scenes wechseln können
+		scenes.put(SceneName.OPTION_VIEW, new FxmlInfo(RudisDampfkesselApp.class.getResource(OPTION_VIEW_FXML), SceneName.OPTION_VIEW, stage));
+		scenes.put(SceneName.COLLECTION_VIEW, new FxmlInfo(RudisDampfkesselApp.class.getResource(COLLECTION_VIEW_FXML), SceneName.COLLECTION_VIEW, stage));
+		scenes.put(SceneName.LOGIN, new FxmlInfo(RudisDampfkesselApp.class.getResource(LOGIN_VIEW_FXML), SceneName.LOGIN, stage));
+		scenes.put(SceneName.MAIN, new FxmlInfo(RudisDampfkesselApp.class.getResource(MAIN_FXML), SceneName.MAIN, stage));
+		scenes.put(SceneName.GUTHABENVERWALTEN, new FxmlInfo(RudisDampfkesselApp.class.getResource(GUTHABEN_VERWALTEN_VIEW_FXML), SceneName.GUTHABENVERWALTEN, stage));
+		scenes.put(SceneName.GUTHABENAUFLADEN, new FxmlInfo(RudisDampfkesselApp.class.getResource(GUTHABEN_AUFLADEN_VIEW_FXML), SceneName.GUTHABENAUFLADEN, stage));
+		scenes.put(SceneName.GAME_DETAIL_VIEW, new FxmlInfo(RudisDampfkesselApp.class.getResource(GAME_DETAIL_VIEW_FXML), SceneName.GAME_DETAIL_VIEW, stage));
+		scenes.put(SceneName.REVIEW_VIEW, new FxmlInfo(RudisDampfkesselApp.class.getResource(REZENSION_SCHREIBEN_VIEW_FXML), SceneName.REVIEW_VIEW, stage));
+		scenes.put(SceneName.SHOP_MENU, new FxmlInfo(RudisDampfkesselApp.class.getResource(SHOP_MENU_VIEW_FXML), SceneName.SHOP_MENU, stage));
+		scenes.put(SceneName.SHOP_ITEM, new FxmlInfo(RudisDampfkesselApp.class.getResource(SHOP_ITEM_VIEW_FXML), SceneName.SHOP_ITEM, stage));
+		scenes.put(SceneName.REZENSION_VIEW, new FxmlInfo(RudisDampfkesselApp.class.getResource(REZENSION_VIEW_FXML), SceneName.REZENSION_VIEW, stage));
 
 		// getScene() will load the FXML file the first time
 		stage.setScene(scenes.get(SceneName.LOGIN).getScene());

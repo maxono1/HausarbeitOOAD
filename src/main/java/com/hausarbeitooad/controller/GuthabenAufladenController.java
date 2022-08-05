@@ -1,6 +1,6 @@
 package com.hausarbeitooad.controller;
 
-import com.hausarbeitooad.SceneFxmlApp;
+import com.hausarbeitooad.RudisDampfkesselApp;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.model.CleaningListener;
 import com.hausarbeitooad.model.LoginListener;
@@ -63,7 +63,7 @@ public class GuthabenAufladenController implements Stageable, Initializable, Log
 
     @FXML
     private void onActionGuthabenAufladenBackBtn(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getScene());
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getScene());
         event.consume();
     }
     private double sicherung(){
@@ -86,8 +86,8 @@ public class GuthabenAufladenController implements Stageable, Initializable, Log
     private void guthabenAufladen(double geld){
         conn.updateGuthaben(activeUser, geld);
         conn.commit();
-        SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getGuthabenListner().updateGuthaben();
-        SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getGuthabenListner().updateGuthaben();
+        RudisDampfkesselApp.getScenes().get(SceneName.SHOP_ITEM).getGuthabenListner().updateGuthaben();
+        RudisDampfkesselApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getGuthabenListner().updateGuthaben();
     }
 
     @Override

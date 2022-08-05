@@ -1,6 +1,6 @@
 package com.hausarbeitooad.controller;
 
-import com.hausarbeitooad.SceneFxmlApp;
+import com.hausarbeitooad.RudisDampfkesselApp;
 import com.hausarbeitooad.entity.Spiel;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.model.LoginListener;
@@ -66,10 +66,10 @@ public class ShopMenuViewController implements Stageable, Initializable, LoginLi
                 HBox spielHbox = createHBoxFromSpiel(s);
                 spielHbox.setOnMouseClicked( event -> {
                     Label idLabel = (Label) spielHbox.getChildren().get(1);
-                    System.out.println(idLabel.getText());
+                    //System.out.println(idLabel.getText());
                     int id = Integer.parseInt(idLabel.getText());
-                    SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getAcceptsID().setSpielID(id);
-                    stage.setScene(SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getScene());
+                    RudisDampfkesselApp.getScenes().get(SceneName.SHOP_ITEM).getAcceptsID().setSpielID(id);
+                    stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.SHOP_ITEM).getScene());
                     event.consume();
                 });
                 listViewID.getItems().add(spielHbox);
@@ -80,7 +80,7 @@ public class ShopMenuViewController implements Stageable, Initializable, LoginLi
     }
     @FXML
     private void onActionMenuItemBackBtn(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.MAIN).getScene());
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.MAIN).getScene());
         event.consume();
     }
 

@@ -1,6 +1,6 @@
 package com.hausarbeitooad.util;
 
-import com.hausarbeitooad.SceneFxmlApp;
+import com.hausarbeitooad.RudisDampfkesselApp;
 import com.hausarbeitooad.model.*;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -134,7 +134,7 @@ public class FxmlInfo {
 
 		// Write back the updated FxmlInfo to the scenes Map in Main
 		this.setScene(scene);
-		SceneFxmlApp.updateScenes(this.getSceneName(), this);
+		RudisDampfkesselApp.updateScenes(this.getSceneName(), this);
 
 		Stageable controller = loader.getController();
 		if (controller != null) {

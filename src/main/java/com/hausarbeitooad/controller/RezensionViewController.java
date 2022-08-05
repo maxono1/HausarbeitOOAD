@@ -1,6 +1,6 @@
 package com.hausarbeitooad.controller;
 
-import com.hausarbeitooad.SceneFxmlApp;
+import com.hausarbeitooad.RudisDampfkesselApp;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.entity.Rezension;
 import com.hausarbeitooad.model.AcceptsID;
@@ -37,7 +37,7 @@ public class RezensionViewController implements Stageable, Initializable, LoginL
 
     @FXML
     private void onActionShopItemBackBtn(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getScene());
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.SHOP_ITEM).getScene());
         event.consume();
     }
 
@@ -93,7 +93,7 @@ public class RezensionViewController implements Stageable, Initializable, LoginL
         try{
             List<Rezension> rezensionen = conn.retrieveRezensionen(this.spielID);
             for (Rezension r:rezensionen) {
-                System.out.println(r.getSpielID() + " SpielID, " + r.getText() + " Text, " + r.getbName() + " Benutzer");
+                //System.out.println(r.getSpielID() + " SpielID, " + r.getText() + " Text, " + r.getbName() + " Benutzer");
                 HBox rezensionBox = createHBoxForRezension(r);
                 listViewID.getItems().add(rezensionBox);
             }

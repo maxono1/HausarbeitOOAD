@@ -218,11 +218,11 @@ public class DatabaseConnection {
             Statement select = conn.createStatement();
             statements.add(select);
             ResultSet everything = select.executeQuery(query);
-            System.out.println(query);
+            //System.out.println(query);
             if (everything.next()) {  //wenn es keine Daten gibt failed es hier
                 return everything.getDouble("guthaben");
             } else {
-                System.out.println("Es wurde nichts gefunden LUL");
+                System.out.println("Es wurde nichts gefunden");
             }
             everything.close();
         } catch (SQLException s) {
@@ -243,8 +243,8 @@ public class DatabaseConnection {
             Statement select = conn.createStatement();
             statements.add(select);
             int everything = select.executeUpdate(query);
-            System.out.println(query);
-            System.out.println(everything); //Hier ist row count
+            //System.out.println(query);
+            //System.out.println(everything); //Hier ist row count
         } catch (SQLException s) {
             printSQLException(s);
 
@@ -258,7 +258,7 @@ public class DatabaseConnection {
             Statement select = conn.createStatement();
             statements.add(select);
             ResultSet everything = select.executeQuery(query);
-            System.out.println(query);
+            //System.out.println(query);
             while (everything.next()) {
                 if (everything.getString("BNAME").equals(username) && everything.getString("PASSWORD").equals(password)) {
                     return true;
@@ -277,7 +277,7 @@ public class DatabaseConnection {
         ResultSet resultSet = stmt.executeQuery("select logo, Spiel.spielID, name, spielzeit from Nutzer_besitzt join Spiel on Spiel.spielid = Nutzer_besitzt.spielid where Nutzer_besitzt.bName = '" + username + "' order by SpielID asc");
         ArrayList<Spiel> spieleAusDb = new ArrayList<>();
         while (resultSet.next()) {
-            System.out.println(resultSet.getString("name"));
+            //System.out.println(resultSet.getString("name"));
             try {
                 spieleAusDb.add(spielFromResultSetName(resultSet));
 
@@ -303,7 +303,7 @@ public class DatabaseConnection {
             ResultSet resultSet = stmt.executeQuery("SELECT * from imagetest where name='" + uniqueName + "'");
             if (resultSet.next()) {
                 Blob imageBlob = resultSet.getBlob("image");
-                System.out.println(imageBlob.length());
+                //System.out.println(imageBlob.length());
                 resultSet.close();
                 return imageBlob.getBinaryStream();
             }
@@ -482,46 +482,31 @@ public class DatabaseConnection {
         }
     }
 
-
-    /**
-     * Reports a data verification failure to System.err with the given message.
-     *
-     * @param message A message describing what failed.
-     */
-    private void reportFailure(String message) {
-        System.err.println("\nData verification failed:");
-        System.err.println('\t' + message);
-    }
-
     /**
      * Prints details of an SQLException chain to <code>System.err</code>.
      * Details included are SQL State, Error code, Exception message.
      * <p>
      * Quelle: https://db.apache.org/derby/papers/DerbyTut/embedded_intro.html
      * offizielles apache derby tutorial
-     *
+     * modifiziert von Maximilian Jaesch
      * @param e the SQLException from which to print details.
      */
     public static void printSQLException(SQLException e) {
         // Unwraps the entire exception chain to unveil the real cause of the
         // Exception.
         while (e != null) {
-            System.err.println("\n----- SQLException -----");
-            System.err.println("  SQL State:  " + e.getSQLState());
-            System.err.println("  Error Code: " + e.getErrorCode());
-            System.err.println("  Message:    " + e.getMessage());
+            if(e.getSQLState().equals("X0Y32")){
+                System.out.println("tables existieren bereits.");
+            } else{
+                System.err.println("\n----- SQLException -----");
+                System.err.println("  SQL State:  " + e.getSQLState());
+                System.err.println("  Error Code: " + e.getErrorCode());
+                System.err.println("  Message:    " + e.getMessage());
+            }
             // for stack traces, refer to derby.log or uncomment this:
             //e.printStackTrace(System.err);
             e = e.getNextException();
         }
-    }
-
-
-    private void insertDemoUsers() throws SQLException {
-        Statement insertDemo = conn.createStatement();
-        insertDemo.execute("insert into Nutzer values('tim',1234);\n" +
-                "insert into Nutzer values('abdu',1234);");
-        statements.add(insertDemo);
     }
 
     public void insertNutzer(Nutzer nutzer) throws SQLException {
@@ -596,45 +581,3 @@ public class DatabaseConnection {
         s.execute("drop table Spiel");
     }
 }
-
-/*
-            String create1 = "create table Spiel(\n" +
-                    "    SpielID int primary key,\n" +
-                    "    Name varchar(255),\n" +
-                    "    Beschreibung varchar(2048),\n" +
-                    "    Preis decimal(5,2),\n" +
-                    "    Genre varchar(128),\n" +
-                    "    BewertungProzent int,\n" +
-                    "    Logo blob,\n" +
-                    "    Titelbild blob,\n" +
-                    "    check (preis>=0 AND preis <1000),\n" +
-                    "    check (BewertungProzent>=0 AND BewertungProzent<=100)\n" +
-                    ")";
-            String create2 = "create table Nutzer(\n" +
-                    "    BName varchar(20) primary key,\n" +
-                    "    password varchar(20),\n" +
-                    "    guthaben decimal(10,2),\n" +
-                    "    check (guthaben>=0)\n" +
-                    ")";
-            String create3 = "create table Rezension(\n" +
-                    "    SpielID int,\n" +
-                    "    BName varchar(20),\n" +
-                    "    UserBewertungProzent int,\n" +
-                    "    Text varchar(3999),\n" +
-                    "    foreign key (BName) references Nutzer(BName),\n" +
-                    "    foreign key (SpielID) references Spiel(SpielID),\n" +
-                    "    primary key(SpielID,BName),\n" +
-                    "    check (UserBewertungProzent>=0 AND UserBewertungProzent<=100)\n" +
-                    ")";
-            String create4 = "create table Nutzer_Besitzt(\n" +
-                    "    SpielID int,\n" +
-                    "    BName varchar(20),\n" +
-                    "    foreign key (BName) references Nutzer(BName),\n" +
-                    "    foreign key (SpielID) references Spiel(SpielID),\n" +
-                    "    primary key(SpielID,BName)\n" +
-                    ")";
-            statement.execute(create1);
-            statement.execute(create2);
-            statement.execute(create3);
-            statement.execute(create4);
-*/

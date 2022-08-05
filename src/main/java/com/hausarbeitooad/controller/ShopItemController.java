@@ -1,6 +1,6 @@
 package com.hausarbeitooad.controller;
 
-import com.hausarbeitooad.SceneFxmlApp;
+import com.hausarbeitooad.RudisDampfkesselApp;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.entity.NutzerBesitzt;
 import com.hausarbeitooad.entity.Spiel;
@@ -74,7 +74,7 @@ public class ShopItemController implements Stageable, Initializable, LoginListen
         //spiel laden von id
 
         this.spielID = spielID;
-        System.out.println(spielID);
+        //System.out.println(spielID);
         try {
             Spiel spiel = conn.retrieveSpielById(spielID);
             preisInhaltID.setText(Double.toString(spiel.getPreis()) + "€");
@@ -105,8 +105,8 @@ public class ShopItemController implements Stageable, Initializable, LoginListen
                 //alle guthaben- anzeigen updaten
                 userBesitztAbfrage();
                 updateGuthaben();
-                SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getGuthabenListner().updateGuthaben();
-                SceneFxmlApp.getScenes().get(SceneName.COLLECTION_VIEW).getBuyListner().updateGames();
+                RudisDampfkesselApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getGuthabenListner().updateGuthaben();
+                RudisDampfkesselApp.getScenes().get(SceneName.COLLECTION_VIEW).getBuyListner().updateGames();
             } else {
                 keineKohleID.setVisible(true);
                 //Quelle https://stackoverflow.com/questions/29487645/how-to-make-a-label-visible-for-a-certain-time-and-then-should-be-invisible-with
@@ -127,7 +127,7 @@ public class ShopItemController implements Stageable, Initializable, LoginListen
 
     @FXML
     private void onActionKaufenBackBtn(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.SHOP_MENU).getScene());
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.SHOP_MENU).getScene());
         event.consume();
     }
 
@@ -157,8 +157,8 @@ public class ShopItemController implements Stageable, Initializable, LoginListen
     }
     @FXML
     private void onActionRezensionBtn(ActionEvent event) {
-        SceneFxmlApp.getScenes().get(SceneName.REZENSION_VIEW).getAcceptsID().setSpielID(this.spielID);
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.REZENSION_VIEW).getScene());
+        RudisDampfkesselApp.getScenes().get(SceneName.REZENSION_VIEW).getAcceptsID().setSpielID(this.spielID);
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.REZENSION_VIEW).getScene());
         event.consume();
     }
 }

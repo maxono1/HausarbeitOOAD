@@ -1,6 +1,6 @@
 package com.hausarbeitooad.controller;
 
-import com.hausarbeitooad.SceneFxmlApp;
+import com.hausarbeitooad.RudisDampfkesselApp;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.entity.Rezension;
 import com.hausarbeitooad.model.*;
@@ -51,7 +51,7 @@ public class RezensionSchreibenViewController implements Stageable, Initializabl
 
     @FXML
     void onActionReviewBackBtn(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getScene());
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getScene());
         event.consume();
     }
 
@@ -69,10 +69,14 @@ public class RezensionSchreibenViewController implements Stageable, Initializabl
     @FXML
     void onActionSubmitButton(ActionEvent event){
         try{
-            System.out.println(this.spielID);
             conn.insertRezension(new Rezension(this.spielID, this.activeUser, Integer.parseInt(this.bewertungID.getText()), this.opinionReviewID.getText()));
         } catch (SQLException sqlException){
-            DatabaseConnection.printSQLException(sqlException);
+            if(sqlException.getSQLState().equals("23505")){
+                //hier son popup einfügen
+                System.out.println("sie haben schon eine rezension geschrieben");
+            } else{
+                DatabaseConnection.printSQLException(sqlException);
+            }
         }
     }
 

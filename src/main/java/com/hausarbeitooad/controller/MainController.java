@@ -1,6 +1,6 @@
 package com.hausarbeitooad.controller;
 
-import com.hausarbeitooad.SceneFxmlApp;
+import com.hausarbeitooad.RudisDampfkesselApp;
 import com.hausarbeitooad.model.LoginListener;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
@@ -18,9 +18,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Pressing a button displays the different scenes.
  *
- * @author
+ *
+ * @author Abdurrahman Azattemür
  */
 public class MainController implements Stageable, Initializable, LoginListener {
     private Stage stage;
@@ -37,7 +37,7 @@ public class MainController implements Stageable, Initializable, LoginListener {
      */
     @FXML
     private void handleOnActionLogout(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.LOGIN).getScene());
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.LOGIN).getScene());
         event.consume();
     }
 
@@ -46,7 +46,7 @@ public class MainController implements Stageable, Initializable, LoginListener {
      */
     @FXML
     private void handleOnActionShop(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.SHOP_MENU).getScene());
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.SHOP_MENU).getScene());
         event.consume();
     }
 
@@ -55,7 +55,7 @@ public class MainController implements Stageable, Initializable, LoginListener {
      */
     @FXML
     private void handleOnActionSceneCollection(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.COLLECTION_VIEW).getScene());
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.COLLECTION_VIEW).getScene());
         event.consume();
     }
 
@@ -98,11 +98,11 @@ public class MainController implements Stageable, Initializable, LoginListener {
     }
 
     public void handleonActionGuthabenScene(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getScene());
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getScene());
         event.consume();
     }
     public void  handleOnActionOptionen(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.OPTION_VIEW).getScene());
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.OPTION_VIEW).getScene());
         event.consume();
     }
 

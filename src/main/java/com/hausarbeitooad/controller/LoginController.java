@@ -1,6 +1,6 @@
 package com.hausarbeitooad.controller;
 
-import com.hausarbeitooad.SceneFxmlApp;
+import com.hausarbeitooad.RudisDampfkesselApp;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.model.LoginListener;
 import com.hausarbeitooad.model.SceneName;
@@ -54,16 +54,16 @@ public class LoginController implements Stageable, Initializable, LoginListener 
 
         if (conn.selectUser(this.usernameID.getText(), this.passwordID.getText())){
             this.errorTextID.setVisible(false);
-            SceneFxmlApp.getScenes().get(SceneName.MAIN).getLoginListener().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getLoginListener().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.GUTHABENAUFLADEN).getLoginListener().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getLoginListener().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.REVIEW_VIEW).getLoginListener().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.LOGIN).getLoginListener().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.SHOP_MENU).getLoginListener().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getLoginListener().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.COLLECTION_VIEW).getLoginListener().setActiveUser(this.usernameID.getText());
-            stage.setScene(SceneFxmlApp.getScenes().get(SceneName.MAIN).getScene());
+            RudisDampfkesselApp.getScenes().get(SceneName.MAIN).getLoginListener().setActiveUser(this.usernameID.getText());
+            RudisDampfkesselApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getLoginListener().setActiveUser(this.usernameID.getText());
+            RudisDampfkesselApp.getScenes().get(SceneName.GUTHABENAUFLADEN).getLoginListener().setActiveUser(this.usernameID.getText());
+            RudisDampfkesselApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getLoginListener().setActiveUser(this.usernameID.getText());
+            RudisDampfkesselApp.getScenes().get(SceneName.REVIEW_VIEW).getLoginListener().setActiveUser(this.usernameID.getText());
+            RudisDampfkesselApp.getScenes().get(SceneName.LOGIN).getLoginListener().setActiveUser(this.usernameID.getText());
+            RudisDampfkesselApp.getScenes().get(SceneName.SHOP_MENU).getLoginListener().setActiveUser(this.usernameID.getText());
+            RudisDampfkesselApp.getScenes().get(SceneName.SHOP_ITEM).getLoginListener().setActiveUser(this.usernameID.getText());
+            RudisDampfkesselApp.getScenes().get(SceneName.COLLECTION_VIEW).getLoginListener().setActiveUser(this.usernameID.getText());
+            stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.MAIN).getScene());
         } else {
             this.errorTextID.setVisible(true);
             this.errorTextID.setText("Username or Password incorrect.");

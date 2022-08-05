@@ -1,6 +1,6 @@
 package com.hausarbeitooad.controller;
 
-import com.hausarbeitooad.SceneFxmlApp;
+import com.hausarbeitooad.RudisDampfkesselApp;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.model.*;
 import javafx.event.ActionEvent;
@@ -32,14 +32,14 @@ public class GuthabenVerwaltenController implements Stageable, Initializable, Lo
     }
     @FXML
     void onActionGuthabenAufladenBtn(ActionEvent event) {
-        SceneFxmlApp.getScenes().get(SceneName.GUTHABENAUFLADEN).getCleaningListener().cleanTextFields();
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GUTHABENAUFLADEN).getScene());
+        RudisDampfkesselApp.getScenes().get(SceneName.GUTHABENAUFLADEN).getCleaningListener().cleanTextFields();
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.GUTHABENAUFLADEN).getScene());
         event.consume();
     }
 
     @FXML
     void onActionGuthabenVerwaltenBackBtn(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.MAIN).getScene());
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.MAIN).getScene());
         event.consume();
     }
 

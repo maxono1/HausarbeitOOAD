@@ -1,6 +1,6 @@
 package com.hausarbeitooad.controller;
 
-import com.hausarbeitooad.SceneFxmlApp;
+import com.hausarbeitooad.RudisDampfkesselApp;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.entity.Spiel;
 import com.hausarbeitooad.model.*;
@@ -41,15 +41,15 @@ public class GameDetailViewController implements Stageable, Initializable, Login
     @FXML
     void handleOnActionRezensionSchreiben(ActionEvent event) {
         //interface acceptsid
-        SceneFxmlApp.getScenes().get(SceneName.REVIEW_VIEW).getCleaningListener().cleanTextFields();
-        SceneFxmlApp.getScenes().get(SceneName.REVIEW_VIEW).getAcceptsID().setSpielID(this.spielID);
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.REVIEW_VIEW).getScene());
+        RudisDampfkesselApp.getScenes().get(SceneName.REVIEW_VIEW).getCleaningListener().cleanTextFields();
+        RudisDampfkesselApp.getScenes().get(SceneName.REVIEW_VIEW).getAcceptsID().setSpielID(this.spielID);
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.REVIEW_VIEW).getScene());
         event.consume();
     }
 
     @FXML
     void onActionCollectionBackBtn(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.COLLECTION_VIEW).getScene());
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.COLLECTION_VIEW).getScene());
         event.consume();
     }
 
@@ -72,7 +72,7 @@ public class GameDetailViewController implements Stageable, Initializable, Login
     @Override
     public void setSpielID(int spielID) {
         this.spielID = spielID;
-        System.out.println(spielID);
+        //System.out.println(spielID);
         try {
             Spiel spiel = conn.retrieveSpielById(spielID);
             erfolgeTextID.setText(spielErfolg(spielID));

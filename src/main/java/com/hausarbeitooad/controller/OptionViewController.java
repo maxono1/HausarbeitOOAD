@@ -1,6 +1,6 @@
 package com.hausarbeitooad.controller;
 
-import com.hausarbeitooad.SceneFxmlApp;
+import com.hausarbeitooad.RudisDampfkesselApp;
 import com.hausarbeitooad.model.LoginListener;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
@@ -25,7 +25,7 @@ public class OptionViewController implements Stageable, Initializable, LoginList
 
     @FXML
     void onActionOptionenBackBtn(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.MAIN).getScene());
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.MAIN).getScene());
         event.consume();
     }
 

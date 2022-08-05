@@ -1,6 +1,6 @@
 package com.hausarbeitooad.controller;
 
-import com.hausarbeitooad.SceneFxmlApp;
+import com.hausarbeitooad.RudisDampfkesselApp;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.entity.Spiel;
 import com.hausarbeitooad.model.BuyListner;
@@ -43,7 +43,7 @@ public class CollectionViewController implements Stageable, Initializable, Login
 
     @FXML
     void onActionCollectionBackBtn(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.MAIN).getScene());
+        stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.MAIN).getScene());
         event.consume();
     }
 
@@ -116,10 +116,10 @@ public class CollectionViewController implements Stageable, Initializable, Login
                 HBox spielHbox = createHBoxFromSpiel(s, spielzeit);
                 spielHbox.setOnMouseClicked( event -> {
                     Label idLabel = (Label) spielHbox.getChildren().get(1);
-                    System.out.println(idLabel.getText());
+                    //System.out.println(idLabel.getText());
                     int id = Integer.parseInt(idLabel.getText());
-                    SceneFxmlApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getAcceptsID().setSpielID(id);
-                    stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getScene());
+                    RudisDampfkesselApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getAcceptsID().setSpielID(id);
+                    stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getScene());
                     event.consume();
                 });
                 listNameID.getItems().add(spielHbox);

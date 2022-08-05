@@ -1,7 +1,7 @@
 package com.hausarbeitooad.controller;
 
 import com.hausarbeitooad.db.DatabaseConnection;
-import com.hausarbeitooad.model.AcceptsDatabase;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 

@@ -3,8 +3,7 @@ package com.hausarbeitooad.controller;
 import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.entity.Spiel;
 import com.hausarbeitooad.db.DatabaseConnection;
-import com.hausarbeitooad.model.AcceptsDatabase;
-import com.hausarbeitooad.model.Loggerble;
+import com.hausarbeitooad.model.LoginListener;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
 import javafx.event.ActionEvent;
@@ -15,25 +14,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ShopMenuViewController implements Stageable, Initializable, Loggerble {
+public class ShopMenuViewController implements Stageable, Initializable, LoginListener {
     @FXML
     private ImageView arrowLeftID;
 

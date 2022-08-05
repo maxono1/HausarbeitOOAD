@@ -2,7 +2,7 @@ package com.hausarbeitooad.controller;
 
 import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.db.DatabaseConnection;
-import com.hausarbeitooad.model.Loggerble;
+import com.hausarbeitooad.model.LoginListener;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
 import javafx.event.ActionEvent;
@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GuthabenAufladenController implements Stageable, Initializable, Loggerble {
+public class GuthabenAufladenController implements Stageable, Initializable, LoginListener {
 
     private Stage stage;
     @FXML

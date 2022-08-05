@@ -29,7 +29,7 @@ public class FxmlInfo {
 	
 	//private static Logger logger = LogManager.getLogger();
 	private BuyListner buyListner;
-	private Loggerble loggerble;
+	private LoginListener loginListener;
 	private GuthabenListner guthabenListner;
 	private AcceptsID acceptsID;
 	private URL resourceName;
@@ -89,11 +89,11 @@ public class FxmlInfo {
 		return guthabenListner;
 	}
 
-	public Loggerble getLoggerble() {
-		if (loggerble == null){
+	public LoginListener getLoginListener() {
+		if (loginListener == null){
 			scene = load();
 		}
-		return loggerble;
+		return loginListener;
 	}
 	public BuyListner getBuyListner(){
 		if(buyListner == null){
@@ -133,9 +133,9 @@ public class FxmlInfo {
 			controller.setStage(this.getStage());
 		}
 
-		Loggerble lgb = loader.getController();
+		LoginListener lgb = loader.getController();
 		if (lgb != null){
-			loggerble = lgb;
+			loginListener = lgb;
 		}
 		if(loader.getController() instanceof GuthabenListner){
 			guthabenListner = loader.getController();

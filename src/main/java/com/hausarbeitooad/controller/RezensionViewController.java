@@ -4,11 +4,10 @@ import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.entity.Rezension;
 import com.hausarbeitooad.model.AcceptsID;
-import com.hausarbeitooad.model.Loggerble;
+import com.hausarbeitooad.model.LoginListener;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class RezensionViewController implements Stageable, Initializable, Loggerble, AcceptsID {
+public class RezensionViewController implements Stageable, Initializable, LoginListener, AcceptsID {
 
     private Stage stage;
     private String activeUser;

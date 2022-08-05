@@ -21,7 +21,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ShopItemController implements Stageable, Initializable, Loggerble, AcceptsID, GuthabenListner{
+public class ShopItemController implements Stageable, Initializable, LoginListener, AcceptsID, GuthabenListner {
 
     @FXML
     private Label keineKohleID;
@@ -101,6 +101,7 @@ public class ShopItemController implements Stageable, Initializable, Loggerble, 
                 //guthaben abziehen
                 conn.updateGuthaben(activeUser, -Double.parseDouble(preisInhaltID.getText().substring(0,iend)));
                 conn.commit();
+                //alle guthaben- anzeigen updaten
                 userBesitztAbfrage();
                 updateGuthaben();
                 SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getGuthabenListner().updateGuthaben();
@@ -142,8 +143,6 @@ public class ShopItemController implements Stageable, Initializable, Loggerble, 
         //abfrage besitzt der user das spiel
         try {
             boolean userBesitztSpiel = conn.besitztNutzerSpiel(activeUser, spielID);
-            conn.selectQuery("select Spiel.spielID, name, spielzeit from Nutzer_besitzt join Spiel on Spiel.spielid = Nutzer_besitzt.spielid");
-
             if (userBesitztSpiel) {
                 kaufBtnID.setDisable(true);
                 kaufBtnID.setText("bereits erworben");

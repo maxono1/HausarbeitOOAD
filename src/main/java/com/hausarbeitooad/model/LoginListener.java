@@ -1,5 +1,5 @@
 package com.hausarbeitooad.model;
 
-public interface Loggerble {
+public interface LoginListener {
     void setActiveUser(String uname);
 }

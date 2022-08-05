@@ -4,7 +4,7 @@ import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.entity.Spiel;
 import com.hausarbeitooad.model.BuyListner;
-import com.hausarbeitooad.model.Loggerble;
+import com.hausarbeitooad.model.LoginListener;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
 import javafx.collections.FXCollections;
@@ -24,12 +24,11 @@ import javafx.stage.Stage;
 import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class CollectionViewController implements Stageable, Initializable, Loggerble, BuyListner {
+public class CollectionViewController implements Stageable, Initializable, LoginListener, BuyListner {
 
     private Stage stage;
     private DatabaseConnection conn;
@@ -76,13 +75,13 @@ public class CollectionViewController implements Stageable, Initializable, Logge
         Label spielIDLabel = new Label(Integer.toString(spiel.getSpielID()));
         spielIDLabel.setFont(Font.font(24));
         spielIDLabel.setAlignment(Pos.CENTER);
-        spielIDLabel.setPrefHeight(54);
-        spielIDLabel.setPrefWidth(206.0);
-
+        spielIDLabel.setPrefHeight(150);
+        spielIDLabel.setPrefWidth(100);
+/*
         VBox spielIDVbox = new VBox(spielIDLabel);
         spielIDVbox.setAlignment(Pos.CENTER_LEFT);
         spielIDVbox.setPrefWidth(100);
-        spielIDVbox.setPrefHeight(150);
+        spielIDVbox.setPrefHeight(150);*/
 
         Label spielNameLabel = new Label(spiel.getName());
         spielNameLabel.setFont(Font.font(36));
@@ -99,11 +98,11 @@ public class CollectionViewController implements Stageable, Initializable, Logge
         spielZeitLabel.setAlignment(Pos.CENTER);
 
         VBox spielZeitVbox = new VBox(spielZeitLabel);
-        spielNameVbox.setAlignment(Pos.CENTER_LEFT);
-        spielNameVbox.setPrefWidth(218);
-        spielNameVbox.setPrefHeight(150);
+        spielZeitVbox.setAlignment(Pos.CENTER);
+        spielZeitVbox.setPrefWidth(218);
+        spielZeitVbox.setPrefHeight(150);
 
-        return new HBox(spielImageView, spielIDVbox, spielNameVbox, spielZeitVbox);
+        return new HBox(spielImageView, spielIDLabel, spielNameVbox, spielZeitVbox);
     }
 
     @Override

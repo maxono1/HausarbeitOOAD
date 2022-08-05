@@ -2,7 +2,7 @@ package com.hausarbeitooad.controller;
 
 import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.db.DatabaseConnection;
-import com.hausarbeitooad.model.Loggerble;
+import com.hausarbeitooad.model.LoginListener;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
 import javafx.event.ActionEvent;
@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController implements Stageable, Initializable, Loggerble {
+public class LoginController implements Stageable, Initializable, LoginListener {
 
     private Stage stage;
     private DatabaseConnection conn;
@@ -54,15 +54,15 @@ public class LoginController implements Stageable, Initializable, Loggerble {
 
         if (conn.selectUser(this.usernameID.getText(), this.passwordID.getText())){
             this.errorTextID.setVisible(false);
-            SceneFxmlApp.getScenes().get(SceneName.MAIN).getLoggerble().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getLoggerble().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.GUTHABENAUFLADEN).getLoggerble().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getLoggerble().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.REVIEW_VIEW).getLoggerble().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.LOGIN).getLoggerble().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.SHOP_MENU).getLoggerble().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getLoggerble().setActiveUser(this.usernameID.getText());
-            SceneFxmlApp.getScenes().get(SceneName.COLLECTION_VIEW).getLoggerble().setActiveUser(this.usernameID.getText());
+            SceneFxmlApp.getScenes().get(SceneName.MAIN).getLoginListener().setActiveUser(this.usernameID.getText());
+            SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getLoginListener().setActiveUser(this.usernameID.getText());
+            SceneFxmlApp.getScenes().get(SceneName.GUTHABENAUFLADEN).getLoginListener().setActiveUser(this.usernameID.getText());
+            SceneFxmlApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getLoginListener().setActiveUser(this.usernameID.getText());
+            SceneFxmlApp.getScenes().get(SceneName.REVIEW_VIEW).getLoginListener().setActiveUser(this.usernameID.getText());
+            SceneFxmlApp.getScenes().get(SceneName.LOGIN).getLoginListener().setActiveUser(this.usernameID.getText());
+            SceneFxmlApp.getScenes().get(SceneName.SHOP_MENU).getLoginListener().setActiveUser(this.usernameID.getText());
+            SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getLoginListener().setActiveUser(this.usernameID.getText());
+            SceneFxmlApp.getScenes().get(SceneName.COLLECTION_VIEW).getLoginListener().setActiveUser(this.usernameID.getText());
             stage.setScene(SceneFxmlApp.getScenes().get(SceneName.MAIN).getScene());
         } else {
             this.errorTextID.setVisible(true);

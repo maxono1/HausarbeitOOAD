@@ -1,7 +1,7 @@
 package com.hausarbeitooad.controller;
 
 import com.hausarbeitooad.SceneFxmlApp;
-import com.hausarbeitooad.model.Loggerble;
+import com.hausarbeitooad.model.LoginListener;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
 import javafx.event.ActionEvent;
@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
  *
  * @author
  */
-public class MainController implements Stageable, Initializable, Loggerble {
+public class MainController implements Stageable, Initializable, LoginListener {
     private Stage stage;
 
 

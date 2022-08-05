@@ -3,10 +3,7 @@ package com.hausarbeitooad.controller;
 import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.entity.Rezension;
-import com.hausarbeitooad.model.AcceptsID;
-import com.hausarbeitooad.model.LoginListener;
-import com.hausarbeitooad.model.SceneName;
-import com.hausarbeitooad.model.Stageable;
+import com.hausarbeitooad.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +16,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class RezensionSchreibenViewController implements Stageable, Initializable, LoginListener, AcceptsID {
+public class RezensionSchreibenViewController implements Stageable, Initializable, LoginListener, AcceptsID, CleaningListener {
 
     private Stage stage;
     @FXML
@@ -77,5 +74,10 @@ public class RezensionSchreibenViewController implements Stageable, Initializabl
         } catch (SQLException sqlException){
             DatabaseConnection.printSQLException(sqlException);
         }
+    }
+
+    public void cleanTextFields(){
+        this.opinionReviewID.setText("");
+        this.bewertungID.setText("");
     }
 }

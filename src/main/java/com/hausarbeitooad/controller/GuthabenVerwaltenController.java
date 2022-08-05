@@ -32,6 +32,7 @@ public class GuthabenVerwaltenController implements Stageable, Initializable, Lo
     }
     @FXML
     void onActionGuthabenAufladenBtn(ActionEvent event) {
+        SceneFxmlApp.getScenes().get(SceneName.GUTHABENAUFLADEN).getCleaningListener().cleanTextFields();
         stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GUTHABENAUFLADEN).getScene());
         event.consume();
     }

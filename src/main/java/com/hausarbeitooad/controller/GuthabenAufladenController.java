@@ -2,6 +2,7 @@ package com.hausarbeitooad.controller;
 
 import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.db.DatabaseConnection;
+import com.hausarbeitooad.model.CleaningListener;
 import com.hausarbeitooad.model.LoginListener;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
@@ -17,7 +18,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GuthabenAufladenController implements Stageable, Initializable, LoginListener {
+public class GuthabenAufladenController implements Stageable, Initializable, LoginListener, CleaningListener {
 
     private Stage stage;
     @FXML
@@ -104,4 +105,8 @@ public class GuthabenAufladenController implements Stageable, Initializable, Log
         conn = DatabaseConnection.getInstance();
     }
 
+    @Override
+    public void cleanTextFields() {
+        this.moneyID.setText("");
+    }
 }

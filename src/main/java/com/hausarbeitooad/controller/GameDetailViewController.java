@@ -41,6 +41,7 @@ public class GameDetailViewController implements Stageable, Initializable, Login
     @FXML
     void handleOnActionRezensionSchreiben(ActionEvent event) {
         //interface acceptsid
+        SceneFxmlApp.getScenes().get(SceneName.REVIEW_VIEW).getCleaningListener().cleanTextFields();
         SceneFxmlApp.getScenes().get(SceneName.REVIEW_VIEW).getAcceptsID().setSpielID(this.spielID);
         stage.setScene(SceneFxmlApp.getScenes().get(SceneName.REVIEW_VIEW).getScene());
         event.consume();

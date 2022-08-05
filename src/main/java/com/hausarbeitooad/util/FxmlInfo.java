@@ -32,6 +32,7 @@ public class FxmlInfo {
 	private LoginListener loginListener;
 	private GuthabenListner guthabenListner;
 	private AcceptsID acceptsID;
+	private CleaningListener cleaningListener;
 	private URL resourceName;
 	private SceneName sceneName;
 	private Stage stage;
@@ -87,6 +88,13 @@ public class FxmlInfo {
 			scene = load();
 		}
 		return guthabenListner;
+	}
+
+	public CleaningListener getCleaningListener() {
+		if(cleaningListener == null){
+			scene = load();
+		}
+		return cleaningListener;
 	}
 
 	public LoginListener getLoginListener() {
@@ -147,7 +155,9 @@ public class FxmlInfo {
 		if(loader.getController() instanceof BuyListner){
 			buyListner = loader.getController();
 		}
-
+		if (loader.getController() instanceof CleaningListener){
+			cleaningListener = loader.getController();
+		}
 
 		/*
 		//hier database verteilen

@@ -29,52 +29,54 @@
             </ImageView>
          </graphic>
       </Button>
-      <VBox layoutX="14.0" layoutY="104.0" prefHeight="396.0" prefWidth="697.0">
+      <VBox layoutX="-3.0" layoutY="104.0" prefHeight="396.0" prefWidth="720.0">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="39.0" prefWidth="99.0" text="Ihr Name:">
+                  <Label prefHeight="39.0" prefWidth="140.0" text="Ihre Bewertung:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="nameReviewID" prefHeight="25.0" prefWidth="200.0">
+                  <TextField fx:id="bewertungID" prefHeight="25.0" prefWidth="81.0" promptText="0-100">
                      <HBox.margin>
                         <Insets left="200.0" top="10.0" />
                      </HBox.margin>
                   </TextField>
+                  <Label text="\%">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Label>
                </children>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="142.0" prefWidth="697.0">
                <children>
                   <Label prefHeight="27.0" prefWidth="198.0" text="Ihre Meinung zum Spiel:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="opinionReviewID" prefHeight="74.0" prefWidth="374.0">
+                  <TextField fx:id="opinionReviewID" prefHeight="110.0" prefWidth="369.0">
                      <HBox.margin>
                         <Insets left="100.0" top="10.0" />
                      </HBox.margin>
                   </TextField>
                </children>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="155.0" prefWidth="697.0">
                <children>
-                  <Label text="Bild hinzufügen:">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <ImageView fx:id="dragImageReviewID" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/dragImgHere.jpg" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="100.0" />
-                     </HBox.margin>
-                  </ImageView>
+                  <Button mnemonicParsing="false" onAction="#onActionSubmitButton" prefHeight="71.0" prefWidth="144.0" text="Submit" />
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>

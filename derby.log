@@ -1,19 +1,13 @@
 ----------------------------------------------------------------
-Fri Aug 05 10:24:28 CEST 2022:
-Booten von Derby-Version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): Instanz a816c00e-0182-6d1b-1729-000006c39f48
-für Datenbankverzeichnis C:\Users\aazat\Desktop\HausarbeitOOAD\derbyDBv2 mit Class Loader jdk.internal.loader.ClassLoaders$AppClassLoader@799f7e29
-Geladen aus file:/C:/Users/aazat/Documents/lib/libs/derby.jar
+Fri Aug 05 12:49:27 CEST 2022:
+Booten von Derby-Version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): Instanz a816c00e-0182-6d9f-d5c3-000006326f68
+für Datenbankverzeichnis C:\Users\timci\IdeaProjects\HausarbeitOOAD\derbyDBv2 mit Class Loader jdk.internal.loader.ClassLoaders$AppClassLoader@5a10411
+Geladen aus file:/C:/Users/timci/OneDrive/Desktop/libs/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=18.0.2+9-61
-user.dir=C:\Users\aazat\Desktop\HausarbeitOOAD
+user.dir=C:\Users\timci\IdeaProjects\HausarbeitOOAD
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
 Datenbank-Class Loader wurde gestartet - derby.database.classpath=''
-----------------------------------------------------------------
-Fri Aug 05 10:25:24 CEST 2022: Derby-Engine wird heruntergefahren
-----------------------------------------------------------------
-Fri Aug 05 10:25:24 CEST 2022:
-Instanz a816c00e-0182-6d1b-1729-000006c39f48 im Datenbankverzeichnis C:\Users\aazat\Desktop\HausarbeitOOAD\derbyDBv2 mit Class Loader jdk.internal.loader.ClassLoaders$AppClassLoader@799f7e29 wird heruntergefahren
-----------------------------------------------------------------

@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GuthabenVerwaltenController implements Stageable, Initializable, Loggerble, Guthaberble {
+public class GuthabenVerwaltenController implements Stageable, Initializable, Loggerble, GuthabenListner {
 
     @FXML
     private Text guthabenAnzeigeID;

@@ -21,7 +21,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ShopItemController implements Stageable, Initializable, Loggerble, AcceptsID, Guthaberble {
+public class ShopItemController implements Stageable, Initializable, Loggerble, AcceptsID, GuthabenListner{
 
     @FXML
     private Label keineKohleID;
@@ -97,12 +97,14 @@ public class ShopItemController implements Stageable, Initializable, Loggerble, 
 
             if (conn.selectGuthaben(activeUser) > Double.parseDouble(preisInhaltID.getText().substring(0,iend))) {
                 //besitzt updaten
-                conn.insertNutzerBesitzt(new NutzerBesitzt(spielID, activeUser));
+                conn.insertNutzerBesitzt(new NutzerBesitzt(spielID, activeUser, 0));
                 //guthaben abziehen
                 conn.updateGuthaben(activeUser, -Double.parseDouble(preisInhaltID.getText().substring(0,iend)));
                 conn.commit();
                 userBesitztAbfrage();
                 updateGuthaben();
+                SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getGuthabenListner().updateGuthaben();
+                SceneFxmlApp.getScenes().get(SceneName.COLLECTION_VIEW).getBuyListner().updateGames();
             } else {
                 keineKohleID.setVisible(true);
                 //Quelle https://stackoverflow.com/questions/29487645/how-to-make-a-label-visible-for-a-certain-time-and-then-should-be-invisible-with
@@ -140,6 +142,8 @@ public class ShopItemController implements Stageable, Initializable, Loggerble, 
         //abfrage besitzt der user das spiel
         try {
             boolean userBesitztSpiel = conn.besitztNutzerSpiel(activeUser, spielID);
+            conn.selectQuery("select Spiel.spielID, name, spielzeit from Nutzer_besitzt join Spiel on Spiel.spielid = Nutzer_besitzt.spielid");
+
             if (userBesitztSpiel) {
                 kaufBtnID.setDisable(true);
                 kaufBtnID.setText("bereits erworben");

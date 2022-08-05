@@ -3,9 +3,11 @@ package com.hausarbeitooad.controller;
 import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.entity.Spiel;
+import com.hausarbeitooad.model.BuyListner;
 import com.hausarbeitooad.model.Loggerble;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,10 +24,12 @@ import javafx.stage.Stage;
 import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class CollectionViewController implements Stageable, Initializable, Loggerble {
+public class CollectionViewController implements Stageable, Initializable, Loggerble, BuyListner {
 
     private Stage stage;
     private DatabaseConnection conn;
@@ -47,34 +51,18 @@ public class CollectionViewController implements Stageable, Initializable, Logge
     @Override
     public void setActiveUser(String uname) {
         this.activeUser = uname;
+        updateGames();
     }
 
     @Override
     public void setStage(Stage stage) {
         this.stage = stage;
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         conn = DatabaseConnection.getInstance();
-
-        try {
-            List<Spiel> spiele = conn.retrieveSpiele();
-            for (Spiel s: spiele){
-                HBox spielHbox = createHBoxFromSpiel(s);
-                spielHbox.setOnMouseClicked( event -> {
-                    Label idLabel = (Label) spielHbox.getChildren().get(1);
-                    System.out.println(idLabel.getText());
-                    int id = Integer.parseInt(idLabel.getText());
-                    SceneFxmlApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getAcceptsID().setSpielID(id);
-                    stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getScene());
-                    event.consume();
-                });
-                listNameID.getItems().add(spielHbox);
-            }
-        } catch (SQLException e) {
-            DatabaseConnection.printSQLException(e);
-        }
     }
 
 
@@ -116,5 +104,28 @@ public class CollectionViewController implements Stageable, Initializable, Logge
         spielNameVbox.setPrefHeight(150);
 
         return new HBox(spielImageView, spielIDVbox, spielNameVbox, spielZeitVbox);
+    }
+
+    @Override
+    public void updateGames() {
+        try {
+            listNameID.setItems(FXCollections.observableList(new ArrayList<HBox>()));
+            List<Spiel> spiele = conn.sammlungView(activeUser);
+            for (Spiel s: spiele){
+
+                HBox spielHbox = createHBoxFromSpiel(s);
+                spielHbox.setOnMouseClicked( event -> {
+                    Label idLabel = (Label) spielHbox.getChildren().get(1);
+                    System.out.println(idLabel.getText());
+                    int id = Integer.parseInt(idLabel.getText());
+                    SceneFxmlApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getAcceptsID().setSpielID(id);
+                    stage.setScene(SceneFxmlApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getScene());
+                    event.consume();
+                });
+                listNameID.getItems().add(spielHbox);
+            }
+        } catch (SQLException e) {
+            DatabaseConnection.printSQLException(e);
+        }
     }
 }

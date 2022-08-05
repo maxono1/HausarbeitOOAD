@@ -1,8 +1,6 @@
 package com.hausarbeitooad.util;
 
 import com.hausarbeitooad.SceneFxmlApp;
-import com.hausarbeitooad.controller.ShopItemController;
-import com.hausarbeitooad.db.DatabaseConnection;
 import com.hausarbeitooad.model.*;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -30,8 +28,9 @@ import java.net.URL;
 public class FxmlInfo {
 	
 	//private static Logger logger = LogManager.getLogger();
+	private BuyListner buyListner;
 	private Loggerble loggerble;
-	private Guthaberble guthaberble;
+	private GuthabenListner guthabenListner;
 	private AcceptsID acceptsID;
 	private URL resourceName;
 	private SceneName sceneName;
@@ -83,11 +82,11 @@ public class FxmlInfo {
 		return stage;
 	}
 
-	public Guthaberble getGuthaberble(){
-		if(guthaberble == null){
+	public GuthabenListner getGuthabenListner(){
+		if(guthabenListner == null){
 			scene = load();
 		}
-		return guthaberble;
+		return guthabenListner;
 	}
 
 	public Loggerble getLoggerble() {
@@ -95,6 +94,12 @@ public class FxmlInfo {
 			scene = load();
 		}
 		return loggerble;
+	}
+	public BuyListner getBuyListner(){
+		if(buyListner == null){
+			scene = load();
+		}
+		return buyListner;
 	}
 
 	public AcceptsID getAcceptsID(){
@@ -132,14 +137,16 @@ public class FxmlInfo {
 		if (lgb != null){
 			loggerble = lgb;
 		}
-		if(loader.getController() instanceof Guthaberble){
-			guthaberble = loader.getController();
+		if(loader.getController() instanceof GuthabenListner){
+			guthabenListner = loader.getController();
 		}
 
 		if(loader.getController() instanceof AcceptsID){
 			acceptsID = loader.getController();
 		}
-
+		if(loader.getController() instanceof BuyListner){
+			buyListner = loader.getController();
+		}
 
 
 		/*

@@ -29,7 +29,7 @@ public class BeispielDatenLoader {
             }
             Nutzer maxi = new Nutzer("maxi", "1234", 100.0);
             Nutzer tim = new Nutzer("tim", "1234", 0);
-            NutzerBesitzt nutzerBesitzt = new NutzerBesitzt(1, "maxi");
+            NutzerBesitzt nutzerBesitzt = new NutzerBesitzt(1, "maxi", 5);
             Rezension rezension = new Rezension(1, maxi.getbName(), 75, "jo, war super Spiel, habe ich mit Freuden spielen dürfen.");
 
             for (Spiel s: bspSpiele){

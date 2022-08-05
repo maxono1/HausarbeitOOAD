@@ -19,18 +19,16 @@ import java.util.Map;
  * @version 2019-08-23
  */
 public class SceneFxmlApp extends Application {
+
 	
 	private static final String MAIN_FXML = "main-view.fxml";
-
 	private static final String COLLECTION_VIEW_FXML = "collection-view.fxml";
 	private static final String GAME_DETAIL_VIEW_FXML = "game-detail-view.fxml";
 	private static final String GUTHABEN_VERWALTEN_VIEW_FXML = "guthaben-verwalten-view.fxml";
 	private static final String LOGIN_VIEW_FXML = "login-view.fxml";
 	private static final String OPTION_VIEW_FXML = "option-view.fxml";
 	private static final String GUTHABEN_AUFLADEN_VIEW_FXML = "guthaben-aufladen-view.fxml";
-
 	private static final String REVIEW_VIEW_FXML = "review-view.fxml";
-
 	private static final String SHOP_MENU_VIEW_FXML = "shop-menu-view.fxml";
 	private static final String REZENSION_VIEW_FXML = "rezension-view.fxml";
 	private static final String SHOP_ITEM_VIEW_FXML = "shop-item-view.fxml";
@@ -74,9 +72,6 @@ public class SceneFxmlApp extends Application {
 		scenes.put(SceneName.COLLECTION_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(COLLECTION_VIEW_FXML), SceneName.COLLECTION_VIEW, stage));
 		scenes.put(SceneName.LOGIN, new FxmlInfo(SceneFxmlApp.class.getResource(LOGIN_VIEW_FXML), SceneName.LOGIN, stage));
 		scenes.put(SceneName.MAIN, new FxmlInfo(SceneFxmlApp.class.getResource(MAIN_FXML), SceneName.MAIN, stage));
-		//scenes.put(SceneName.SCENE1, new FxmlInfo(SceneFxmlApp.class.getResource(SCENE_ONE_FXML), SceneName.SCENE1, stage));
-		//scenes.put(SceneName.SCENE2, new FxmlInfo(SceneFxmlApp.class.getResource(SCENE_TWO_FXML), SceneName.SCENE2, stage));
-		//scenes.put(SceneName.SCENE3, new FxmlInfo(SceneFxmlApp.class.getResource(SCENE_THREE_FXML), SceneName.SCENE3, stage));
 		scenes.put(SceneName.GUTHABENVERWALTEN, new FxmlInfo(SceneFxmlApp.class.getResource(GUTHABEN_VERWALTEN_VIEW_FXML), SceneName.GUTHABENVERWALTEN, stage));
 		scenes.put(SceneName.GUTHABENAUFLADEN, new FxmlInfo(SceneFxmlApp.class.getResource(GUTHABEN_AUFLADEN_VIEW_FXML), SceneName.GUTHABENAUFLADEN, stage));
 		scenes.put(SceneName.GAME_DETAIL_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(GAME_DETAIL_VIEW_FXML), SceneName.GAME_DETAIL_VIEW, stage));

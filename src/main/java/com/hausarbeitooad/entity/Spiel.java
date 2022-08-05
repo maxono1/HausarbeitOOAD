@@ -16,6 +16,7 @@ public class Spiel {
     private byte[] logo;
     private byte[] titelbild; //eig mediumblob
 
+
     public Spiel(int spielID, String name, String beschreibung, double preis, String genre, int bewertungProzent, InputStream logo, InputStream titelbild) throws IOException{
         this.spielID = spielID;
         this.name = name;
@@ -25,6 +26,11 @@ public class Spiel {
         setBewertungProzent(bewertungProzent);
         setLogo(logo);
         setTitelbild(titelbild);
+    }
+    public Spiel(String name, int spielID, InputStream logo) throws IOException {
+        this.spielID = spielID;
+        this.name = name;
+        setLogo(logo);
     }
 
     public int getSpielID() {

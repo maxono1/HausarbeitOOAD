@@ -2,7 +2,6 @@ package com.hausarbeitooad.controller;
 
 import com.hausarbeitooad.SceneFxmlApp;
 import com.hausarbeitooad.db.DatabaseConnection;
-import com.hausarbeitooad.model.AcceptsDatabase;
 import com.hausarbeitooad.model.Loggerble;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
@@ -74,8 +73,8 @@ public class GuthabenAufladenController implements Stageable, Initializable, Log
     private void guthabenAufladen(double geld){
         conn.updateGuthaben(activeUser, geld);
         conn.commit();
-        SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getGuthaberble().updateGuthaben();
-        SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getGuthaberble().updateGuthaben();
+        SceneFxmlApp.getScenes().get(SceneName.SHOP_ITEM).getGuthabenListner().updateGuthaben();
+        SceneFxmlApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getGuthabenListner().updateGuthaben();
     }
 
     @Override

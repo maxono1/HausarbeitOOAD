@@ -1,5 +1,5 @@
 package com.hausarbeitooad.model;
 
-public interface Guthaberble {
+public interface GuthabenListner {
     void updateGuthaben();
 }

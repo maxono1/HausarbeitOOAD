@@ -42,15 +42,15 @@ public class DatabaseConnection {
         try {
             ArrayList<Spiel> bspSpiele = new ArrayList<>();
             bspSpiele.add(new Spiel(1, "banana Guys", "Don't Fall in the Slime", 20.0, "Horrorspiel", 50, new FileInputStream("src/main/resources/images/bananen_game.jpg"), new FileInputStream("src/main/resources/images/bananen_game.jpg")));
-            bspSpiele.add(new Spiel(2, "Car Drivers", "Ride or Die, super speed",40.0,"Racing", 90, new FileInputStream("src/main/resources/images/car.png"), new FileInputStream("src/main/resources/images/car.png")));
+            bspSpiele.add(new Spiel(2, "Car Drivers", "Ride or Die, super speed", 40.0, "Racing", 90, new FileInputStream("src/main/resources/images/car.png"), new FileInputStream("src/main/resources/images/car.png")));
             bspSpiele.add(new Spiel(3, "XTreme Bike Ride", "Race down a mountain to be the winner baby", 90.55, "Racing, Thriller", 20, new FileInputStream("src/main/resources/images/bike.png"), new FileInputStream("src/main/resources/images/bike.png")));
             bspSpiele.add(new Spiel(4, "Astronaut Game explore", "explore the galaxy to become rich and influential!", 1.5, "space", 99, new FileInputStream("src/main/resources/images/galaxy.jpg"), new FileInputStream("src/main/resources/images/galaxy.jpg")));
-            for (int i = 5; i < 15; i++){
-                bspSpiele.add(new Spiel(i,"Spiel"+i,"Beschreibung" + i, 50, "genre", 20, new FileInputStream("src/main/resources/images/placeholder_grafik.png") ,new FileInputStream("src/main/resources/images/placeholder_grafik.png")));
+            for (int i = 5; i < 15; i++) {
+                bspSpiele.add(new Spiel(i, "Spiel" + i, "Beschreibung" + i, 50, "genre", 20, new FileInputStream("src/main/resources/images/placeholder_grafik.png"), new FileInputStream("src/main/resources/images/placeholder_grafik.png")));
             }
             Nutzer maxi = new Nutzer("maxi", "1234", 100.0);
             Nutzer tim = new Nutzer("tim", "1234", 0);
-            NutzerBesitzt nutzerBesitzt = new NutzerBesitzt(1, "maxi");
+            NutzerBesitzt nutzerBesitzt = new NutzerBesitzt(1, "maxi", 5);
             Rezension rezension = new Rezension(1, maxi.getbName(), 75, "jo, war super Spiel, habe ich mit Freuden spielen dürfen.");
             //lol.insertImage(new FileInputStream("src/main/resources/images/CSGO.png"), "galaxie");
             lol.insertNutzer(maxi);
@@ -64,7 +64,7 @@ public class DatabaseConnection {
             System.err.println("some SQL Statements are broken.");
             printSQLException(e);
             //throw new RuntimeException(e);
-        } catch (IOException io){
+        } catch (IOException io) {
             io.printStackTrace();
         }
         lol.selectQuery("Select * from Nutzer");
@@ -78,8 +78,8 @@ public class DatabaseConnection {
 
     private static DatabaseConnection dbConnInstance = null;
 
-    public static DatabaseConnection getInstance(){
-        if (dbConnInstance == null){
+    public static DatabaseConnection getInstance() {
+        if (dbConnInstance == null) {
             dbConnInstance = new DatabaseConnection();
         }
         return dbConnInstance;
@@ -134,7 +134,6 @@ public class DatabaseConnection {
 */
 
 
-
             Statement statement = conn.createStatement();
             statements.add(statement);
             //Quelle sql skript laden: https://howtodoinjava.com/java/io/java-read-file-to-string-examples/#1-using-filesreadstring-java-11
@@ -144,7 +143,7 @@ public class DatabaseConnection {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
             String sqlLine;
 
-            while((sqlLine = bufferedReader.readLine()) != null){
+            while ((sqlLine = bufferedReader.readLine()) != null) {
                 statement.execute(sqlLine);
             }
             fileInputStream.close();
@@ -153,7 +152,7 @@ public class DatabaseConnection {
         } catch (SQLException sqlException) {
 
             printSQLException(sqlException);
-        } catch (IOException ioException){
+        } catch (IOException ioException) {
             ioException.printStackTrace();
         }
     }
@@ -182,7 +181,7 @@ public class DatabaseConnection {
 
     /**
      * quelle fehlt, noch suchen
-     * */
+     */
     public void selectQuery(String query) {
         try {
             Statement select = conn.createStatement();
@@ -207,21 +206,22 @@ public class DatabaseConnection {
         }
 
     }
+
     /**
      * gibt guthaben in form eines doubles zurück
      *
      * @author Tim cirksena
-     * */
-    public double selectGuthaben(String username){
-        try{
+     */
+    public double selectGuthaben(String username) {
+        try {
             String query = "Select guthaben From Nutzer WHERE bName like '" + username + "'";
             Statement select = conn.createStatement();
             statements.add(select);
             ResultSet everything = select.executeQuery(query);
             System.out.println(query);
-            if(everything.next()){  //wenn es keine Daten gibt failed es hier
+            if (everything.next()) {  //wenn es keine Daten gibt failed es hier
                 return everything.getDouble("guthaben");
-            }else{
+            } else {
                 System.out.println("Es wurde nichts gefunden LUL");
             }
             everything.close();
@@ -233,10 +233,11 @@ public class DatabaseConnection {
 
     /**
      * negative value um geld abzuziehen
+     *
      * @author Tim Cirksena
-     * */
-    public boolean updateGuthaben(String username, double geld){
-        try{
+     */
+    public boolean updateGuthaben(String username, double geld) {
+        try {
             double tmp = selectGuthaben(username) + geld;
             String query = "UPDATE Nutzer SET guthaben =" + tmp + " WHERE bName like'" + username + "'";
             Statement select = conn.createStatement();
@@ -244,14 +245,12 @@ public class DatabaseConnection {
             int everything = select.executeUpdate(query);
             System.out.println(query);
             System.out.println(everything); //Hier ist row count
-            }catch (SQLException s) {
+        } catch (SQLException s) {
             printSQLException(s);
 
         }
         return false;
     }
-
-
 
     public boolean selectUser(String username, String password) {
         try {
@@ -260,8 +259,8 @@ public class DatabaseConnection {
             statements.add(select);
             ResultSet everything = select.executeQuery(query);
             System.out.println(query);
-            while(everything.next()){
-                if (everything.getString("BNAME").equals(username) && everything.getString("PASSWORD").equals(password)){
+            while (everything.next()) {
+                if (everything.getString("BNAME").equals(username) && everything.getString("PASSWORD").equals(password)) {
                     return true;
                 }
             }
@@ -271,6 +270,31 @@ public class DatabaseConnection {
         }
         return false;
     }
+
+    public List<Spiel> sammlungView(String username) throws SQLException {
+        Statement stmt = conn.createStatement();
+        statements.add(stmt);
+        ResultSet resultSet = stmt.executeQuery("select logo, Spiel.spielID, name, spielzeit from Nutzer_besitzt join Spiel on Spiel.spielid = Nutzer_besitzt.spielid where Nutzer_besitzt.bName = '" + username + "' order by SpielID asc");
+        ArrayList<Spiel> spieleAusDb = new ArrayList<>();
+        while (resultSet.next()) {
+            System.out.println(resultSet.getString("name"));
+            try {
+                spieleAusDb.add(spielFromResultSetName(resultSet));
+
+            } catch (IOException io) {
+                io.printStackTrace();
+            }
+        }
+        resultSet.close();
+        return spieleAusDb;
+    }
+    private Spiel spielFromResultSetName(ResultSet resultSet) throws SQLException, IOException {
+        String name = resultSet.getString("Name");
+        int spielID = resultSet.getInt("SpielID");
+        InputStream logo = resultSet.getBlob("logo").getBinaryStream();
+        return new Spiel(name, spielID, logo);
+    }
+
 
     public InputStream retrieveImage(String uniqueName) {
         try {
@@ -291,6 +315,7 @@ public class DatabaseConnection {
 
         return null;
     }
+
     private Spiel spielFromResultSet(ResultSet resultSet) throws SQLException, IOException {
         int spielID = resultSet.getInt("SpielID");
         String name = resultSet.getString("Name");
@@ -298,10 +323,10 @@ public class DatabaseConnection {
         double preis = resultSet.getDouble("Preis");
         String genre = resultSet.getString("Genre");
         int bewertungProzent = resultSet.getInt("BewertungProzent");
-        InputStream logo =  resultSet.getBlob("logo").getBinaryStream();
+        InputStream logo = resultSet.getBlob("logo").getBinaryStream();
         InputStream titelbild = resultSet.getBlob("titelbild").getBinaryStream();
-        
-        return new Spiel(spielID,name,beschreibung,preis,genre,bewertungProzent,logo,titelbild);
+
+        return new Spiel(spielID, name, beschreibung, preis, genre, bewertungProzent, logo, titelbild);
     }
 
     private Rezension rezensionFromResultSet(ResultSet resultSet) throws SQLException, IOException {
@@ -310,20 +335,20 @@ public class DatabaseConnection {
         int userBewertungProzent = resultSet.getInt("userBewertungProzent");
         String beschreibung = resultSet.getString("text");
 
-        return new Rezension(spielID,name,userBewertungProzent,beschreibung);
+        return new Rezension(spielID, name, userBewertungProzent, beschreibung);
     }
 
     //https://docs.oracle.com/javase/tutorial/jdbc/basics/retrieving.html
-    public List<Spiel> retrieveSpiele() throws SQLException{
+    public List<Spiel> retrieveSpiele() throws SQLException {
         Statement stmt = conn.createStatement();
         statements.add(stmt);
         ResultSet resultSet = stmt.executeQuery("select * from Spiel order by SpielID asc");
         ArrayList<Spiel> spieleAusDb = new ArrayList<>();
-        while (resultSet.next()){
-            try{
+        while (resultSet.next()) {
+            try {
                 spieleAusDb.add(spielFromResultSet(resultSet));
 
-            }catch (IOException io){
+            } catch (IOException io) {
                 io.printStackTrace();
             }
         }
@@ -331,16 +356,16 @@ public class DatabaseConnection {
         return spieleAusDb;
     }
 
-    public List<Rezension> retrieveRezensionen(int spielID) throws SQLException{
+    public List<Rezension> retrieveRezensionen(int spielID) throws SQLException {
         Statement stmt = conn.createStatement();
         statements.add(stmt);
         ResultSet resultSet = stmt.executeQuery("select * from Rezension where spielID =" + spielID);
         ArrayList<Rezension> rezensionenAusDB = new ArrayList<>();
-        while (resultSet.next()){
-            try{
+        while (resultSet.next()) {
+            try {
                 rezensionenAusDB.add(rezensionFromResultSet(resultSet));
 
-            }catch (IOException io){
+            } catch (IOException io) {
                 io.printStackTrace();
             }
         }
@@ -348,12 +373,12 @@ public class DatabaseConnection {
         return rezensionenAusDB;
     }
 
-    public Spiel retrieveSpielById(int id) throws  SQLException{
+    public Spiel retrieveSpielById(int id) throws SQLException {
         Statement statement = conn.createStatement();
         statements.add(statement);
-        ResultSet resultSet = statement.executeQuery("select * from Spiel where SpielID = "+ id);
+        ResultSet resultSet = statement.executeQuery("select * from Spiel where SpielID = " + id);
         Spiel spiel = null;
-        if(resultSet.next()){
+        if (resultSet.next()) {
             try {
                 spiel = spielFromResultSet(resultSet);
             } catch (IOException e) {
@@ -364,13 +389,13 @@ public class DatabaseConnection {
         return spiel;
     }
 
-    public boolean besitztNutzerSpiel(String nutzername, int spielID) throws SQLException{
+    public boolean besitztNutzerSpiel(String nutzername, int spielID) throws SQLException {
         Statement statement = conn.createStatement();
         statements.add(statement);
 
         ResultSet resultSet = statement.executeQuery("Select SpielID from Nutzer_Besitzt where bName like '" + nutzername + "'");
-        while (resultSet.next()){
-            if(resultSet.getInt("SpielID") == spielID){
+        while (resultSet.next()) {
+            if (resultSet.getInt("SpielID") == spielID) {
                 return true;
             }
         }
@@ -462,9 +487,10 @@ public class DatabaseConnection {
     /**
      * Prints details of an SQLException chain to <code>System.err</code>.
      * Details included are SQL State, Error code, Exception message.
-     *
+     * <p>
      * Quelle: https://db.apache.org/derby/papers/DerbyTut/embedded_intro.html
      * offizielles apache derby tutorial
+     *
      * @param e the SQLException from which to print details.
      */
     public static void printSQLException(SQLException e) {
@@ -530,9 +556,10 @@ public class DatabaseConnection {
 
     public void insertNutzerBesitzt(NutzerBesitzt nutzerBesitzt) throws SQLException {
         PreparedStatement insert =
-                conn.prepareStatement("insert into Nutzer_Besitzt values(?,?)");
+                conn.prepareStatement("insert into Nutzer_Besitzt values(?,?,?)");
         insert.setInt(1, nutzerBesitzt.getSpielID());
         insert.setString(2, nutzerBesitzt.getbName());
+        insert.setInt(3,nutzerBesitzt.getSpielzeit());
         insert.executeUpdate();
     }
 

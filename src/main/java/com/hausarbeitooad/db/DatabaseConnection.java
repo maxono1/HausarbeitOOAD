@@ -389,6 +389,15 @@ public class DatabaseConnection {
         return spiel;
     }
 
+    public int retrieveSpielzeitNutzerBesitzt(String bname, int spielID) throws SQLException{
+        Statement statement = conn.createStatement();
+        statements.add(statement);
+        ResultSet resultSet = statement.executeQuery("Select spielzeit from Nutzer_Besitzt where bName like '" + bname + "' and spielID = " + spielID);
+        if(resultSet.next()){
+            return resultSet.getInt("spielzeit");
+        } else return 0;
+    }
+
     public boolean besitztNutzerSpiel(String nutzername, int spielID) throws SQLException {
         Statement statement = conn.createStatement();
         statements.add(statement);

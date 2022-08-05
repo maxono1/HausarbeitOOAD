@@ -20,6 +20,7 @@ import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ShopItemController implements Stageable, Initializable, LoginListener, AcceptsID, GuthabenListner {
 
@@ -97,7 +98,7 @@ public class ShopItemController implements Stageable, Initializable, LoginListen
 
             if (conn.selectGuthaben(activeUser) > Double.parseDouble(preisInhaltID.getText().substring(0,iend))) {
                 //besitzt updaten
-                conn.insertNutzerBesitzt(new NutzerBesitzt(spielID, activeUser, 0));
+                conn.insertNutzerBesitzt(new NutzerBesitzt(spielID, activeUser, ThreadLocalRandom.current().nextInt(0,2000)));
                 //guthaben abziehen
                 conn.updateGuthaben(activeUser, -Double.parseDouble(preisInhaltID.getText().substring(0,iend)));
                 conn.commit();

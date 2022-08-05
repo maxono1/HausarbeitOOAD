@@ -65,7 +65,7 @@ public class CollectionViewController implements Stageable, Initializable, Login
     }
 
 
-    private HBox createHBoxFromSpiel(Spiel spiel){
+    private HBox createHBoxFromSpiel(Spiel spiel, int spielzeit){
         ImageView spielImageView = new ImageView(new Image(new ByteArrayInputStream(spiel.getLogo())));
         spielImageView.setFitHeight(150);
         spielImageView.setFitWidth(200);
@@ -94,7 +94,7 @@ public class CollectionViewController implements Stageable, Initializable, Login
         spielNameVbox.setPrefWidth(243);
         spielNameVbox.setPrefHeight(150);
 
-        Label spielZeitLabel = new Label("0 std");
+        Label spielZeitLabel = new Label(Integer.toString(spielzeit) + " std");
         spielZeitLabel.setAlignment(Pos.CENTER);
 
         VBox spielZeitVbox = new VBox(spielZeitLabel);
@@ -110,9 +110,10 @@ public class CollectionViewController implements Stageable, Initializable, Login
         try {
             listNameID.setItems(FXCollections.observableList(new ArrayList<HBox>()));
             List<Spiel> spiele = conn.sammlungView(activeUser);
-            for (Spiel s: spiele){
 
-                HBox spielHbox = createHBoxFromSpiel(s);
+            for (Spiel s: spiele){
+                int spielzeit = conn.retrieveSpielzeitNutzerBesitzt(activeUser,s.getSpielID());
+                HBox spielHbox = createHBoxFromSpiel(s, spielzeit);
                 spielHbox.setOnMouseClicked( event -> {
                     Label idLabel = (Label) spielHbox.getChildren().get(1);
                     System.out.println(idLabel.getText());

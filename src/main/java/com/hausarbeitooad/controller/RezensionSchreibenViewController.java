@@ -1,6 +1,7 @@
 package com.hausarbeitooad.controller;
 
 import com.hausarbeitooad.SceneFxmlApp;
+import com.hausarbeitooad.model.AcceptsID;
 import com.hausarbeitooad.model.LoginListener;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
@@ -15,11 +16,11 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ReviewViewController implements Stageable, Initializable, LoginListener {
+public class RezensionSchreibenViewController implements Stageable, Initializable, LoginListener, AcceptsID {
 
     private Stage stage;
     @FXML
-    private ImageView DragImageReviewID;
+    private ImageView dragImageReviewID;
 
     @FXML
     private ImageView arrowLeftID;
@@ -32,6 +33,8 @@ public class ReviewViewController implements Stageable, Initializable, LoginList
 
     @FXML
     private TextField opinionReviewID;
+
+    private int spielID;
     private String activeUser;
 
     @Override
@@ -50,5 +53,10 @@ public class ReviewViewController implements Stageable, Initializable, LoginList
     @Override
     public void setActiveUser(String uname) {
         this.activeUser = uname;
+    }
+
+    @Override
+    public void setSpielID(int spielID) {
+        this.spielID = spielID;
     }
 }

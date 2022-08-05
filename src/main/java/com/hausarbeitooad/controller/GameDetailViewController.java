@@ -33,19 +33,20 @@ public class GameDetailViewController implements Stageable, Initializable, Login
 
     @FXML
     private Button rezensionSchreibenID;
-    private int spielID;
-
     @FXML
     private Text spielzeitTextID;
 
+    private int spielID;
+
     @FXML
     void handleOnActionRezensionSchreiben(ActionEvent event) {
+        //interface acceptsid
         stage.setScene(SceneFxmlApp.getScenes().get(SceneName.REVIEW_VIEW).getScene());
         event.consume();
     }
     @FXML
     void onActionCollectionBackBtn(ActionEvent event) {
-        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.MAIN).getScene());
+        stage.setScene(SceneFxmlApp.getScenes().get(SceneName.COLLECTION_VIEW).getScene());
         event.consume();
     }
 
@@ -57,7 +58,7 @@ public class GameDetailViewController implements Stageable, Initializable, Login
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        this.conn = DatabaseConnection.getInstance();
     }
 
     @Override
@@ -71,6 +72,9 @@ public class GameDetailViewController implements Stageable, Initializable, Login
         System.out.println(spielID);
         try {
             Spiel spiel = conn.retrieveSpielById(spielID);
+            erfolgeTextID.setText("durchgespielt!, 100%!");
+            gameNameID.setText(spiel.getName());
+            spielzeitTextID.setText(Integer.toString(conn.retrieveSpielzeitNutzerBesitzt(activeUser,spielID)));
             /*
             preisInhaltID.setText(Double.toString(spiel.getPreis()) + "€");
             bewertungInhaltID.setText(Integer.toString(spiel.getBewertungProzent()) + "%");

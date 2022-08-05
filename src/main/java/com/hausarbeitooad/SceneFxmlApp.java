@@ -28,7 +28,7 @@ public class SceneFxmlApp extends Application {
 	private static final String LOGIN_VIEW_FXML = "login-view.fxml";
 	private static final String OPTION_VIEW_FXML = "option-view.fxml";
 	private static final String GUTHABEN_AUFLADEN_VIEW_FXML = "guthaben-aufladen-view.fxml";
-	private static final String REVIEW_VIEW_FXML = "review-view.fxml";
+	private static final String REZENSION_SCHREIBEN_VIEW_FXML = "rezension-schreiben-view.fxml";
 	private static final String SHOP_MENU_VIEW_FXML = "shop-menu-view.fxml";
 	private static final String REZENSION_VIEW_FXML = "rezension-view.fxml";
 	private static final String SHOP_ITEM_VIEW_FXML = "shop-item-view.fxml";
@@ -75,7 +75,7 @@ public class SceneFxmlApp extends Application {
 		scenes.put(SceneName.GUTHABENVERWALTEN, new FxmlInfo(SceneFxmlApp.class.getResource(GUTHABEN_VERWALTEN_VIEW_FXML), SceneName.GUTHABENVERWALTEN, stage));
 		scenes.put(SceneName.GUTHABENAUFLADEN, new FxmlInfo(SceneFxmlApp.class.getResource(GUTHABEN_AUFLADEN_VIEW_FXML), SceneName.GUTHABENAUFLADEN, stage));
 		scenes.put(SceneName.GAME_DETAIL_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(GAME_DETAIL_VIEW_FXML), SceneName.GAME_DETAIL_VIEW, stage));
-		scenes.put(SceneName.REVIEW_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(REVIEW_VIEW_FXML), SceneName.REVIEW_VIEW, stage));
+		scenes.put(SceneName.REVIEW_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(REZENSION_SCHREIBEN_VIEW_FXML), SceneName.REVIEW_VIEW, stage));
 		scenes.put(SceneName.SHOP_MENU, new FxmlInfo(SceneFxmlApp.class.getResource(SHOP_MENU_VIEW_FXML), SceneName.SHOP_MENU, stage));
 		scenes.put(SceneName.SHOP_ITEM, new FxmlInfo(SceneFxmlApp.class.getResource(SHOP_ITEM_VIEW_FXML), SceneName.SHOP_ITEM, stage));
 		scenes.put(SceneName.REZENSION_VIEW, new FxmlInfo(SceneFxmlApp.class.getResource(REZENSION_VIEW_FXML), SceneName.REZENSION_VIEW, stage));

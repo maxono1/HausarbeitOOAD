@@ -26,8 +26,6 @@ public class MainController implements Stageable, Initializable, LoginListener {
     private Stage stage;
 
 
-    @FXML
-    private MenuBar menuBar;
     private String activeUser;
     @FXML
     private Label usernameID;
@@ -72,29 +70,6 @@ public class MainController implements Stageable, Initializable, LoginListener {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        menuBar.setFocusTraversable(true);
-
-    }
-
-    @FXML
-    private void handleKeyInput(final InputEvent event) {
-        if (event instanceof KeyEvent) {
-            final KeyEvent keyEvent = (KeyEvent) event;
-            if (keyEvent.isControlDown() && keyEvent.getCode() == KeyCode.A) {
-                provideAboutFunctionality();
-            }
-        }
-        event.consume();
-    }
-
-    private void provideAboutFunctionality() {
-        System.out.println("You clicked on About!");
-    }
-
-    @FXML
-    private void handleAboutAction(final ActionEvent event) {
-        provideAboutFunctionality();
-        event.consume();
     }
 
     public void handleonActionGuthabenScene(ActionEvent event) {

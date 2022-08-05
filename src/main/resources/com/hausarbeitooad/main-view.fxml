@@ -13,36 +13,6 @@
 <?import javafx.scene.text.Font?>
 
 <VBox maxHeight="500" maxWidth="700" minHeight="0" minWidth="0" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hausarbeitooad.controller.MainController">
-    <MenuBar fx:id="menuBar" onKeyPressed="#handleKeyInput">
-        <menus>
-            <Menu text="File">
-                <items>
-                    <MenuItem text="New" />
-                    <MenuItem text="Open" />
-                    <MenuItem text="Save" />
-                    <MenuItem text="Save As" />
-                    <SeparatorMenuItem />
-                    <MenuItem text="Exit" />
-                </items>
-            </Menu>
-            <Menu text="Edit">
-                <items>
-                    <MenuItem text="Copy" />
-                    <MenuItem text="Cut" />
-                    <MenuItem text="Paste" />
-                </items>
-            </Menu>
-            <Menu text="Help">
-                <items>
-                    <MenuItem disable="true" text="Search" />
-                    <MenuItem text="Online Manual" visible="false" />
-                    <SeparatorMenuItem />
-                    <MenuItem onAction="#handleAboutAction" text="About" />
-                </items>
-            </Menu>
-        </menus>
-    </MenuBar>
-
     <ButtonBar prefHeight="30.0" prefWidth="400.0" BorderPane.alignment="CENTER">
         <buttons>
             <Button mnemonicParsing="false" onAction="#handleOnActionLogout" text="Logout">

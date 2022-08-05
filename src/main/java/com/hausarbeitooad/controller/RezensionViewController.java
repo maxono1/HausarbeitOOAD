@@ -7,6 +7,8 @@ import com.hausarbeitooad.model.AcceptsID;
 import com.hausarbeitooad.model.Loggerble;
 import com.hausarbeitooad.model.SceneName;
 import com.hausarbeitooad.model.Stageable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,6 +23,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -87,6 +90,7 @@ public class RezensionViewController implements Stageable, Initializable, Logger
     @Override
     public void setSpielID(int spielID) {
         this.spielID = spielID;
+        listViewID.setItems(FXCollections.observableList(new ArrayList<HBox>()));
         try{
             List<Rezension> rezensionen = conn.retrieveRezensionen(this.spielID);
             for (Rezension r:rezensionen) {
@@ -96,6 +100,7 @@ public class RezensionViewController implements Stageable, Initializable, Logger
             }
         } catch (SQLException e) {
             DatabaseConnection.printSQLException(e);
+
         }
     }
 }

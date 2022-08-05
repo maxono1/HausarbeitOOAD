@@ -44,6 +44,7 @@ public class GameDetailViewController implements Stageable, Initializable, Login
         stage.setScene(SceneFxmlApp.getScenes().get(SceneName.REVIEW_VIEW).getScene());
         event.consume();
     }
+
     @FXML
     void onActionCollectionBackBtn(ActionEvent event) {
         stage.setScene(SceneFxmlApp.getScenes().get(SceneName.COLLECTION_VIEW).getScene());
@@ -72,9 +73,9 @@ public class GameDetailViewController implements Stageable, Initializable, Login
         System.out.println(spielID);
         try {
             Spiel spiel = conn.retrieveSpielById(spielID);
-            erfolgeTextID.setText("durchgespielt!, 100%!");
+            erfolgeTextID.setText(spielErfolg(spielID));
             gameNameID.setText(spiel.getName());
-            spielzeitTextID.setText(Integer.toString(conn.retrieveSpielzeitNutzerBesitzt(activeUser,spielID)));
+            spielzeitTextID.setText(Integer.toString(conn.retrieveSpielzeitNutzerBesitzt(activeUser, spielID)));
             /*
             preisInhaltID.setText(Double.toString(spiel.getPreis()) + "€");
             bewertungInhaltID.setText(Integer.toString(spiel.getBewertungProzent()) + "%");
@@ -86,5 +87,23 @@ public class GameDetailViewController implements Stageable, Initializable, Login
             DatabaseConnection.printSQLException(s);
         }
         //userBesitztAbfrage();
+    }
+
+    private String spielErfolg(int spielID) throws SQLException {
+        int spielzeit = conn.retrieveSpielzeitNutzerBesitzt(activeUser, spielID);
+        if (spielzeit == 0) {
+            return "Blutiger Anfänger! 0%";
+        } else if (spielzeit > 0 && spielzeit <= 150) {
+            return "Anfänger, es wurden schon Fortschritte gemacht! 25%";
+        } else if (spielzeit > 150 && spielzeit <= 750) {
+            return "Fortgeschrittner, es wurden große Erfolge erzielt! 50%";
+        } else if (spielzeit > 750 && spielzeit <= 1500) {
+            return "Meister, Sie haben das Spiel gemeistert! 75%";
+        } else if (spielzeit > 1500 && spielzeit <= 2000) {
+            return "Kleuker, Sie wissen über alles bescheid! 100%";
+        } else {
+            return "Blutiger Anfänger! 0%";
+        }
+
     }
 }

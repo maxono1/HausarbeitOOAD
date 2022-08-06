@@ -11,7 +11,7 @@ import java.util.InputMismatchException;
  *  es werden in den einzelnen Methoden invalide Werte abgefangen
  * @throws InputMismatchException
  * @author 1st: Maximillian Jaesch, 2nd: Tim Cirkena
- * @source: Selbst erstellt
+ * @source: Selbst erstellt für alle methoden
  * */
 public class Spiel {
     private int spielID;
@@ -26,7 +26,6 @@ public class Spiel {
 
     /**
      * @author Maximilian Jaesch
-     * @source: Selbst erstellt
      * @param spielID
      * @param name
      * @param beschreibung
@@ -53,7 +52,7 @@ public class Spiel {
      * minimierter konstruktor, um die anfrage an die datenbank minimieren zu können,
      * der Rest der elemente bleibt null
      * @author Tim Cirksena
-     * @source: Selbst erstellt
+     *
      * @param name
      * @param spielID
      * @param logo
@@ -120,7 +119,7 @@ public class Spiel {
      * @author Maximilian Jaesch
      * @param preis
      * @throws InputMismatchException wenn preis kleiner als 0 oder größer als 1000
-     * @source: Selbst erstellt
+     *
      */
     public void setPreis(double preis) throws InputMismatchException{
         if(preis >=0 && preis <= 1000){
@@ -140,7 +139,7 @@ public class Spiel {
      * @author Maximilian Jaesch
      * @param genre
      * @throws InputMismatchException wenn genre länger als 255 chars ist
-     * @source: Selbst erstellt
+     *
      */
     public void setGenre(String genre) throws InputMismatchException{
         if(genre.length() <=255){
@@ -160,7 +159,7 @@ public class Spiel {
      * länger als 255 chars
      * @param bewertungProzent
      * @throws InputMismatchException wenn bewertung nicht zwischen 0 und 100 prozent
-     * @source: Selbst erstellt
+     *
      */
     public void setBewertungProzent(int bewertungProzent) throws InputMismatchException {
         if(bewertungProzent >=0 && bewertungProzent <=100){
@@ -183,7 +182,7 @@ public class Spiel {
      * @param logoStream
      * @throws IOException wenn der InputStream fehlerhaft ist
      * @author 1st: Maximillian Jaesch
-     * @source: Selbst erstellt
+     *
      */
     public void setLogo(InputStream logoStream) throws IOException {
         this.logo = logoStream.readAllBytes();
@@ -201,7 +200,7 @@ public class Spiel {
      * @param titelbild
      * @throws IOException wenn der InputStream fehlerhaft ist
      * @author 1st: Maximillian Jaesch
-     * @source: Selbst erstellt
+     *
      */
     public void setTitelbild(InputStream titelbild) throws IOException{
         this.titelbild = titelbild.readAllBytes();

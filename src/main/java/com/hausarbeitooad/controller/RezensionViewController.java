@@ -26,6 +26,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Dieser Controller steuert die Rezension View
+ *
+ * @author Abdurrahman Azattemür
+ */
 public class RezensionViewController implements Stageable, Initializable, LoginListener, AcceptsID {
 
     private Stage stage;
@@ -62,6 +67,14 @@ public class RezensionViewController implements Stageable, Initializable, LoginL
         conn = DatabaseConnection.getInstance();
     }
 
+    /**
+     * hier wird dynamisch ein HBox Element aus einer Rezension Entität erstellt,
+     * um dies einer ListView hinzuzufügen
+     *
+     * @param rezension
+     * @return HBox
+     * @author 1st: Abdurrahman Azattemür, 2nd: Maximilian Jaesch
+     */
     private HBox createHBoxForRezension(Rezension rezension) {
         Label usernameLabel = new Label(rezension.getbName());
         usernameLabel.setFont(Font.font(18.0));
@@ -99,7 +112,6 @@ public class RezensionViewController implements Stageable, Initializable, LoginL
         try{
             List<Rezension> rezensionen = conn.retrieveRezensionen(this.spielID);
             for (Rezension r:rezensionen) {
-                //System.out.println(r.getSpielID() + " SpielID, " + r.getText() + " Text, " + r.getbName() + " Benutzer");
                 HBox rezensionBox = createHBoxForRezension(r);
                 listViewID.getItems().add(rezensionBox);
             }

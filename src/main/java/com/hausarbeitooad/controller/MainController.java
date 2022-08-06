@@ -18,20 +18,21 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
+ * Dieser Controller steuert die Main View
  *
- *
- * @author Abdurrahman Azattemür
+ * @author 1st: Abdurrahman Azattemür, 2nd: Tim Cirksena, 3rd: Maximilian Jaesch
  */
 public class MainController implements Stageable, Initializable, LoginListener {
     private Stage stage;
-
-
     private String activeUser;
     @FXML
     private Label usernameID;
 
     /**
-     * Close application
+     * Dieser EventListener ist für das Logout zuständig.
+     *
+     * @param event
+     * @author 1st: Abdurrahman Azattemür, 2nd: Maximilian Jaesch
      */
     @FXML
     private void handleOnActionLogout(ActionEvent event) {
@@ -40,7 +41,10 @@ public class MainController implements Stageable, Initializable, LoginListener {
     }
 
     /**
-     * Display the first scene
+     * Dieser EventListener ist für das Wechseln in die ShopMenu zuständig.
+     *
+     * @param event
+     * @author 1st: Abdurrahman Azattemür, 2nd: Maximilian Jaesch
      */
     @FXML
     private void handleOnActionShop(ActionEvent event) {
@@ -49,7 +53,10 @@ public class MainController implements Stageable, Initializable, LoginListener {
     }
 
     /**
-     * Display the third scene
+     * Dieser EventListener ist für das Wechseln in die CollectionView zuständig.
+     *
+     * @param event
+     * @author 1st: Tim Cirksena, 2nd: Maximilian Jaesch
      */
     @FXML
     private void handleOnActionSceneCollection(ActionEvent event) {
@@ -57,11 +64,6 @@ public class MainController implements Stageable, Initializable, LoginListener {
         event.consume();
     }
 
-    /**
-     * Needed by the close button
-     *
-     * @param stage primary stage to set
-     */
     @Override
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -69,14 +71,26 @@ public class MainController implements Stageable, Initializable, LoginListener {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 
+    /**
+     * Dieser EventListener ist für das Wechseln in die GuthabenVerwaltenView zuständig.
+     *
+     * @param event
+     * @author Abdurrahman Azattemür
+     */
     public void handleonActionGuthabenScene(ActionEvent event) {
         stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getScene());
         event.consume();
     }
-    public void  handleOnActionOptionen(ActionEvent event) {
+
+    /**
+     * Dieser EventListener ist für das Wechseln in die OptionsView zuständig.
+     *
+     * @param event
+     * @author Tim Cirksena
+     */
+    public void handleOnActionOptionen(ActionEvent event) {
         stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.OPTION_VIEW).getScene());
         event.consume();
     }

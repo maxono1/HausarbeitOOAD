@@ -11,8 +11,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 /**
- * @author Abdurrahman Azattemür
- * Source:
+ * lädt beispiel Daten in die Datenbank um die UI zu testen
+ *
+ * @author 1st: Maximilian Jaesch, 2nd: Abdurrahman Azattemür
+ * @Source: selbst erstellt
  * */
 
 public class BeispielDatenLoader {
@@ -49,7 +51,5 @@ public class BeispielDatenLoader {
         } catch (SQLException sqlException){
             DatabaseConnection.printSQLException(sqlException);
         }
-
-
     }
 }

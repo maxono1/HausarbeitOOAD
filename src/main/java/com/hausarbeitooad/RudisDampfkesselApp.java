@@ -12,17 +12,12 @@ import java.util.Map;
 /**
  *
  *
- * Quelle: <a href="https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11"> https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11 </a>
+ * @source: <a href="https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11"> https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11 </a>
  *
- * @author Knute Snortum, modified by Abdurrahman Azattemür, Maximilian Jaesch, Tim Cirksena
- * @version 2019-08-23
+ * @author 1st:Abdurrahman Azattemür, 2nd:Maximilian Jaesch, 3rd:Tim Cirksena
+ *
  */
 public class RudisDampfkesselApp extends Application {
-
-	/**
-	 * @author
-	 * Source:
-	 * */
 	private static final String MAIN_FXML = "main-view.fxml";
 	private static final String COLLECTION_VIEW_FXML = "collection-view.fxml";
 	private static final String GAME_DETAIL_VIEW_FXML = "game-detail-view.fxml";
@@ -35,7 +30,8 @@ public class RudisDampfkesselApp extends Application {
 	private static final String REZENSION_VIEW_FXML = "rezension-view.fxml";
 	private static final String SHOP_ITEM_VIEW_FXML = "shop-item-view.fxml";
 
-	/** Holds the information for various scenes to switch between */
+	/** Holds the information for various scenes to switch between
+	 *  * @source: <a href="https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11"> https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11 </a>*/
 	private static Map<SceneName, FxmlInfo> scenes = new HashMap<>();
 
 	private DatabaseConnection conn;
@@ -46,8 +42,8 @@ public class RudisDampfkesselApp extends Application {
 
 
 	/**
-	 * @author
-	 * Source:
+	 * @author 1st:Abdurrahman Azattemür, 2nd:Maximilian Jaesch, 3rd:Tim Cirksena
+	 * Source: * @source: <a href="https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11"> https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11 </a>
 	 * */
 	@Override
 	public void start(Stage stage){
@@ -79,16 +75,16 @@ public class RudisDampfkesselApp extends Application {
 		stage.show();
 	}
 
-	/** @return a Map of the {@link FxmlInfo} by {@link SceneName} */
+	/** @return a Map of the {@link FxmlInfo} by {@link SceneName}
+	 *  @source: <a href="https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11"> https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11 </a>
+	 * */
 	public static Map<SceneName, FxmlInfo> getScenes() {
 		return scenes;
 	}
 	
 	/**
-	 * Update the scene Map with new FxmlInfo
-	 * 
-	 * @param name the {@link SceneName} that is the key to update
-	 * @param info the {@link FxmlInfo} that is the data to update
+
+	 * @source: <a href="https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11"> https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11 </a>
 	 */
 	public static void updateScenes(SceneName name, FxmlInfo info) {
 		scenes.put(name, info);

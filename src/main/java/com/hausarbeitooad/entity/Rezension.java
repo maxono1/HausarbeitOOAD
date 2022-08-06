@@ -3,9 +3,11 @@ package com.hausarbeitooad.entity;
 import java.util.InputMismatchException;
 
 /**
- *  Die Entität Rezension
+ *  Die Entität Rezension, repräsentiert die Entität in der Datenbank, und fungiert als Schnittstelle zwischen Java und Sql
+ *  es werden in den einzelnen Methoden invalide Werte abgefangen
  *
- * @author 1st: Maximillian Jaesch, 2nd: Abdurrahman Azattemür
+ * @throws InputMismatchException
+ * @author 1st: Abdurrahman Azattemür, 2nd: Maximillian Jaesch
  * @source: Selbst erstellt
  * */
 public class Rezension {
@@ -13,6 +15,21 @@ public class Rezension {
     private String bName;
     private int userBewertungProzent;
     private String text;
+
+    /**
+     * @author Abdurrahman Azattemür
+     * @param spielID
+     * @param bName
+     * @param userBewertungProzent
+     * @param text
+     * @throws InputMismatchException
+     */
+    public Rezension(int spielID, String bName, int userBewertungProzent, String text) throws InputMismatchException{
+        this.spielID = spielID;
+        this.setbName(bName);
+        this.setUserBewertungProzent(userBewertungProzent);
+        this.setText(text);
+    }
 
     public int getSpielID() {
         return spielID;
@@ -26,7 +43,12 @@ public class Rezension {
         return bName;
     }
 
-    public void setbName(String bName) {
+    /**
+     * @author Abdurrahman Azattemür
+     * @param bName
+     * @throws InputMismatchException
+     */
+    public void setbName(String bName) throws InputMismatchException{
         if(bName.length() > 20){
             throw new InputMismatchException("name länger als 20 zeichen");
         }
@@ -37,7 +59,12 @@ public class Rezension {
         return userBewertungProzent;
     }
 
-    public void setUserBewertungProzent(int userBewertungProzent) {
+    /**
+     * @author Abdurrahman Azattemür
+     * @param userBewertungProzent
+     * @throws InputMismatchException
+     */
+    public void setUserBewertungProzent(int userBewertungProzent) throws InputMismatchException {
         if(userBewertungProzent >=0 && userBewertungProzent <=100){
             this.userBewertungProzent = userBewertungProzent;
         } else {
@@ -58,10 +85,5 @@ public class Rezension {
         }
     }
 
-    public Rezension(int spielID, String bName, int userBewertungProzent, String text) {
-        this.spielID = spielID;
-        this.setbName(bName);
-        this.setUserBewertungProzent(userBewertungProzent);
-        this.setText(text);
-    }
+
 }

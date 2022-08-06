@@ -7,8 +7,9 @@ import java.sql.Blob;
 import java.util.InputMismatchException;
 
 /**
- *  Die Entität Spiel
- *
+ *  Die Entität Spiel, repräsentiert die Entität in der Datenbank, und fungiert als Schnittstelle zwischen Java und Sql
+ *  es werden in den einzelnen Methoden invalide Werte abgefangen
+ * @throws InputMismatchException
  * @author 1st: Maximillian Jaesch, 2nd: Tim Cirkena
  * @source: Selbst erstellt
  * */
@@ -23,6 +24,19 @@ public class Spiel {
     private byte[] titelbild; //eig mediumblob
 
 
+    /**
+     * @author Maximilian Jaesch
+     * @source: Selbst erstellt
+     * @param spielID
+     * @param name
+     * @param beschreibung
+     * @param preis
+     * @param genre
+     * @param bewertungProzent
+     * @param logo
+     * @param titelbild
+     * @throws IOException
+     */
     public Spiel(int spielID, String name, String beschreibung, double preis, String genre, int bewertungProzent, InputStream logo, InputStream titelbild) throws IOException{
         this.spielID = spielID;
         this.name = name;
@@ -33,6 +47,18 @@ public class Spiel {
         setLogo(logo);
         setTitelbild(titelbild);
     }
+
+
+    /**
+     * minimierter konstruktor, um die anfrage an die datenbank minimieren zu können,
+     * der Rest der elemente bleibt null
+     * @author Tim Cirksena
+     * @source: Selbst erstellt
+     * @param name
+     * @param spielID
+     * @param logo
+     * @throws IOException
+     */
     public Spiel(String name, int spielID, InputStream logo) throws IOException {
         this.spielID = spielID;
         this.name = name;
@@ -51,6 +77,13 @@ public class Spiel {
         return name;
     }
 
+    /**
+     *
+     * @author Maximilian Jaesch
+     * @param name
+     * @throws InputMismatchException wenn name länger als 255 chars
+     * @source: Selbst erstellt
+     */
     public void setName(String name) throws InputMismatchException{
         if(name.length() <=255){
             this.name = name;
@@ -64,6 +97,12 @@ public class Spiel {
         return beschreibung;
     }
 
+    /**
+     * @author Maximilian Jaesch
+     * @param beschreibung
+     * @throws InputMismatchException wenn beschreibung länger als 2048 chars
+     * @source: Selbst erstellt
+     */
     public void setBeschreibung(String beschreibung) throws InputMismatchException{
         if(beschreibung.length() <=2048) {
             this.beschreibung = beschreibung;
@@ -77,6 +116,12 @@ public class Spiel {
         return preis;
     }
 
+    /**
+     * @author Maximilian Jaesch
+     * @param preis
+     * @throws InputMismatchException wenn preis kleiner als 0 oder größer als 1000
+     * @source: Selbst erstellt
+     */
     public void setPreis(double preis) throws InputMismatchException{
         if(preis >=0 && preis <= 1000){
             this.preis = preis;
@@ -91,6 +136,12 @@ public class Spiel {
         return genre;
     }
 
+    /**
+     * @author Maximilian Jaesch
+     * @param genre
+     * @throws InputMismatchException wenn genre länger als 255 chars ist
+     * @source: Selbst erstellt
+     */
     public void setGenre(String genre) throws InputMismatchException{
         if(genre.length() <=255){
             this.genre = genre;
@@ -105,6 +156,12 @@ public class Spiel {
         return bewertungProzent;
     }
 
+    /**
+     * länger als 255 chars
+     * @param bewertungProzent
+     * @throws InputMismatchException wenn bewertung nicht zwischen 0 und 100 prozent
+     * @source: Selbst erstellt
+     */
     public void setBewertungProzent(int bewertungProzent) throws InputMismatchException {
         if(bewertungProzent >=0 && bewertungProzent <=100){
             this.bewertungProzent = bewertungProzent;
@@ -118,6 +175,16 @@ public class Spiel {
         return logo;
     }
 
+    /**
+     * nimmt einen Inputstream und speichert diesen in das byte array logo ab
+     * aus diesem byte array kann später wieder mehrmals ein InputStream erstellt werden um JavaFX
+     * Imageviews zu befüllen
+     *
+     * @param logoStream
+     * @throws IOException wenn der InputStream fehlerhaft ist
+     * @author 1st: Maximillian Jaesch
+     * @source: Selbst erstellt
+     */
     public void setLogo(InputStream logoStream) throws IOException {
         this.logo = logoStream.readAllBytes();
     }
@@ -126,6 +193,16 @@ public class Spiel {
         return titelbild;
     }
 
+    /**
+     * nimmt einen Inputstream und speichert diesen in das byte array logo ab
+     * aus diesem byte array kann später wieder mehrmals ein InputStream erstellt werden um JavaFX
+     * Imageviews zu befüllen
+     *
+     * @param titelbild
+     * @throws IOException wenn der InputStream fehlerhaft ist
+     * @author 1st: Maximillian Jaesch
+     * @source: Selbst erstellt
+     */
     public void setTitelbild(InputStream titelbild) throws IOException{
         this.titelbild = titelbild.readAllBytes();
     }

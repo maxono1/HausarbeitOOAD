@@ -12,7 +12,7 @@
 <AnchorPane prefHeight="500" prefWidth="700" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hausarbeitooad.controller.ShopMenuViewController">
     <children>
         <Separator layoutY="91.0" prefHeight="18.0" prefWidth="703.0" />
-        <Label fx:id="gameNameID" alignment="CENTER" contentDisplay="TOP" layoutX="150.0" layoutY="48.0" prefHeight="18.0" prefWidth="403.0" text="Shop">
+        <Label alignment="CENTER" contentDisplay="TOP" layoutX="150.0" layoutY="48.0" prefHeight="18.0" prefWidth="403.0" text="Shop">
             <font>
                 <Font size="36.0" />
             </font>
@@ -20,7 +20,7 @@
         <ListView fx:id="listViewID" fixedCellSize="50.0" layoutY="100.0" prefHeight="500.0" prefWidth="703.0" />
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onActionMenuItemBackBtn">
          <graphic>
-            <ImageView fx:id="arrowLeftID" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/left-arrow.png" />
                </image>

@@ -25,46 +25,27 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Dieser Controller steuert die ShopMenu View
+ *
+ * @author 1st: Maximilian Jaesch, 2nd: Abdurrahman Azattemür, 3rd: Tim Cirksena
+ */
 public class ShopMenuViewController implements Stageable, Initializable, LoginListener {
     @FXML
-    private ImageView arrowLeftID;
-
-    @FXML
     private ListView<HBox> listViewID;
-    //Label textField = new Label("LOL");
-    //HBox hBox = new HBox(textField);
-
-    @FXML
-    private Label gameNameID;
     private DatabaseConnection conn;
     private Stage stage;
     private String activeUser;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //textField.setBackground(Background.fill(Color.AQUA));
-
-        //listViewID.getItems().add("textField");
-        /*
-        Spiel fallGuys = null;
-        try {
-            fallGuys = new Spiel(1, "Fall Guys", "Don't Fall in the Slime", 1.0, "Horrorspiel", 50, new FileInputStream("src/main/resources/images/CSGO.png"), new FileInputStream("src/main/resources/images/CSGO.png"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException io){
-            io.printStackTrace();
-        }
-        for (int i = 0; i < 50; i++){
-            listViewID.getItems().add(createHBoxFromSpiel(fallGuys));
-        }
-        */
         conn = DatabaseConnection.getInstance();
 
         try {
             List<Spiel> spiele = conn.retrieveSpiele();
-            for (Spiel s: spiele){
+            for (Spiel s : spiele) {
                 HBox spielHbox = createHBoxFromSpiel(s);
-                spielHbox.setOnMouseClicked( event -> {
+                spielHbox.setOnMouseClicked(event -> {
                     Label idLabel = (Label) spielHbox.getChildren().get(1);
                     //System.out.println(idLabel.getText());
                     int id = Integer.parseInt(idLabel.getText());
@@ -78,12 +59,13 @@ public class ShopMenuViewController implements Stageable, Initializable, LoginLi
             DatabaseConnection.printSQLException(e);
         }
     }
+
     /**
      * back button navigiert eine Scene zurück.
      *
      * @author Tim Cirksena
      * Source: selber erstellt
-     * */
+     */
     @FXML
     private void onActionMenuItemBackBtn(ActionEvent event) {
         stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.MAIN).getScene());
@@ -94,12 +76,21 @@ public class ShopMenuViewController implements Stageable, Initializable, LoginLi
     public void setActiveUser(String uname) {
         this.activeUser = uname;
     }
+
     @Override
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    private HBox createHBoxFromSpiel(Spiel spiel){
+    /**
+     * hier wird dynamisch ein HBox Element aus einer Spiel Entität erstellt,
+     * um dies einer ListView hinzuzufügen
+     *
+     * @param spiel
+     * @return HBox
+     * @author Maximilian Jaesch
+     */
+    private HBox createHBoxFromSpiel(Spiel spiel) {
 
         ImageView logoImageView = new ImageView(new Image(new ByteArrayInputStream(spiel.getLogo())));
         logoImageView.setFitHeight(68);
@@ -117,12 +108,6 @@ public class ShopMenuViewController implements Stageable, Initializable, LoginLi
         idLabel.setAlignment(Pos.CENTER);
         idLabel.setPrefHeight(70);
         idLabel.setPrefWidth(100);
-
-
-        /*VBox idVbox = new VBox(idLabel);
-        idVbox.setAlignment(Pos.CENTER);
-        idVbox.setPrefHeight(70);
-        idVbox.setPrefWidth(100);*/
 
         Label nameLabel = new Label(spiel.getName());
         nameLabel.setFont(Font.font(18.0));
@@ -142,6 +127,6 @@ public class ShopMenuViewController implements Stageable, Initializable, LoginLi
         preisVbox.setPrefHeight(70);
         preisVbox.setPrefWidth(280);
 
-        return new HBox(logoVbox,idLabel,nameVbox,preisVbox);
+        return new HBox(logoVbox, idLabel, nameVbox, preisVbox);
     }
 }

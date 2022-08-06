@@ -27,7 +27,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
+/**
+ * Dieser Controller steuert die Collection View
+ *
+ * @author 1st: Tim Cirksena, 2nd: Maximilian Jaesch
+ * */
 public class CollectionViewController implements Stageable, Initializable, LoginListener, BuyListner {
 
     private Stage stage;
@@ -41,6 +45,12 @@ public class CollectionViewController implements Stageable, Initializable, Login
     @FXML
     private ListView<HBox> listNameID;
 
+    /**
+     * back button navigiert eine Scene zurück.
+     *
+     * @author Tim Cirksena
+     * Source: selber erstellt
+     * */
     @FXML
     void onActionCollectionBackBtn(ActionEvent event) {
         stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.MAIN).getScene());
@@ -65,6 +75,14 @@ public class CollectionViewController implements Stageable, Initializable, Login
     }
 
 
+    /**
+     * hier wird dynamisch ein HBox element aus einer Spiel entität und Spielzeit erstellt,
+     * um dies einer ListView hinzuzufügen
+     *
+     * Source: selber erstellt
+     *
+     * @author 1st: Maximilian Jaesch, 2nd:Tim Cirksena
+     * */
     private HBox createHBoxFromSpiel(Spiel spiel, int spielzeit){
         ImageView spielImageView = new ImageView(new Image(new ByteArrayInputStream(spiel.getLogo())));
         spielImageView.setFitHeight(150);
@@ -77,11 +95,6 @@ public class CollectionViewController implements Stageable, Initializable, Login
         spielIDLabel.setAlignment(Pos.CENTER);
         spielIDLabel.setPrefHeight(150);
         spielIDLabel.setPrefWidth(100);
-/*
-        VBox spielIDVbox = new VBox(spielIDLabel);
-        spielIDVbox.setAlignment(Pos.CENTER_LEFT);
-        spielIDVbox.setPrefWidth(100);
-        spielIDVbox.setPrefHeight(150);*/
 
         Label spielNameLabel = new Label(spiel.getName());
         spielNameLabel.setFont(Font.font(36));
@@ -105,6 +118,14 @@ public class CollectionViewController implements Stageable, Initializable, Login
         return new HBox(spielImageView, spielIDLabel, spielNameVbox, spielZeitVbox);
     }
 
+    /**
+     * hier wird dynamisch ein HBox element aus einer Spiel entität und Spielzeit erstellt,
+     * um dies einer ListView hinzuzufügen
+     *
+     * Source: selber erstellt
+     *
+     * @author 1st:Tim Cirksena 2nd: Maximilian Jaesch
+     * */
     @Override
     public void updateGames() {
         try {

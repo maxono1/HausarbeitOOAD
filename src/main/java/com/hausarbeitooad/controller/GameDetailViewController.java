@@ -16,7 +16,14 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
+/**
+ * Controller der GameDetailView
+ * erlaubt dem User eine Rezension zu schreiben und die Spielzeit einzulesen
+ *
+ * @source selber erstellt
+ *
+ * @author 1st:Tim Cirksena, 2nd: Maximilian Jaesch
+ * */
 public class GameDetailViewController implements Stageable, Initializable, LoginListener, AcceptsID {
 
     private Stage stage;
@@ -47,6 +54,12 @@ public class GameDetailViewController implements Stageable, Initializable, Login
         event.consume();
     }
 
+    /**
+     * back button navigiert eine Scene zurück.
+     *
+     * @author Tim Cirksena
+     * Source: selber erstellt
+     * */
     @FXML
     void onActionCollectionBackBtn(ActionEvent event) {
         stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.COLLECTION_VIEW).getScene());
@@ -69,6 +82,12 @@ public class GameDetailViewController implements Stageable, Initializable, Login
         this.activeUser = uname;
     }
 
+    /**
+     * Interfacemethode, die uns erlaubt bei einem Update der spielID aus der Datenbank informationen.
+     *
+     * @param spielID
+     * @author 1st:Maximilian Jaesch
+     */
     @Override
     public void setSpielID(int spielID) {
         this.spielID = spielID;
@@ -91,6 +110,15 @@ public class GameDetailViewController implements Stageable, Initializable, Login
         //userBesitztAbfrage();
     }
 
+
+    /**
+     * nimmt spielID, liest die Spielzeit aus der Tabelle Nutzer_Besitzt aus und generiert einen fortschritt
+     * @author 1st:Tim Cirksena
+     *
+     * @param spielID
+     * @return String erfolg, zeigt den Spielerfolg grob an
+     * @throws SQLException
+     */
     private String spielErfolg(int spielID) throws SQLException {
         int spielzeit = conn.retrieveSpielzeitNutzerBesitzt(activeUser, spielID);
         if (spielzeit == 0) {

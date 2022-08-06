@@ -23,6 +23,12 @@ public class OptionViewController implements Stageable, Initializable, LoginList
     @FXML
     private Label gameNameID;
 
+    /**
+     * back button navigiert eine Scene zurück.
+     *
+     * @author Tim Cirksena
+     * @Source: selber erstellt
+     * */
     @FXML
     void onActionOptionenBackBtn(ActionEvent event) {
         stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.MAIN).getScene());

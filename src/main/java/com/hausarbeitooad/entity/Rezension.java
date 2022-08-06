@@ -6,7 +6,7 @@ import java.util.InputMismatchException;
  *  Die Entität Rezension, repräsentiert die Entität in der Datenbank, und fungiert als Schnittstelle zwischen Java und Sql
  *  es werden in den einzelnen Methoden invalide Werte abgefangen
  *
- * @throws InputMismatchException
+ *
  * @author 1st: Abdurrahman Azattemür, 2nd: Maximillian Jaesch
  * @source: Selbst erstellt für alle methoden
  * */

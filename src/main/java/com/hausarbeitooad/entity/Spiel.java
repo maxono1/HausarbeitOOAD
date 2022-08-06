@@ -9,7 +9,7 @@ import java.util.InputMismatchException;
 /**
  *  Die Entität Spiel, repräsentiert die Entität in der Datenbank, und fungiert als Schnittstelle zwischen Java und Sql
  *  es werden in den einzelnen Methoden invalide Werte abgefangen
- * @throws InputMismatchException
+ *
  * @author 1st: Maximillian Jaesch, 2nd: Tim Cirkena
  * @source: Selbst erstellt für alle methoden
  * */

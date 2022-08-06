@@ -16,24 +16,18 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Dieser Controller steuert die RezensionSchreiben View
+ *
+ * @author 1st: Abdurrahman Azattemür, 2nd: Maximilian Jaesch, 3rd: Tim Cirksena
+ */
 public class RezensionSchreibenViewController implements Stageable, Initializable, LoginListener, AcceptsID, CleaningListener {
 
     private Stage stage;
     @FXML
-    private ImageView dragImageReviewID;
-
-    @FXML
-    private ImageView arrowLeftID;
-
-    @FXML
-    private Label gameNameID;
-
-    @FXML
     private TextField bewertungID;
-
     @FXML
     private TextField opinionReviewID;
-
     private int spielID;
     private String activeUser;
 
@@ -49,6 +43,12 @@ public class RezensionSchreibenViewController implements Stageable, Initializabl
         conn = DatabaseConnection.getInstance();
     }
 
+    /**
+     * back button navigiert eine Scene zurück.
+     *
+     * @author Tim Cirksena
+     * @Source: selber erstellt
+     * */
     @FXML
     void onActionReviewBackBtn(ActionEvent event) {
         stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.GAME_DETAIL_VIEW).getScene());
@@ -65,7 +65,12 @@ public class RezensionSchreibenViewController implements Stageable, Initializabl
         this.spielID = spielID;
     }
 
-
+    /**
+     * Dieser onClickListener ist für das abschicken einer Rezension und das Eintragen dieser in die Datenbank zuständig
+     *
+     * @param event
+     * @author 1st: Abdurrahman Azattemür, 2nd: Maximilian Jaesch
+     */
     @FXML
     void onActionSubmitButton(ActionEvent event){
         try{

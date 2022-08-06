@@ -13,7 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-
+/**
+ * Die Klasse DatabaseConnection ist für die Datenbank Verbindung.
+ *
+ * @author 1st: Maximilian Jaesch, 2nd: Tim Cirksena, 3rd: Abdurrahman Azattemür
+ * @source: {@link https://db.apache.org/derby/papers/DerbyTut/embedded_intro.html#copy_sample_app} (Sample Application)
+ **/
 public class DatabaseConnection {
     /* the default framework is embedded */
     private String framework;
@@ -26,6 +31,11 @@ public class DatabaseConnection {
 
     private static DatabaseConnection dbConnInstance = null;
 
+    /**
+     * DatabaseConnection ist als Singleton realisiert, da es nur eine Verbindung zur Datenbank geben kann.
+     * @return DatabaseConnection
+     * @author Maximilian Jaesch
+     */
     public static DatabaseConnection getInstance() {
         if (dbConnInstance == null) {
             dbConnInstance = new DatabaseConnection();
@@ -101,8 +111,11 @@ public class DatabaseConnection {
             ioException.printStackTrace();
         }
     }
+
     /**
-     * quelle fehlt, noch suchen
+     * Ausgabe der SQL Result: ist für Debug-Zwecke
+     * @param query
+     * @author Maximilian Jaesch
      */
     public void selectQuery(String query) {
         try {
@@ -130,8 +143,8 @@ public class DatabaseConnection {
     }
 
     /**
-     * gibt guthaben in form eines doubles zurück
-     *
+     * Gibt Guthaben in form eines doubles zurück
+     * @param username
      * @author Tim cirksena
      */
     public double selectGuthaben(String username) {
@@ -155,7 +168,8 @@ public class DatabaseConnection {
 
     /**
      * negative value um geld abzuziehen
-     *
+     * @param username
+     * @param geld
      * @author Tim Cirksena
      */
     public boolean updateGuthaben(String username, double geld) {
@@ -174,13 +188,20 @@ public class DatabaseConnection {
         return false;
     }
 
+    /**
+     * Gibt true zurück, wenn ein User erfolgreich einloggt, false, wenn es fehlerhaft ist.
+     *
+     * @param username
+     * @param password
+     * @return boolean
+     * @author Abdurrahman Azattemür
+     */
     public boolean selectUser(String username, String password) {
         try {
             String query = "Select * From Nutzer WHERE bName like '" + username + "'";
             Statement select = conn.createStatement();
             statements.add(select);
             ResultSet everything = select.executeQuery(query);
-            //System.out.println(query);
             while (everything.next()) {
                 if (everything.getString("BNAME").equals(username) && everything.getString("PASSWORD").equals(password)) {
                     return true;
@@ -193,13 +214,20 @@ public class DatabaseConnection {
         return false;
     }
 
+    /**
+     * Diese Methode dient dafür, um die vorhandenen Spiele eines Users zuruckzugeben.
+     *
+     * @param username
+     * @return List<Spiel>
+     * @throws SQLException
+     * @author Tim Ciksena
+     */
     public List<Spiel> sammlungView(String username) throws SQLException {
         Statement stmt = conn.createStatement();
         statements.add(stmt);
         ResultSet resultSet = stmt.executeQuery("select logo, Spiel.spielID, name, spielzeit from Nutzer_besitzt join Spiel on Spiel.spielid = Nutzer_besitzt.spielid where Nutzer_besitzt.bName = '" + username + "' order by SpielID asc");
         ArrayList<Spiel> spieleAusDb = new ArrayList<>();
         while (resultSet.next()) {
-            //System.out.println(resultSet.getString("name"));
             try {
                 spieleAusDb.add(spielFromResultSetName(resultSet));
 
@@ -210,6 +238,16 @@ public class DatabaseConnection {
         resultSet.close();
         return spieleAusDb;
     }
+
+    /**
+     * Gibt das Spiel zurück, welche von der Datenbank zurückgegeben wurden.
+     *
+     * @param resultSet
+     * @return Spiel
+     * @throws SQLException
+     * @throws IOException
+     * @author Tim Cirksena
+     */
     private Spiel spielFromResultSetName(ResultSet resultSet) throws SQLException, IOException {
         String name = resultSet.getString("Name");
         int spielID = resultSet.getInt("SpielID");
@@ -217,7 +255,13 @@ public class DatabaseConnection {
         return new Spiel(name, spielID, logo);
     }
 
-
+    /**
+     * Gibt das Bild aus der Datenbank zurück.
+     *
+     * @param uniqueName
+     * @return InputStream
+     * @author Maximilian Jaesch
+     */
     public InputStream retrieveImage(String uniqueName) {
         try {
             Statement stmt = conn.createStatement();
@@ -238,6 +282,15 @@ public class DatabaseConnection {
         return null;
     }
 
+    /**
+     * Gibt das Spiel zurück, welche von der Datenbank zurückgegeben wurden.
+     *
+     * @param resultSet
+     * @return Spiel
+     * @throws SQLException
+     * @throws IOException
+     * @author Maximilian Jaesch
+     */
     private Spiel spielFromResultSet(ResultSet resultSet) throws SQLException, IOException {
         int spielID = resultSet.getInt("SpielID");
         String name = resultSet.getString("Name");
@@ -251,6 +304,16 @@ public class DatabaseConnection {
         return new Spiel(spielID, name, beschreibung, preis, genre, bewertungProzent, logo, titelbild);
     }
 
+
+    /**
+     * Gibt die Rezension von der Datenbank zurück.
+     *
+     * @param resultSet
+     * @return Rezension
+     * @throws SQLException
+     * @throws IOException
+     * @author Abdurrahman Azattemür
+     */
     private Rezension rezensionFromResultSet(ResultSet resultSet) throws SQLException, IOException {
         int spielID = resultSet.getInt("SpielID");
         String name = resultSet.getString("bName");
@@ -260,7 +323,14 @@ public class DatabaseConnection {
         return new Rezension(spielID, name, userBewertungProzent, beschreibung);
     }
 
-    //https://docs.oracle.com/javase/tutorial/jdbc/basics/retrieving.html
+    /**
+     * Gibt das Bild zurück, welche von der Datenbank zurückgegeben wurden.
+     *
+     * @return List
+     * @throws SQLException
+     * @author Maximilian Jaesch
+     * @Source https://docs.oracle.com/javase/tutorial/jdbc/basics/retrieving.html
+     */
     public List<Spiel> retrieveSpiele() throws SQLException {
         Statement stmt = conn.createStatement();
         statements.add(stmt);
@@ -278,6 +348,14 @@ public class DatabaseConnection {
         return spieleAusDb;
     }
 
+    /**
+     * Gibt die Rezension zurück, welche von der Datenbank zurückgegeben wurden.
+     *
+     * @param spielID
+     * @return List
+     * @throws SQLException
+     * @author Abdurrahman Azattemür
+     */
     public List<Rezension> retrieveRezensionen(int spielID) throws SQLException {
         Statement stmt = conn.createStatement();
         statements.add(stmt);
@@ -295,6 +373,14 @@ public class DatabaseConnection {
         return rezensionenAusDB;
     }
 
+    /**
+     * Gibt das Spiel von der vorgegebenen ID zurück.
+     *
+     * @param id
+     * @return Spiel
+     * @throws SQLException
+     * @author Mximilian Jaesch
+     */
     public Spiel retrieveSpielById(int id) throws SQLException {
         Statement statement = conn.createStatement();
         statements.add(statement);
@@ -311,15 +397,33 @@ public class DatabaseConnection {
         return spiel;
     }
 
-    public int retrieveSpielzeitNutzerBesitzt(String bname, int spielID) throws SQLException{
+    /**
+     * Gibt die Spielzeit von einem Spiel für den Nutzer zurück
+     *
+     * @param bname
+     * @param spielID
+     * @return int
+     * @throws SQLException
+     * @author Maximilian Jaesch
+     */
+    public int retrieveSpielzeitNutzerBesitzt(String bname, int spielID) throws SQLException {
         Statement statement = conn.createStatement();
         statements.add(statement);
         ResultSet resultSet = statement.executeQuery("Select spielzeit from Nutzer_Besitzt where bName like '" + bname + "' and spielID = " + spielID);
-        if(resultSet.next()){
+        if (resultSet.next()) {
             return resultSet.getInt("spielzeit");
         } else return 0;
     }
 
+    /**
+     * Gibt true zurück, wenn der Nutzer das Spiel besitzt.
+     *
+     * @param nutzername
+     * @param spielID
+     * @return boolean
+     * @throws SQLException
+     * @author Maximilian Jaesch
+     */
     public boolean besitztNutzerSpiel(String nutzername, int spielID) throws SQLException {
         Statement statement = conn.createStatement();
         statements.add(statement);
@@ -333,6 +437,11 @@ public class DatabaseConnection {
         return false;
     }
 
+    /**
+     * Ist für die Datenbank das Commiten.
+     *
+     * @author Maximilian Jaesch
+     */
     public void commit() {
         try {
             conn.commit();
@@ -341,6 +450,10 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Die Methode ist für das Schließen der Datenbank.
+     * @author Maximilian Jaesch
+     */
     public void closeDB() {
         if (framework.equals("embedded")) {
             try {
@@ -405,21 +518,21 @@ public class DatabaseConnection {
     }
 
     /**
-     * Prints details of an SQLException chain to <code>System.err</code>.
-     * Details included are SQL State, Error code, Exception message.
+     * Gibt eine detaillierte Ausgabe des SQL-Fehlers in der Konsole aus.
      * <p>
      * Quelle: https://db.apache.org/derby/papers/DerbyTut/embedded_intro.html
      * offizielles apache derby tutorial
      * modifiziert von Maximilian Jaesch
+     *
      * @param e the SQLException from which to print details.
      */
     public static void printSQLException(SQLException e) {
         // Unwraps the entire exception chain to unveil the real cause of the
         // Exception.
         while (e != null) {
-            if(e.getSQLState().equals("X0Y32")){
+            if (e.getSQLState().equals("X0Y32")) {
                 System.out.println("tables existieren bereits.");
-            } else{
+            } else {
                 System.err.println("\n----- SQLException -----");
                 System.err.println("  SQL State:  " + e.getSQLState());
                 System.err.println("  Error Code: " + e.getErrorCode());
@@ -431,6 +544,12 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Die Methode ist für das Hinzufügen eines neuen Nutzers in die Datenbank zuständig.
+     * @param nutzer
+     * @throws SQLException
+     * @author Maximilian Jaesch
+     */
     public void insertNutzer(Nutzer nutzer) throws SQLException {
         PreparedStatement insert =
                 conn.prepareStatement("insert into Nutzer values(?,?,?)");
@@ -442,6 +561,12 @@ public class DatabaseConnection {
         insert.executeUpdate();
     }
 
+    /**
+     * Die Methode ist für das Hinzufügen eines neuen Spiels in die Datenbank zuständig.
+     * @param spiel
+     * @throws SQLException
+     * @author Maximilian Jaesch
+     */
     public void insertSpiel(Spiel spiel) throws SQLException {
         PreparedStatement insert =
                 conn.prepareStatement("insert into Spiel values(?,?,?,?,?,?,?,?)");
@@ -458,6 +583,12 @@ public class DatabaseConnection {
         insert.executeUpdate();
     }
 
+    /**
+     * Die Methode ist für das Hinzufügen einer neuen Rezension in die Datenbank zuständig.
+     * @param rezension
+     * @throws SQLException
+     * @author Abdurrahman Azattemür
+     */
     public void insertRezension(Rezension rezension) throws SQLException {
         PreparedStatement insert =
                 conn.prepareStatement("insert into Rezension values(?,?,?,?)");
@@ -470,33 +601,59 @@ public class DatabaseConnection {
         insert.executeUpdate();
     }
 
+    /**
+     * Die Methode ist für das Hinzufügen eines neuen NutzerBesitzt in die Datenbank zuständig.
+     * @param nutzerBesitzt
+     * @throws SQLException
+     * @author 1st: Maximilian Jaesch, 2nd: Tim Cirksena
+     */
     public void insertNutzerBesitzt(NutzerBesitzt nutzerBesitzt) throws SQLException {
         PreparedStatement insert =
                 conn.prepareStatement("insert into Nutzer_Besitzt values(?,?,?)");
         insert.setInt(1, nutzerBesitzt.getSpielID());
         insert.setString(2, nutzerBesitzt.getbName());
-        insert.setInt(3,nutzerBesitzt.getSpielzeit());
+        insert.setInt(3, nutzerBesitzt.getSpielzeit());
         insert.executeUpdate();
     }
 
+    /**
+     * Die Methode löscht die Tabelle Rezension.
+     * @throws SQLException
+     * @author Abdurrahman Azattemür
+     */
     public void dropRezension() throws SQLException {
         Statement s = conn.createStatement();
         statements.add(s);
         s.execute("drop table Rezension");
     }
 
+    /**
+     * Die Methode löscht die Tabelle NutzerBesitzt.
+     * @throws SQLException
+     * @author Abdurrahman Azattemür
+     */
     public void dropNutzerBesitzt() throws SQLException {
         Statement s = conn.createStatement();
         statements.add(s);
         s.execute("drop table Nutzer_Besitzt");
     }
 
+    /**
+     * Die Methode löscht die Tabelle Nutzer.
+     * @throws SQLException
+     * @author Abdurrahman Azattemür
+     */
     public void dropNutzer() throws SQLException {
         Statement s = conn.createStatement();
         statements.add(s);
         s.execute("drop table Nutzer");
     }
 
+    /**
+     * Die Methode löscht die Tabelle Spiel.
+     * @throws SQLException
+     * @author Abdurrahman Azattemür
+     */
     public void dropSpiel() throws SQLException {
         Statement s = conn.createStatement();
         statements.add(s);

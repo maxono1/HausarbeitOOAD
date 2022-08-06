@@ -2,6 +2,11 @@ package com.hausarbeitooad.entity;
 
 import java.util.InputMismatchException;
 
+/**
+ * Entität für die Datenbank
+ * @author 1st: Maximilian Jaesch, 2nd: Abdurrahman Azattemür
+ * @source: selber erstellt
+ * */
 public class Nutzer {
     private String bName = "test";
     private String password = "5555";

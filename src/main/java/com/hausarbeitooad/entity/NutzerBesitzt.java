@@ -1,7 +1,11 @@
 package com.hausarbeitooad.entity;
-
 import java.util.InputMismatchException;
 
+/**
+ * Entität für die Datenbank
+ * @author 1st: Maximilian Jaesch, 2nd: Tim Cirksena
+ * @source: selber erstellt
+ * */
 public class NutzerBesitzt {
     private int spielID;
     private int spielzeit;
@@ -18,10 +22,6 @@ public class NutzerBesitzt {
 
     public int getSpielID() {
         return spielID;
-    }
-
-    public void setSpielID(int spielID) {
-        this.spielID = spielID;
     }
 
     public String getbName() {

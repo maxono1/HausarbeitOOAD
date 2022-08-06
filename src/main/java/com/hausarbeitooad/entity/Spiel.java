@@ -6,6 +6,12 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.util.InputMismatchException;
 
+/**
+ *  Die Entität Spiel
+ *
+ * @author 1st: Maximillian Jaesch, 2nd: Tim Cirkena
+ * @source: Selbst erstellt
+ * */
 public class Spiel {
     private int spielID;
     private  String name;

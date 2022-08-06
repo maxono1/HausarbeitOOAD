@@ -19,7 +19,10 @@ import java.util.Map;
  */
 public class RudisDampfkesselApp extends Application {
 
-	
+	/**
+	 * @author
+	 * Source:
+	 * */
 	private static final String MAIN_FXML = "main-view.fxml";
 	private static final String COLLECTION_VIEW_FXML = "collection-view.fxml";
 	private static final String GAME_DETAIL_VIEW_FXML = "game-detail-view.fxml";
@@ -42,7 +45,10 @@ public class RudisDampfkesselApp extends Application {
 	}
 
 
-
+	/**
+	 * @author
+	 * Source:
+	 * */
 	@Override
 	public void start(Stage stage){
 		conn = DatabaseConnection.getInstance();
@@ -50,11 +56,6 @@ public class RudisDampfkesselApp extends Application {
 		if (loadTestData){
 			BeispielDatenLoader b = new BeispielDatenLoader(conn);
 		}
-		//zum testen der Tables
-		//conn.selectQuery("Select * from Nutzer");
-		//conn.selectQuery("Select * from Nutzer_Besitzt");
-		//conn.selectQuery("Select * from Rezension");
-		//conn.selectQuery("Select * from Spiel");
 
 		//alle FXMLinfo initialisieren, damit wir zwischen den scenes wechseln können
 		scenes.put(SceneName.OPTION_VIEW, new FxmlInfo(RudisDampfkesselApp.class.getResource(OPTION_VIEW_FXML), SceneName.OPTION_VIEW, stage));

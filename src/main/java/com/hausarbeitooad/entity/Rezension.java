@@ -2,6 +2,12 @@ package com.hausarbeitooad.entity;
 
 import java.util.InputMismatchException;
 
+/**
+ *  Die Entität Rezension
+ *
+ * @author 1st: Maximillian Jaesch, 2nd: Abdurrahman Azattemür
+ * @source: Selbst erstellt
+ * */
 public class Rezension {
     private int spielID;
     private String bName;

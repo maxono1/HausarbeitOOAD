@@ -12,19 +12,22 @@ import java.net.URL;
 
 /**
  * Holds FXML information:<br>
- * <ul>
- *   <li>the resource name for the FXML file</li>
- *   <li>the {@link SceneName}</li>
- *   <li>the primary stage, if needed by the controller</li>
- *   <li>the scene for this FXML, iff it has been loaded and set</li>
- * </ul>
  * 
  * The scenes are loaded lazily, that is, only the first time they are called.
  * After that, the loaded scene is looked and returned.
  * 
- * @author
+ * @author ksnortum
  * @version 2019-01-30
+ * @source https://github.com/ksnortum/javafx-multi-scene-fxml/tree/pre-javafx-11
  */
+
+/**
+ * Diese Klasse dient als Verteiler für die Kontroller, sofern es Updates in der
+ * Datenbank gibt, werden die Controller über diese Klasse darüber informiert
+ *
+ * @author 1st: Tim Cirksena, 2nd: Abdurrahman Azattemür
+ * Source: Selber erstellt
+ * */
 public class FxmlInfo {
 	
 	//private static Logger logger = LogManager.getLogger();
@@ -158,13 +161,6 @@ public class FxmlInfo {
 		if (loader.getController() instanceof CleaningListener){
 			cleaningListener = loader.getController();
 		}
-
-		/*
-		//hier database verteilen
-		AcceptsDatabase controlr = loader.getController();
-		if (controlr != null){
-			controlr.setDatabaseConnection(this.getConn());
-		}*/
 
 		return scene;
 	}

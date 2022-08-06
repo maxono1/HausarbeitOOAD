@@ -14,14 +14,14 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Dieser Controller steuert die Options View
+ *
+ * @author Tim Cirksena
+ */
 public class OptionViewController implements Stageable, Initializable, LoginListener {
 
     private Stage stage;
-    @FXML
-    private ImageView arrowLeftID1;
-
-    @FXML
-    private Label gameNameID;
 
     /**
      * back button navigiert eine Scene zurück.

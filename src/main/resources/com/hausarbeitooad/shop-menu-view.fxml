@@ -18,14 +18,14 @@
             </font>
         </Label>
         <ListView fx:id="listViewID" fixedCellSize="50.0" layoutY="100.0" prefHeight="500.0" prefWidth="703.0" />
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onActionMenuItemBackBtn">
-         <graphic>
-            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../images/left-arrow.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onActionMenuItemBackBtn">
+            <graphic>
+                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/left-arrow.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
     </children>
 </AnchorPane>

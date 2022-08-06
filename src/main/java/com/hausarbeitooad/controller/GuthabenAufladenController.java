@@ -9,14 +9,12 @@ import com.hausarbeitooad.model.Stageable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Dieser Controller steuert die Guthaben Aufladen View
@@ -104,12 +102,17 @@ public class GuthabenAufladenController implements Stageable, Initializable, Log
      */
     @FXML
     private void onActionGuthabenAufladenBtn(ActionEvent event) {
-        guthabenAufladen(sicherung());
+        if (guthabenAlert(event).get()) {
+            guthabenAufladen(sicherung());
+        } else {
+            System.out.println("Sie haben kein Geld aufgeladen");
+        }
         event.consume();
     }
 
     /**
      * Diese Methode ist für das Geldaufladen und das reinschreiben in die Datenbank zuständig.
+     *
      * @param geld
      * @author Tim Cirksena
      */
@@ -118,6 +121,29 @@ public class GuthabenAufladenController implements Stageable, Initializable, Log
         conn.commit();
         RudisDampfkesselApp.getScenes().get(SceneName.SHOP_ITEM).getGuthabenListner().updateGuthaben();
         RudisDampfkesselApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getGuthabenListner().updateGuthaben();
+    }
+
+    /**
+     * Diese Methode gibt die Möglichkeit den Kaufprozess zu beenden
+     *
+     * @param event
+     * @author Tim Cirksena
+     */
+    private AtomicBoolean guthabenAlert(ActionEvent event) {
+        ButtonType okay = new ButtonType("Okay");
+        ButtonType abbrechen = new ButtonType("Abbrechen");
+        AtomicBoolean value = new AtomicBoolean(false);
+        Alert alert = new Alert(Alert.AlertType.NONE, "", okay, abbrechen);
+        alert.setTitle("Guthaben aufgeladen");
+        alert.setContentText("Wollen Sie ihr Guthaben aufladen?");
+        alert.showAndWait().ifPresent(response -> {
+            if (response == okay) {
+                value.set(true);
+            } else if (response == abbrechen) {
+                value.set(false);
+            }
+        });
+        return value;
     }
 
     @Override

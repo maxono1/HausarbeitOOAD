@@ -143,7 +143,7 @@ public class DatabaseConnection {
     }
 
     /**
-     * Gibt Guthaben in form eines doubles zurück
+     * Gibt Guthaben in Form eines doubles zurück
      * @param username
      * @author Tim cirksena
      */

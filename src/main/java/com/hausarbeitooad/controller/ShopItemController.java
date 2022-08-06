@@ -22,6 +22,11 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Dieser Controller steuert die ShopItem View
+ *
+ * @author 1st: Maximilian Jaesch, 2nd: Tim Cirksena, 3rd: Abdurrahman Azattemür
+ */
 public class ShopItemController implements Stageable, Initializable, LoginListener, AcceptsID, GuthabenListner {
 
     @FXML
@@ -40,18 +45,12 @@ public class ShopItemController implements Stageable, Initializable, LoginListen
     private Label gameNameID;
     @FXML
     private Button kaufBtnID;
-
     private DatabaseConnection conn;
     private Stage stage;
     private String activeUser;
     private int spielID;
     @FXML
     private Label guthabenInItemViewID;
-
-    @FXML
-    private void btnOkClicked(ActionEvent event) {
-
-    }
 
     @Override
     public void setActiveUser(String uname) {
@@ -87,20 +86,24 @@ public class ShopItemController implements Stageable, Initializable, LoginListen
             DatabaseConnection.printSQLException(s);
         }
         userBesitztAbfrage();
-
     }
 
+    /**
+     * Diese Methode ist für das kaufen der spiele zuständig.
+     *
+     * @author Maximilian Jaesch
+     */
     @FXML
     private void kaufen() {
         //guthaben abfragen
         try {
             int iend = preisInhaltID.getText().indexOf("€");
 
-            if (conn.selectGuthaben(activeUser) > Double.parseDouble(preisInhaltID.getText().substring(0,iend))) {
+            if (conn.selectGuthaben(activeUser) > Double.parseDouble(preisInhaltID.getText().substring(0, iend))) {
                 //besitzt updaten
-                conn.insertNutzerBesitzt(new NutzerBesitzt(spielID, activeUser, ThreadLocalRandom.current().nextInt(0,2000)));
+                conn.insertNutzerBesitzt(new NutzerBesitzt(spielID, activeUser, ThreadLocalRandom.current().nextInt(0, 2000)));
                 //guthaben abziehen
-                conn.updateGuthaben(activeUser, -Double.parseDouble(preisInhaltID.getText().substring(0,iend)));
+                conn.updateGuthaben(activeUser, -Double.parseDouble(preisInhaltID.getText().substring(0, iend)));
                 conn.commit();
                 //alle guthaben- anzeigen updaten
                 userBesitztAbfrage();
@@ -121,8 +124,6 @@ public class ShopItemController implements Stageable, Initializable, LoginListen
         } catch (SQLException s) {
             DatabaseConnection.printSQLException(s);
         }
-
-
     }
 
     /**
@@ -130,7 +131,7 @@ public class ShopItemController implements Stageable, Initializable, LoginListen
      *
      * @author Tim Cirksena
      * Source: selber erstellt
-     * */
+     */
     @FXML
     private void onActionKaufenBackBtn(ActionEvent event) {
         stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.SHOP_MENU).getScene());
@@ -139,6 +140,8 @@ public class ShopItemController implements Stageable, Initializable, LoginListen
 
     /**
      * Funktion: von dem active user guthaben laden
+     *
+     * @author Tim Cirksena
      */
     @Override
     public void updateGuthaben() {
@@ -146,6 +149,11 @@ public class ShopItemController implements Stageable, Initializable, LoginListen
         guthabenInItemViewID.setText(conn.selectGuthaben(activeUser) + "€");
     }
 
+    /**
+     * Funktion: überprüfen, ob der User das Spiel bereits besitzt.
+     *
+     * @author Maximilian Jaesch
+     */
     private void userBesitztAbfrage() {
         //abfrage besitzt der user das spiel
         try {
@@ -161,6 +169,13 @@ public class ShopItemController implements Stageable, Initializable, LoginListen
             DatabaseConnection.printSQLException(s);
         }
     }
+
+    /**
+     * Diese Methode ist für das Wechseln zur Rezension View zuständig.
+     *
+     * @param event
+     * @author Abdurrahman Azattemür
+     */
     @FXML
     private void onActionRezensionBtn(ActionEvent event) {
         RudisDampfkesselApp.getScenes().get(SceneName.REZENSION_VIEW).getAcceptsID().setSpielID(this.spielID);

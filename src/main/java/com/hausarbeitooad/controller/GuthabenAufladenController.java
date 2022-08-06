@@ -61,6 +61,12 @@ public class GuthabenAufladenController implements Stageable, Initializable, Log
         event.consume();
     }
 
+    /**
+     * back button navigiert eine Scene zurück.
+     *
+     * @author Tim Cirksena
+     * Source: selber erstellt
+     * */
     @FXML
     private void onActionGuthabenAufladenBackBtn(ActionEvent event) {
         stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.GUTHABENVERWALTEN).getScene());

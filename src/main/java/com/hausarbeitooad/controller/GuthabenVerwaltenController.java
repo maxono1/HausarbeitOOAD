@@ -30,6 +30,7 @@ public class GuthabenVerwaltenController implements Stageable, Initializable, Lo
     public void initialize(URL url, ResourceBundle resourceBundle) {
         conn = DatabaseConnection.getInstance();
     }
+
     @FXML
     void onActionGuthabenAufladenBtn(ActionEvent event) {
         RudisDampfkesselApp.getScenes().get(SceneName.GUTHABENAUFLADEN).getCleaningListener().cleanTextFields();
@@ -37,6 +38,12 @@ public class GuthabenVerwaltenController implements Stageable, Initializable, Lo
         event.consume();
     }
 
+    /**
+     * back button navigiert eine Scene zurück.
+     *
+     * @author Tim Cirksena
+     * Source: selber erstellt
+     * */
     @FXML
     void onActionGuthabenVerwaltenBackBtn(ActionEvent event) {
         stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.MAIN).getScene());

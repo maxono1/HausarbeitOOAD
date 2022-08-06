@@ -125,6 +125,12 @@ public class ShopItemController implements Stageable, Initializable, LoginListen
 
     }
 
+    /**
+     * back button navigiert eine Scene zurück.
+     *
+     * @author Tim Cirksena
+     * Source: selber erstellt
+     * */
     @FXML
     private void onActionKaufenBackBtn(ActionEvent event) {
         stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.SHOP_MENU).getScene());

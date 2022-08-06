@@ -16,14 +16,14 @@
       <AnchorPane prefHeight="500.0" prefWidth="700.0">
          <children>
             <Separator layoutY="95.0" prefHeight="18.0" prefWidth="714.0" />
-            <Label fx:id="gameNameID" alignment="CENTER" contentDisplay="TOP" layoutX="161.0" layoutY="51.0" prefHeight="18.0" prefWidth="403.0" text="Guthaben aufladen">
+            <Label alignment="CENTER" contentDisplay="TOP" layoutX="161.0" layoutY="51.0" prefHeight="18.0" prefWidth="403.0" text="Guthaben aufladen">
                <font>
                   <Font size="36.0" />
                </font>
             </Label>
             <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onActionGuthabenAufladenBackBtn">
                <graphic>
-                  <ImageView fx:id="arrowLeftID" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/left-arrow.png" />
                      </image>
@@ -37,7 +37,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Button fx:id="euro20BtnID" mnemonicParsing="false" onAction="#onClick20Euro" prefHeight="25.0" prefWidth="152.0" text="20€">
+                  <Button mnemonicParsing="false" onAction="#onClick20Euro" prefHeight="25.0" prefWidth="152.0" text="20€">
                      <VBox.margin>
                         <Insets top="25.0" />
                      </VBox.margin>
@@ -45,7 +45,7 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button fx:id="euro50BtnID" mnemonicParsing="false" onAction="#onClick50Euro" prefHeight="25.0" prefWidth="152.0" text="50€">
+                  <Button mnemonicParsing="false" onAction="#onClick50Euro" prefHeight="25.0" prefWidth="152.0" text="50€">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -53,7 +53,7 @@
                         <Insets top="25.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="euro100BtnID" mnemonicParsing="false" onAction="#onClick100Euro" prefHeight="25.0" prefWidth="152.0" text="100€">
+                  <Button mnemonicParsing="false" onAction="#onClick100Euro" prefHeight="25.0" prefWidth="152.0" text="100€">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -71,7 +71,7 @@
                         <Insets top="5.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button fx:id="guthabenAufladenBtnID" mnemonicParsing="false" onAction="#onActionGuthabenAufladenBtn" prefHeight="25.0" prefWidth="152.0" text="Submit">
+                  <Button mnemonicParsing="false" onAction="#onActionGuthabenAufladenBtn" prefHeight="25.0" prefWidth="152.0" text="Submit">
                      <font>
                         <Font size="24.0" />
                      </font>

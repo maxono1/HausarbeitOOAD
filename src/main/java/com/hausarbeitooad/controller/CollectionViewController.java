@@ -27,21 +27,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
 /**
  * Dieser Controller steuert die Collection View
  *
  * @author 1st: Tim Cirksena, 2nd: Maximilian Jaesch
- * */
+ */
 public class CollectionViewController implements Stageable, Initializable, LoginListener, BuyListner {
 
     private Stage stage;
     private DatabaseConnection conn;
     private String activeUser;
-    @FXML
-    private ImageView arrowLeftID1;
-
-    @FXML
-    private Label gameNameID;
     @FXML
     private ListView<HBox> listNameID;
 
@@ -50,7 +46,7 @@ public class CollectionViewController implements Stageable, Initializable, Login
      *
      * @author Tim Cirksena
      * Source: selber erstellt
-     * */
+     */
     @FXML
     void onActionCollectionBackBtn(ActionEvent event) {
         stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.MAIN).getScene());
@@ -78,12 +74,12 @@ public class CollectionViewController implements Stageable, Initializable, Login
     /**
      * hier wird dynamisch ein HBox element aus einer Spiel entität und Spielzeit erstellt,
      * um dies einer ListView hinzuzufügen
-     *
+     * <p>
      * Source: selber erstellt
      *
      * @author 1st: Maximilian Jaesch, 2nd:Tim Cirksena
-     * */
-    private HBox createHBoxFromSpiel(Spiel spiel, int spielzeit){
+     */
+    private HBox createHBoxFromSpiel(Spiel spiel, int spielzeit) {
         ImageView spielImageView = new ImageView(new Image(new ByteArrayInputStream(spiel.getLogo())));
         spielImageView.setFitHeight(150);
         spielImageView.setFitWidth(200);
@@ -121,21 +117,21 @@ public class CollectionViewController implements Stageable, Initializable, Login
     /**
      * hier wird dynamisch ein HBox element aus einer Spiel entität und Spielzeit erstellt,
      * um dies einer ListView hinzuzufügen
-     *
+     * <p>
      * Source: selber erstellt
      *
      * @author 1st:Tim Cirksena 2nd: Maximilian Jaesch
-     * */
+     */
     @Override
     public void updateGames() {
         try {
             listNameID.setItems(FXCollections.observableList(new ArrayList<HBox>()));
             List<Spiel> spiele = conn.sammlungView(activeUser);
 
-            for (Spiel s: spiele){
-                int spielzeit = conn.retrieveSpielzeitNutzerBesitzt(activeUser,s.getSpielID());
+            for (Spiel s : spiele) {
+                int spielzeit = conn.retrieveSpielzeitNutzerBesitzt(activeUser, s.getSpielID());
                 HBox spielHbox = createHBoxFromSpiel(s, spielzeit);
-                spielHbox.setOnMouseClicked( event -> {
+                spielHbox.setOnMouseClicked(event -> {
                     Label idLabel = (Label) spielHbox.getChildren().get(1);
                     //System.out.println(idLabel.getText());
                     int id = Integer.parseInt(idLabel.getText());

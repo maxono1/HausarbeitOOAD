@@ -16,7 +16,7 @@
    <children>
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onActionCollectionBackBtn" prefHeight="18.0" prefWidth="6.0">
          <graphic>
-            <ImageView fx:id="arrowLeftID1" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/left-arrow.png" />
                </image>
@@ -24,7 +24,7 @@
          </graphic>
       </Button>
       <Separator layoutY="105.0" prefHeight="18.0" prefWidth="716.0" />
-      <Label fx:id="gameNameID" alignment="CENTER" contentDisplay="TOP" layoutX="171.0" layoutY="61.0" prefHeight="18.0" prefWidth="403.0" text="Deine Sammlung">
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="171.0" layoutY="61.0" prefHeight="18.0" prefWidth="403.0" text="Deine Sammlung">
          <font>
             <Font size="36.0" />
          </font>

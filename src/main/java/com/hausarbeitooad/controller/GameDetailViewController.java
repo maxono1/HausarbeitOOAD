@@ -16,33 +16,25 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
 /**
  * Controller der GameDetailView
  * erlaubt dem User eine Rezension zu schreiben und die Spielzeit einzulesen
  *
- * @source selber erstellt
- *
  * @author 1st:Tim Cirksena, 2nd: Maximilian Jaesch
- * */
+ * @source selber erstellt
+ */
 public class GameDetailViewController implements Stageable, Initializable, LoginListener, AcceptsID {
 
     private Stage stage;
     private DatabaseConnection conn;
     private String activeUser;
     @FXML
-    private ImageView arrowLeftID1;
-
-    @FXML
     private Text erfolgeTextID;
-
     @FXML
     private Label gameNameID;
-
-    @FXML
-    private Button rezensionSchreibenID;
     @FXML
     private Text spielzeitTextID;
-
     private int spielID;
 
     @FXML
@@ -59,7 +51,7 @@ public class GameDetailViewController implements Stageable, Initializable, Login
      *
      * @author Tim Cirksena
      * Source: selber erstellt
-     * */
+     */
     @FXML
     void onActionCollectionBackBtn(ActionEvent event) {
         stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.COLLECTION_VIEW).getScene());
@@ -113,11 +105,11 @@ public class GameDetailViewController implements Stageable, Initializable, Login
 
     /**
      * nimmt spielID, liest die Spielzeit aus der Tabelle Nutzer_Besitzt aus und generiert einen fortschritt
-     * @author 1st:Tim Cirksena
      *
      * @param spielID
      * @return String erfolg, zeigt den Spielerfolg grob an
      * @throws SQLException
+     * @author 1st:Tim Cirksena
      */
     private String spielErfolg(int spielID) throws SQLException {
         int spielzeit = conn.retrieveSpielzeitNutzerBesitzt(activeUser, spielID);

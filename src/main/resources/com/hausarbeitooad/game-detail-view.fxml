@@ -56,7 +56,7 @@
                   </Text>
                </children>
             </HBox>
-            <Button fx:id="rezensionSchreibenID" mnemonicParsing="false" onAction="#handleOnActionRezensionSchreiben" text="Rezension schreiben">
+            <Button mnemonicParsing="false" onAction="#handleOnActionRezensionSchreiben" text="Rezension schreiben">
                <font>
                   <Font size="36.0" />
                </font>
@@ -68,7 +68,7 @@
       </VBox>
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onActionCollectionBackBtn" prefHeight="18.0" prefWidth="6.0">
          <graphic>
-            <ImageView fx:id="arrowLeftID1" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/left-arrow.png" />
                </image>

@@ -12,6 +12,11 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Dieser Controller steuert die GuthabenVerwalten View
+ *
+ * @author 1st: Abdurrahman Azattemür, 2nd: Maximilian Jaesch, 3rd: Tim Cirksena
+ */
 public class GuthabenVerwaltenController implements Stageable, Initializable, LoginListener, GuthabenListner {
 
     @FXML
@@ -31,6 +36,12 @@ public class GuthabenVerwaltenController implements Stageable, Initializable, Lo
         conn = DatabaseConnection.getInstance();
     }
 
+    /**
+     * Diese EventListener dient dazu die Scene zuwechseln.
+     *
+     * @param event
+     * @author Tim Cirksena
+     */
     @FXML
     void onActionGuthabenAufladenBtn(ActionEvent event) {
         RudisDampfkesselApp.getScenes().get(SceneName.GUTHABENAUFLADEN).getCleaningListener().cleanTextFields();
@@ -43,7 +54,7 @@ public class GuthabenVerwaltenController implements Stageable, Initializable, Lo
      *
      * @author Tim Cirksena
      * Source: selber erstellt
-     * */
+     */
     @FXML
     void onActionGuthabenVerwaltenBackBtn(ActionEvent event) {
         stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.MAIN).getScene());
@@ -58,6 +69,6 @@ public class GuthabenVerwaltenController implements Stageable, Initializable, Lo
 
     @Override
     public void updateGuthaben() {
-        guthabenAnzeigeID.setText(conn.selectGuthaben(activeUser)+ "€");
+        guthabenAnzeigeID.setText(conn.selectGuthaben(activeUser) + "€");
     }
 }

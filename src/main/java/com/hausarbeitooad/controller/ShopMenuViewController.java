@@ -47,7 +47,6 @@ public class ShopMenuViewController implements Stageable, Initializable, LoginLi
                 HBox spielHbox = createHBoxFromSpiel(s);
                 spielHbox.setOnMouseClicked(event -> {
                     Label idLabel = (Label) spielHbox.getChildren().get(1);
-                    //System.out.println(idLabel.getText());
                     int id = Integer.parseInt(idLabel.getText());
                     RudisDampfkesselApp.getScenes().get(SceneName.SHOP_ITEM).getAcceptsID().setSpielID(id);
                     stage.setScene(RudisDampfkesselApp.getScenes().get(SceneName.SHOP_ITEM).getScene());

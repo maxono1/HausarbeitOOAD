@@ -32,7 +32,7 @@ public class DatabaseConnection {
     private static DatabaseConnection dbConnInstance = null;
 
     /**
-     * DatabaseConnection ist als Singleton realisiert, da es nur eine Verbindung zur Datenbank geben kann.
+     * DatabaseConnection ist als Singleton realisiert, da es nur eine Verbindung zur Datenbank geben soll.
      * @return DatabaseConnection
      * @author Maximilian Jaesch
      */
